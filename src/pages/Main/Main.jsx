@@ -1,34 +1,38 @@
 import React, {Component} from 'react';
+import axios from "axios"
 import './Main.scss';
 
 import SearchBar from "../../components/SearchBar/SearchBar";
 import ResultsList from "../../components/ResultsList/ResultsList";
 import NominationList from "../../components/NominationList/NominationList";
 
+const API_URL = "http://www.omdbapi.com/?";
+const API_KEY = "6f490190";
+
 export default class Main extends Component {
 
     state = {
-        resultsListing: [
-            {
-                title: "Rambo",
-                year: 1999
-            },
-            {
-                title: "Hey Ram",
-                year: 2000
-            },
-            {
-                title: "Ram Dass, Going Home",
-                year: 2007
-            }
-        ],
+        resultsListing: [],
         nominationListing: [
             {
                 title: "Rambo",
                 year: 1999
             }
         ],
-        searchQuery: "ram"
+        searchQuery: "Rambo"
+    }
+
+    componentDidUpdate(searchQuery) {
+        axios.get(`${API_URL}t=${searchQuery}&apikey=${API_KEY}`)
+            .then(response => {
+                this.setState({
+                    resultsListing: response.data
+                })
+                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
     render() {
