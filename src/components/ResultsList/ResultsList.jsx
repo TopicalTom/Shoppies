@@ -6,19 +6,17 @@ import Result from "../Result/Result";
 
 const ResultsList = (props) => {
 
-    const {resultsListing, nominationListing} = props
+    const {resultsListing} = props
 
-    if (resultsListing && resultsListing !== undefined) {
+    if (resultsListing && resultsListing.length !== 0 && resultsListing !== undefined) {
         return (
-            <>
             <ul className="results">
                 {resultsListing
                     .map((listing) => {
-                        return <Result {...listing} nominations={nominationListing[0].title} key={uuid()} />
+                        return <Result {...listing} key={uuid()} />
                     }
                 )}
             </ul>
-            </>
         );
     } else {
         return <></>

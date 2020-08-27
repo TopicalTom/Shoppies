@@ -1,34 +1,62 @@
 import React, {Component} from 'react';
-import axios from "axios"
+import axios from "axios";
 import './Main.scss';
 
+// Components
 import SearchBar from "../../components/SearchBar/SearchBar";
 import ResultsList from "../../components/ResultsList/ResultsList";
 import NominationList from "../../components/NominationList/NominationList";
 
+// API Variables
 const API_URL = "http://www.omdbapi.com/?";
 const API_KEY = "6f490190";
+const queryType = "Movie";
 
 export default class Main extends Component {
-
-    state = {
-        resultsListing: [],
-        nominationListing: [
-            {
-                title: "Rambo",
-                year: 1999
-            }
-        ],
-        searchQuery: "Rambo"
+    constructor (props) {
+        super(props);
+        this.state = {
+            resultsListing: [], // Displays search results
+            nominationListing: [], // Saved movie nominations
+            searchQuery: "" // SearchBar parameters
+        }
     }
 
-    componentDidUpdate(searchQuery) {
-        axios.get(`${API_URL}t=${searchQuery}&apikey=${API_KEY}`)
+    handleChange = (e) => {
+        this.setState({ searchQuery: e.target.value})
+    }
+
+    componentDidUpdate() {
+
+        const movieQuery = this.state.searchQuery;
+
+        // Returns Movies that match search parameters
+        axios.get(`${API_URL}s=${movieQuery}&type=${queryType}&apikey=${API_KEY}`)
             .then(response => {
                 this.setState({
-                    resultsListing: response.data
+                    resultsListing: response.data.Search 
                 })
-                console.log(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
+    componentDidMount() {
+        
+        const nominationID = "tt1285016"
+
+        // Returns Movie that matches imdb ID (for Nom List)
+        axios.get(`${API_URL}i=${nominationID}&apikey=${API_KEY}`)
+            .then(response => {
+                this.setState({
+                    movie: {
+                        title: response.data.Title,
+                        year: response.data.Year,
+                        id: response.data.imdbID
+                    }
+                })
+                this.setState({nominationListing: [this.state.movie]})
             })
             .catch(error => {
                 console.log(error)
@@ -41,38 +69,46 @@ export default class Main extends Component {
 
         return (
             <main className="main">
-                <h1 className="main__title">The Shoppies</h1>
-                <section className="main__section">
-                    <article className="main__block">
-                        <h3 
-                            className="main__label">
-                            Movie Title
-                        </h3>
-                        <SearchBar />
+                <section className="main__container">
+                    <h1 className="main__title">The Shoppies</h1>
+                    <article className="main__section">
+                        <div className="main__block main__block--full">
+                            <h3 
+                                className="main__label">
+                                Movie Title
+                            </h3>
+                            <input 
+                                className="search"
+                                placeholder="Search"
+                                name="search"
+                                id="search"
+                                type="text"
+                                onChange={this.handleChange} 
+                            />
+                        </div>
                     </article>
-                </section>
-                <section className="main__section">
-                    <article className="main__block">
-                        <h2 
-                            className="main__subtitle">
-                            Results for "{searchQuery}"
-                        </h2>
-                        <ResultsList 
-                            resultsListing={resultsListing}
-                            nominationListing={nominationListing}
-                        />
+                    <article className="main__section">
+                        <div className="main__block main__block--half">
+                            <h2 
+                                className="main__subtitle">
+                                Results for "{searchQuery}"
+                            </h2>
+                            <ResultsList 
+                                resultsListing={resultsListing}
+                            />
+                        </div>
+                        <div className="main__block main__block--half">
+                            <h2 
+                                className="main__subtitle">
+                                Nominations
+                            </h2>
+                            <NominationList 
+                                nominationListing={nominationListing}
+                            />
+                        </div>
                     </article>
-                    <article className="main__block">
-                        <h2 
-                            className="main__subtitle">
-                            Nominations
-                        </h2>
-                        <NominationList 
-                            nominationListing={nominationListing}
-                        />
-                    </article>
-                </section>
-    
+
+                </section>    
             </main>
         );
     }

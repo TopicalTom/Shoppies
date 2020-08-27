@@ -3,18 +3,18 @@ import "./NominateButton.scss"
 
 const NominateButton = (props) => {
 
-    const {nominations, title, year} = props
+    const {nominations, id} = props
     const [isNominated, setIsNominated] = useState(false);
 
     function checkNomination() {
 
-        if (title === nominations) {
+        if (id === nominations) {
             setIsNominated(true)
         } else {
             setIsNominated(false)
         }
     }
-    
+
     const buttonLabel = isNominated ? "Nominated" : "Nominate";
 
     return (

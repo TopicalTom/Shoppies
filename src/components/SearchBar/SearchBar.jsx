@@ -1,10 +1,17 @@
 import React from 'react';
 import './SearchBar.scss';
 
-function SearchBar() {
+function SearchBar({handleInput}) {
+
     return (
-        <input placeholder="Search">
-        </input>
+        <input 
+            className="search"
+            placeholder="Search"
+            name="search"
+            id="search"
+            type="text"
+            onChange={handleInput} 
+        />
     );
 }
 
