@@ -4,8 +4,9 @@ import "./NominateButton.scss"
 const NominateButton = (props) => {
 
     const {id} = props
-    const [nomination, setNomination] = useState(id)
+    const [alreadyNominated, setAlreadyNominated] = useState(false);
 
+    // Adds Nominated Movie to Local Storage
     let addToLocalStorage = function (name, value) {
 
         /*
@@ -20,20 +21,36 @@ const NominateButton = (props) => {
         localStorage.setItem("nominations", JSON.stringify(id))
     }
 
-    /*
-
+    // Checks if Movie has already been nominated
     useEffect(() => {
-        setNomination
-        window.localStorage.setItem("nomination", JSON.stringify(nomination))
-    })
 
-    */
+        const exists = localStorage.getItem("nominations")
+        const status = JSON.stringify(id);
+
+        (status === exists 
+            ? setAlreadyNominated(true)
+            : setAlreadyNominated(false)
+        )
+
+    })
 
     // () => window.localStorage.setItem("nomination", JSON.stringify(nomination))
 
     return (
-        <button className="nominate" onClick={addToLocalStorage}>
-            <span className="nominate__label">Nominate</span>
+        <button 
+            className="nominate" 
+            onClick={addToLocalStorage} 
+            disabled={alreadyNominated}>
+            {alreadyNominated
+                ?   <span 
+                        className="nominate__label">
+                        Nominated
+                    </span>
+                :   <span 
+                        className="nominate__label">
+                        Nominate
+                    </span>
+            }
         </button>
     );
 }
