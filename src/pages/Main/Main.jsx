@@ -19,7 +19,7 @@ function Main() {
     const [resultsListing, setResultsListing] = useState([]);
     const [nominationListing, setNominationListing] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-    const nominationID = JSON.parse(localStorage.getItem("nominations"));
+    const storedNoms = JSON.parse(localStorage.getItem("nominations"));
 
     // Updates Search Query Parameters
     function handleChange(e) {
@@ -38,10 +38,10 @@ function Main() {
     }, [searchQuery]);
 
     // Updates Movie Nomination Listings
-    useLayoutEffect(() => {
-        if(nominationID !== null) {
-            console.log(nominationID)
-            {nominationID
+    useEffect(() => {
+        if(storedNoms !== null) {
+            console.log(storedNoms)
+            {storedNoms
                 .map((item) => {
                     axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
                         .then(response => {
@@ -51,6 +51,7 @@ function Main() {
                                 id: response.data.imdbID
                             })
                             nominationListing.push(nominee)
+                            setNominationListing(nominationListing)
                         })
                         .catch(error => {
                             console.log(error)
@@ -113,7 +114,7 @@ function Main() {
                     <SearchBar
                         handleChange={handleChange} 
                     />
-                    </article>
+                </article>
                 <article className="main__section">
                     <div className="main__block main__block--half">
                         <h2 
@@ -134,7 +135,7 @@ function Main() {
                         </h2>
                         <NominationList 
                             nominationListing={nominationListing}
-                            nominationID={nominationID}
+                            nominationID={storedNoms}
                         />
                     </div>
                 </article>

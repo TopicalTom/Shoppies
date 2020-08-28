@@ -13,7 +13,7 @@ const NominationList = (props) => {
             <ul className="nominations">
                 {nominationListing
                     .map((listing) => {
-                        const key = listing.imdbID
+                        const key = `${listing.id}679`
                         return <Nominee {...listing} key={key}/>
                     }
                 )}
