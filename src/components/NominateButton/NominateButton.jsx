@@ -8,12 +8,16 @@ const NominateButton = (props) => {
 
     let addToLocalStorage = function (name, value) {
 
+        /*
+
         let existing = localStorage.getItem("nominations");
 
         existing = existing ? existing.split(',') : [];
         existing.push(nomination);
 
-        localStorage.setItem("nominations", JSON.stringify(existing))
+        */
+
+        localStorage.setItem("nominations", JSON.stringify(id))
     }
 
     /*

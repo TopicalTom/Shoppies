@@ -5,7 +5,6 @@ import Search from "../../assets/icons/Search.svg";
 
 function SearchBar({handleChange}) {
 
-    const [searchParams, setSearchParams] = useState("")
     const [hasContent, setHasContent ] = useState(false);
 
     return (

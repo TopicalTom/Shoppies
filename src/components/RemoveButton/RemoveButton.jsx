@@ -4,19 +4,21 @@ import "./RemoveButton.scss"
 const RemoveButton = (props) => {
 
     const {id} = props
-    const [nomination, setNomination] = useState(id)
 
-    /*
+    let removeFromLocalStorage = function (name, value) {
 
-    useEffect(() => {
-        setNomination
-        window.localStorage.setItem("nomination", JSON.stringify(nomination))
-    })
+        let stored = localStorage.getItem("nominations");
+        let nomination = JSON.stringify(id);
+        console.log(`This is Stored ${stored}`)
+        console.log(`This is Nomination ${nomination}`)
 
-    */
+        if (stored === nomination) {
+            localStorage.removeItem("nominations", JSON.stringify(id))
+        }
+    }
 
     return (
-        <button className="remove" onClick={() => window.localStorage.setItem("nomination", JSON.stringify(nomination))}>
+        <button className="remove" onClick={removeFromLocalStorage}>
             <span className="remove__label">Remove</span>
         </button>
     );

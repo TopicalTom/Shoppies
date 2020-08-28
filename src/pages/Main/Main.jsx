@@ -2,8 +2,8 @@ import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import './Main.scss';
 
-// Logo
-import Shoppies from "../../assets/icons/ShoppiesLogo.svg";
+// Assets
+import ShoppiesLogo from "../../assets/icons/ShoppiesLogo.svg";
 
 // Components
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -22,7 +22,7 @@ function Main() {
 
     // Updates Search Query Parameters
     function handleChange(e) {
-        setSearchQuery(e.target.value)
+        setSearchQuery(e.target.value);
     }
 
     // Updates Results Listings
@@ -63,7 +63,7 @@ function Main() {
                     <img 
                         className="main__logo"
                         alt="Shoppies Logo"
-                        src={Shoppies}
+                        src={ShoppiesLogo}
                     />
                     <div>
                         <span 
