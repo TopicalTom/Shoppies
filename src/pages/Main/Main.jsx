@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 import axios from "axios";
 import './Main.scss';
 
@@ -38,9 +38,37 @@ function Main() {
     }, [searchQuery]);
 
     // Updates Movie Nomination Listings
+    useLayoutEffect(() => {
+        if(nominationID !== null) {
+            console.log(nominationID)
+            {nominationID
+                .map((item) => {
+                    axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
+                        .then(response => {
+                            const nominee = ({
+                                title: response.data.Title,
+                                year: response.data.Year,
+                                id: response.data.imdbID
+                            })
+                            nominationListing.push(nominee)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                    })
+            }
+        }
+    }, [nominationListing]);
+
+    /*
+
+    // Updates Movie Nomination Listings
     useLayoutEffect(() => { 
         
         const check = JSON.parse(localStorage.getItem("nominations"));
+        //console.log(check)
+        //const check = "tt0462499";
+        //const ids = check[0].movieNomination
 
         axios.get(`${API_URL}i=${check}&apikey=${API_KEY}`)
             .then(response => {
@@ -57,7 +85,10 @@ function Main() {
             })
     }, [nominationListing]);
 
+    */
 
+
+   console.log(nominationListing)
     return (
         <main className="main">
             <section className="main__container">
@@ -113,6 +144,52 @@ function Main() {
 }
 
 export default Main;
+
+/*
+    // Updates Search Query Parameters
+    function handleChange(e) {
+        setSearchQuery(e.target.value);
+    }
+
+    // Gets Search Results Listings
+    function getResults() {
+        axios.get(`${API_URL}s=${searchQuery}&type=${queryType}&apikey=${API_KEY}`)
+        .then(response => {
+            setResultsListing(response.data.Search)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    }
+
+    // Gets Movie Nominations Listings
+    function getNominations() {
+                //const check = JSON.parse(localStorage.getItem("nominations"));
+                const check = "tt0462499";
+                //const ids = check[0].movieNomination
+        
+                axios.get(`${API_URL}i=${check}&apikey=${API_KEY}`)
+                    .then(response => {
+                        setNominationListing([
+                            {
+                                title: response.data.Title,
+                                year: response.data.Year,
+                                id: response.data.imdbID
+                            }
+                        ])
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+    }
+
+    // Updates DOM
+    useLayoutEffect(() => {
+        getResults()
+        getNominations()
+    }, [searchQuery, nominationListing]);
+
+*/
 
 /*
 

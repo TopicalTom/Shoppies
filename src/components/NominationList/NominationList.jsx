@@ -13,7 +13,8 @@ const NominationList = (props) => {
             <ul className="nominations">
                 {nominationListing
                     .map((listing) => {
-                        return <Nominee {...listing} key={uuid()} />
+                        const key = listing.imdbID
+                        return <Nominee {...listing} key={key}/>
                     }
                 )}
             </ul>

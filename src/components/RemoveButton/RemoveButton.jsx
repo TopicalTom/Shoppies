@@ -8,12 +8,13 @@ const RemoveButton = (props) => {
     let removeFromLocalStorage = function (name, value) {
 
         let stored = JSON.parse(localStorage.getItem("nominations"));
+        let checker = stored[0].movieNomination;
         let nomination = [JSON.stringify(id)];
-        console.log(`This is Stored ${stored}`)
+        console.log(`This is Stored ${checker}`)
         console.log(`This is Id ${id}`)
         console.log(`This is Nomination ${nomination}`)
 
-        if (stored === id) {
+        if (checker === id) {
             localStorage.removeItem("nominations", [JSON.stringify(id)])
         }
     }
