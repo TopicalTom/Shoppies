@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import "./NominateButton.scss"
 
 const NominateButton = (props) => {
@@ -22,7 +22,7 @@ const NominateButton = (props) => {
     }
 
     // Checks if Movie has already been nominated
-    useEffect(() => {
+    useLayoutEffect(() => {
 
         const exists = localStorage.getItem("nominations")
         const status = JSON.stringify(id);

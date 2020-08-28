@@ -8,7 +8,11 @@
     height: 36px;
 
     &:disabled {
-        background-color: red;
+        background-color: rgb(155, 155, 155);
+
+        &__label {
+            color: grey;
+        }
     }
 
     &__label {

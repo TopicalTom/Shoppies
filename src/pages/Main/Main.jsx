@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import axios from "axios";
 import './Main.scss';
 
@@ -25,8 +25,8 @@ function Main() {
         setSearchQuery(e.target.value);
     }
 
-    // Updates Results Listings
-    useEffect(() => {
+    // Updates Search Results Listings
+    useLayoutEffect(() => {
         axios.get(`${API_URL}s=${searchQuery}&type=${queryType}&apikey=${API_KEY}`)
             .then(response => {
                 setResultsListing(response.data.Search)
@@ -36,8 +36,8 @@ function Main() {
             })
     }, [searchQuery]);
 
-    // Updates Nomination Listings
-    useEffect(() => {
+    // Updates Movie Nomination Listings
+    useLayoutEffect(() => {
         const nominationID = JSON.parse(window.localStorage.getItem("nominations"))
         
         axios.get(`${API_URL}i=${nominationID}&apikey=${API_KEY}`)
@@ -54,7 +54,6 @@ function Main() {
                 console.log(error)
             })
     }, [nominationListing]);
-
 
     return (
         <main className="main">
@@ -83,7 +82,7 @@ function Main() {
                     </article>
                 <article className="main__section">
                     <div className="main__block main__block--half">
-                        {resultsListing && resultsListing.length > 0 
+                        {resultsListing 
                             ?   <h2 
                                     className="main__subtitle">
                                     Movies with "{searchQuery}"
