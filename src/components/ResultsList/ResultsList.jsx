@@ -19,7 +19,7 @@ const ResultsList = (props) => {
             </ul>
         );
     } else {
-        return <></>
+        return <span>No Matches</span>
     }
 }
 

@@ -5,13 +5,14 @@ import NominateButton from '../NominateButton/NominateButton';
 
 const Result = (props) => {
 
-    const {Title, Year, imdbID, nominations} = props
-    //console.log(props)
+    const {Title, Year, imdbID} = props
 
     return (
         <li className="result">
-            <span className="result__title">{Title}</span>
-            <span className="result__year">({Year})</span>
+            <div className="result__details">
+                <span className="result__title">{Title}</span>
+                <span className="result__year">({Year})</span>
+            </div>
             <NominateButton 
                 id={imdbID}
             />

@@ -2,7 +2,7 @@ import React from 'react';
 import uuid from "react-uuid";
 import './NominationList.scss';
 
-import Nomination from "../Nomination/Nomination";
+import Nominee from "../Nominee/Nominee";
 
 const NominationList = (props) => {
 
@@ -13,7 +13,7 @@ const NominationList = (props) => {
             <ul className="nominations">
                 {nominationListing
                     .map((listing) => {
-                        return <Nomination {...listing} key={uuid()} />
+                        return <Nominee {...listing} key={uuid()} />
                     }
                 )}
             </ul>

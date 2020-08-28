@@ -1,0 +1,10 @@
+@import "../../styles/baseline.scss";
+
+.nominations {
+    width: 100%;
+    padding-inline-start: 0;
+
+    & > li {
+        margin-bottom: 10px;
+    }
+}
