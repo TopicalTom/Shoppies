@@ -8,7 +8,7 @@ const ResultsList = (props) => {
 
     const {resultsListing} = props
 
-    if (resultsListing && resultsListing.length !== 0 && resultsListing !== undefined) {
+    if (resultsListing) {
         return (
             <ul className="results">
                 {resultsListing
@@ -19,7 +19,7 @@ const ResultsList = (props) => {
             </ul>
         );
     } else {
-        return <span>No Matches</span>
+        return <span className="results__empty">No Matches</span>
     }
 }
 

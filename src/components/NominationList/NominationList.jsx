@@ -6,9 +6,9 @@ import Nominee from "../Nominee/Nominee";
 
 const NominationList = (props) => {
 
-    const {nominationListing} = props
+    const {nominationListing, nominationID} = props
 
-    if (nominationListing && nominationListing !== undefined) {
+    if(nominationID) {
         return (
             <ul className="nominations">
                 {nominationListing
@@ -19,7 +19,7 @@ const NominationList = (props) => {
             </ul>
         );
     } else {
-        return <></>
+        return <span className="nominations__empty">Nominated movies will show up here</span>
     }
 }
 

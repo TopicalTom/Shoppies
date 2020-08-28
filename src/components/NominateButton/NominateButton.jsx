@@ -6,22 +6,18 @@ const NominateButton = (props) => {
     const {id} = props
     const [alreadyNominated, setAlreadyNominated] = useState(false);
 
-    // Adds Nominated Movie to Local Storage
-    let addToLocalStorage = function (name, value) {
+    // Adds Movie Nomination to Local Storage
+    const addToLocalStorage = () => {
 
-        /*
+        let currentNominations = JSON.parse(localStorage.getItem('nominations')) || [];
 
-        let existing = localStorage.getItem("nominations");
+        let newNomination = { "movieNomination": id }
+        currentNominations.push(newNomination);
 
-        existing = existing ? existing.split(',') : [];
-        existing.push(nomination);
-
-        */
-
-        localStorage.setItem("nominations", JSON.stringify(id))
+        localStorage.setItem("nominations", JSON.stringify(currentNominations));
     }
 
-    // Checks if Movie has already been nominated
+    // Checks if Movie is already in Local Storage
     useLayoutEffect(() => {
 
         const exists = localStorage.getItem("nominations")
@@ -32,7 +28,7 @@ const NominateButton = (props) => {
             : setAlreadyNominated(false)
         )
 
-    })
+    }, [id]);
 
     // () => window.localStorage.setItem("nomination", JSON.stringify(nomination))
 
@@ -57,32 +53,46 @@ const NominateButton = (props) => {
 
 export default NominateButton;
 
+
+// Original Working
 /*
-import React, {useState} from 'react';
-import "./NominateButton.scss"
+    // Adds Nominated Movie to Local Storage
+    let addToLocalStorage = function (name, value) {
 
-const NominateButton = (props) => {
+        
 
-    const {nominations, id} = props
-    const [isNominated, setIsNominated] = useState(false);
+        let existing = localStorage.getItem("nominations");
 
-    function checkNomination() {
+        existing = existing ? existing.split(',') : [];
+        existing.push(nomination);
 
-        if (id === nominations) {
-            setIsNominated(true)
-        } else {
-            setIsNominated(false)
-        }
+        
+
+        localStorage.setItem("nominations", JSON.stringify(id))
     }
 
-    const buttonLabel = isNominated ? "Nominated" : "Nominate";
+*/
 
-    return (
-        <button className="nominate" onClick={checkNomination} disabled={isNominated}>
-            <span className="nominate__label">{buttonLabel}</span>
-        </button>
-    );
-}
+// Second Working
+/*
+    // Adds Nominated Movie to Local Storage
+    let addToLocalStorage = function (name, value) {
 
-export default NominateButton;
+	    // Get the existing data
+        let existing = JSON.parse(localStorage.getItem("nominations"));
+        console.log(existing)
+
+	    // If no existing data, create an array
+	    // Otherwise, convert the localStorage string to an array
+	    existing = existing ? existing.split(',') : [];
+
+	    // Add new data to localStorage Array
+        existing.push(id);
+        
+        console.log(`Updated ${existing}`)
+
+	    // Save back to localStorage
+	    localStorage.setItem("nominations", [JSON.stringify(existing)]);
+    }
+
 */
