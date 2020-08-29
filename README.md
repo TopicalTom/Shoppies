@@ -10,11 +10,30 @@ This project can be viewed here [Shoppies Website](https://shoppies.netlify.app/
 
 ### `UX Development Challenge`
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Shopify has branched out into movie award shows and we need your help. Please build us an app to help manage our movie nominations for the upcoming Shoppies.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+We need a webpage that can search OMDB for movies, and allow the user to save their favourite films they feel should be up for nomination. When they've selected 5 nominees they should be notified they're finished.
+
+> Design Goals
+
+- Search OMDB and display the results (movies only)
+- Add a movie from the search results to our nomination list
+- View the list of films already nominated
+- Remove a nominee from the nomination list
+
+> Technical Requirements
+
+- Search results should come from OMDB's API
+- Each search result should list at least its title, year of release and a button to nominate that film
+- Updates to the search terms should update the result list
+- Movies in search results can be added and removed from the nomination list
+- If a search result has already been nominated, disable its nominate button
+- Display a banner when the user has 5 nominations
+
+> Bonus Feature
+
+- Save nomination lists if the user leaves the page
+
 
 <br />
 <br />
