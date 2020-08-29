@@ -1,10 +1,9 @@
+
+<a href="https://ibb.co/FHZ8VPs"><img src="https://i.ibb.co/vXyLYts/The-Shoppies.png" alt="The-Shoppies" border="0"></a>
+
 This project can be viewed here [Shoppies Website](https://shoppies.netlify.app/).
 
-## The Shoppies: UX Development Challenge
-
-In the project directory, you can run:
-
-### `npm start`
+### `UX Development Challenge`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
