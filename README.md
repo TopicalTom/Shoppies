@@ -1,7 +1,12 @@
 
+<br />
+<br />
+
 <a href="https://ibb.co/FHZ8VPs"><img src="https://i.ibb.co/vXyLYts/The-Shoppies.png" alt="The-Shoppies" border="0"></a>
 
 This project can be viewed here [Shoppies Website](https://shoppies.netlify.app/).
+
+<br />
 
 ### `UX Development Challenge`
 
@@ -11,13 +16,25 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.<br />
 You will also see any lint errors in the console.
 
+<br />
+<br />
 
-
-## Search OMDB and display the results (movies only)
+# Project Structure (Context)
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+<br />
+<br />
+
+# Search OMDB and display the results (movies only)
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+<br />
 
 ### OMDB API Calls
 
@@ -33,11 +50,16 @@ To learn React, check out the [React documentation](https://reactjs.org/).
     }, [searchQuery, storedNoms]);
 ```
 
-## Add a movie from the search results to our nomination list
+<br />
+<br />
+
+# Add a movie from the search results to our nomination list
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+<br />
 
 ### Adding Movie to Local Storage
 
@@ -54,12 +76,16 @@ To learn React, check out the [React documentation](https://reactjs.org/).
     }
 ```
 
+<br />
+<br />
 
-## View the list of films already nominated
+# View the list of films already nominated
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+<br />
 
 ### Displaying Nominated Movies
 
@@ -87,6 +113,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
     }, [nominationListing]);
 ```
 
+<br />
 
 ### Checking for already Nominated Movies
 
@@ -108,11 +135,16 @@ To learn React, check out the [React documentation](https://reactjs.org/).
     });
 ```
 
-## Remove a nominee from the nomination list
+<br />
+<br />
+
+# Remove a nominee from the nomination list
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+<br />
 
 ### Selecting Movies To Remove
 
@@ -126,11 +158,16 @@ To learn React, check out the [React documentation](https://reactjs.org/).
     }
 ```
 
-## Display a banner when the user has 5 nominations
+<br />
+<br />
+
+# Display a banner when the user has 5 nominations
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+<br />
 
 ### Creating a Notification Banner
 
@@ -144,7 +181,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
     }
 ```
 
-## Bonus Features
+<br />
+<br />
+
+# Reflection
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
