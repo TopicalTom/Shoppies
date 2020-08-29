@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useState, useEffect, useLayoutEffect} from 'react';
 import "./NominateButton.scss"
 
 const NominateButton = (props) => {
@@ -15,22 +15,25 @@ const NominateButton = (props) => {
         currentNominations.push(newNomination);
 
         localStorage.setItem("nominations", JSON.stringify(currentNominations));
+        setAlreadyNominated(true);
     }
 
     // Checks if Movie is already in Local Storage
     useLayoutEffect(() => {
 
-        const exists = localStorage.getItem("nominations")
-        const status = JSON.stringify(id);
+        const stored = JSON.parse(localStorage.getItem("nominations"));
+        const match = stored.filter(item => item.movieNomination == id);
 
-        (status === exists 
-            ? setAlreadyNominated(true)
-            : setAlreadyNominated(false)
-        )
+        if(match && match.length !== 0) {
 
-    }, [id]);
+            let nominated = match[0].movieNomination;
 
-    // () => window.localStorage.setItem("nomination", JSON.stringify(nomination))
+            (id == nominated 
+                ? setAlreadyNominated(true)
+                : setAlreadyNominated(false)
+            )
+        }
+    });
 
     return (
         <button 

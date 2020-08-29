@@ -38,7 +38,7 @@ function Main() {
     }, [searchQuery]);
 
     // Updates Movie Nomination Listings
-    useEffect(() => {
+    useLayoutEffect(() => {
         if(storedNoms !== null) {
             console.log(storedNoms)
             {storedNoms
@@ -61,35 +61,6 @@ function Main() {
         }
     }, [nominationListing]);
 
-    /*
-
-    // Updates Movie Nomination Listings
-    useLayoutEffect(() => { 
-        
-        const check = JSON.parse(localStorage.getItem("nominations"));
-        //console.log(check)
-        //const check = "tt0462499";
-        //const ids = check[0].movieNomination
-
-        axios.get(`${API_URL}i=${check}&apikey=${API_KEY}`)
-            .then(response => {
-                setNominationListing([
-                    {
-                        title: response.data.Title,
-                        year: response.data.Year,
-                        id: response.data.imdbID
-                    }
-                ])
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }, [nominationListing]);
-
-    */
-
-
-   console.log(nominationListing)
     return (
         <main className="main">
             <section className="main__container">
@@ -145,6 +116,33 @@ function Main() {
 }
 
 export default Main;
+
+    /*
+
+    // Updates Movie Nomination Listings
+    useLayoutEffect(() => { 
+        
+        const check = JSON.parse(localStorage.getItem("nominations"));
+        //console.log(check)
+        //const check = "tt0462499";
+        //const ids = check[0].movieNomination
+
+        axios.get(`${API_URL}i=${check}&apikey=${API_KEY}`)
+            .then(response => {
+                setNominationListing([
+                    {
+                        title: response.data.Title,
+                        year: response.data.Year,
+                        id: response.data.imdbID
+                    }
+                ])
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [nominationListing]);
+
+    */
 
 /*
     // Updates Search Query Parameters
