@@ -23,14 +23,15 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### OMDB API Calls
 
 ```javascript
-// code away!
-
-let generateProject = project => {
-  let code = [];
-  for (let js = 0; js < project.length; js++) {
-    code.push(js);
-  }
-};
+    useLayoutEffect(() => {
+        axios.get(`${API_URL}s=${searchQuery}&type=${queryType}&apikey=${API_KEY}`)
+            .then(response => {
+                setResultsListing(response.data.Search)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [searchQuery, storedNoms]);
 ```
 
 ## Add a movie from the search results to our nomination list
@@ -39,17 +40,19 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### OMDB API Calls
+### Adding Movie to Local Storage
 
 ```javascript
-// code away!
+    const addToLocalStorage = () => {
 
-let generateProject = project => {
-  let code = [];
-  for (let js = 0; js < project.length; js++) {
-    code.push(js);
-  }
-};
+        let currentNominations = JSON.parse(localStorage.getItem('nominations')) || [];
+
+        let newNomination = { "movieNomination": id }
+        currentNominations.push(newNomination);
+
+        localStorage.setItem("nominations", JSON.stringify(currentNominations));
+        setAlreadyNominated(true);
+    }
 ```
 
 
@@ -59,36 +62,87 @@ You can learn more in the [Create React App documentation](https://facebook.gith
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### OMDB API Calls
+### Displaying Nominated Movies
 
 ```javascript
-// code away!
-
-let generateProject = project => {
-  let code = [];
-  for (let js = 0; js < project.length; js++) {
-    code.push(js);
-  }
-};
+    useLayoutEffect(() => {
+        if(storedNoms !== null) {
+            {storedNoms
+                .map((item) => {
+                    axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
+                        .then(response => {
+                            const nominee = ({
+                                title: response.data.Title,
+                                year: response.data.Year,
+                                id: response.data.imdbID
+                            })
+                            nominationListing.push(nominee)
+                            setNominationListing(nominationListing)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                    })
+            }
+        }
+    }, [nominationListing]);
 ```
 
-## View the list of films already nominated
+
+### Checking for already Nominated Movies
+
+```javascript
+    useLayoutEffect(() => {
+
+        const stored = JSON.parse(localStorage.getItem("nominations"));
+        const match = stored.filter(item => item.movieNomination == id);
+
+        if(match && match.length !== 0) {
+
+            let nominated = match[0].movieNomination;
+
+            (id == nominated 
+                ? setAlreadyNominated(true)
+                : setAlreadyNominated(false)
+            )
+        }
+    });
+```
+
+## Remove a nominee from the nomination list
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### OMDB API Calls
+### Selecting Movies To Remove
 
 ```javascript
-// code away!
+    let removeFromLocalStorage = function (name, value) {
 
-let generateProject = project => {
-  let code = [];
-  for (let js = 0; js < project.length; js++) {
-    code.push(js);
-  }
-};
+        let stored = JSON.parse(localStorage.getItem("nominations"));
+        stored = stored.filter(item => item.movieNomination !== id);
+
+        localStorage.setItem("nominations", [JSON.stringify(stored)])
+    }
+```
+
+## Display a banner when the user has 5 nominations
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Creating a Notification Banner
+
+```javascript
+    let removeFromLocalStorage = function (name, value) {
+
+        let stored = JSON.parse(localStorage.getItem("nominations"));
+        stored = stored.filter(item => item.movieNomination !== id);
+
+        localStorage.setItem("nominations", [JSON.stringify(stored)])
+    }
 ```
 
 ## Bonus Features
