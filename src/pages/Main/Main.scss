@@ -14,12 +14,19 @@
         width: 1000px;
     }
 
-    &__header {
+    &__heading {
         display: flex;
         flex-direction: row;
         width: 100%;
         height: 80px;
-        margin-bottom: 80px;
+        margin-bottom: 60px;
+    }
+
+    &__header {
+        display: flex;
+        display: row;
+        width: 100%;
+        justify-content: space-between;
     }
 
     &__logo {
@@ -52,7 +59,7 @@
 
         &--half {
             width: 48%;
-            height: 600px;
+            height: 640px;
         }
     }
 

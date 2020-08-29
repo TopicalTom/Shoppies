@@ -1,9 +1,9 @@
-import React, {useState, useEffect, useLayoutEffect} from 'react';
+import React, {useState, useLayoutEffect} from 'react';
 import axios from "axios";
 import './Main.scss';
 
 // Assets
-import ShoppiesLogo from "../../assets/icons/ShoppiesLogo.svg";
+import ShoppiesLogo from "../../assets/logos/ShoppiesLogo.svg";
 
 // Components
 import SearchBar from "../../components/SearchBar/SearchBar";
@@ -20,10 +20,16 @@ function Main() {
     const [nominationListing, setNominationListing] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
     const storedNoms = JSON.parse(localStorage.getItem("nominations"));
+    const nominationCount = storedNoms.length;
 
     // Updates Search Query Parameters
     function handleChange(e) {
         setSearchQuery(e.target.value);
+    }
+
+    // Resets Search Field
+    function resetValue() {
+        setSearchQuery("");
     }
 
     // Updates Search Results Listings
@@ -35,12 +41,11 @@ function Main() {
             .catch(error => {
                 console.log(error)
             })
-    }, [searchQuery]);
+    }, [searchQuery, storedNoms]);
 
     // Updates Movie Nomination Listings
     useLayoutEffect(() => {
         if(storedNoms !== null) {
-            console.log(storedNoms)
             {storedNoms
                 .map((item) => {
                     axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
@@ -64,7 +69,7 @@ function Main() {
     return (
         <main className="main">
             <section className="main__container">
-                <header className="main__header">
+                <header className="main__heading">
                     <img 
                         className="main__logo"
                         alt="Shoppies Logo"
@@ -83,7 +88,11 @@ function Main() {
                 </header>
                 <article className="main__section">
                     <SearchBar
-                        handleChange={handleChange} 
+                        handleChange={handleChange}
+                        resetValue={resetValue}
+                        searchParams={searchQuery}
+                        length={searchQuery.length}
+                        count={nominationCount}
                     />
                 </article>
                 <article className="main__section">
@@ -91,12 +100,13 @@ function Main() {
                         <h2 
                             className="main__subtitle">
                             {resultsListing 
-                                ?   `Movies with "${searchQuery}"`
-                                :   "Search Results"
+                                ? `Movies with "${searchQuery}"`
+                                : "Search Results"
                             }
                         </h2>
                         <ResultsList 
                             resultsListing={resultsListing}
+                            count={nominationCount}
                         />
                     </div>
                     <div className="main__block main__block--half">

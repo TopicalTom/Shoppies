@@ -19,6 +19,10 @@
         outline: none;
 
         &:focus {
+            caret-color: rgba(255, 255, 255, 0.199);
+        }
+
+        &:hover {
             box-shadow: rgba(0, 0, 0, 0.18) 0px 20px 30px;
         }
     }
@@ -27,14 +31,30 @@
         position: absolute;
         cursor: pointer;
         border-radius: 100px;
-        height: 28px;
-        width: 28px;
+        height: 26px;
+        width: 26px;
+        padding: 6px;
         right: 0;
-        top: 16;
+        top: 0;
         background: white;
         z-index: 90;
         align-self: center;
-        margin: 16px;
+        margin: 17px;
+        opacity: 0.2;
+        animation: Pop-in 0.2s ease 0s;
+
+        @keyframes Pop-in {
+            from {
+              transform: scale(0.2);
+            }
+            to {
+              transform: scale(1);
+            }
+        }
+
+        &:hover {
+            opacity: 0.4;
+        }
     }
 
     &__icon {
@@ -48,5 +68,25 @@
         margin: 18px;
         color: white;
         opacity: 0.2;
+    }
+
+    &__count {
+        position: absolute;
+        pointer-events: none;
+        right: 0;
+        top: 16;
+        z-index: 90;
+        align-self: center;
+        text-align: right;
+        opacity: 0.3;
+        transition: margin 0.2s ease 0s;
+
+        &--focused {
+            margin: 21px 60px;
+        }
+
+        &--initial {
+            margin: 21px 24px;
+        }
     }
 }
