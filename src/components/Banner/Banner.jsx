@@ -8,10 +8,14 @@ const Banner = () => {
 
     // Displays Banner when 5 movies nominated
     useEffect(() => {
-        (nominations.length >= 5
-            ?   setShowBanner(true)
-            :   setShowBanner(false)
-        )
+
+        if(nominations) {
+            (nominations.length >= 5
+                ?   setShowBanner(true)
+                :   setShowBanner(false)
+            )
+        }
+
     }, [nominations]);
 
     return (

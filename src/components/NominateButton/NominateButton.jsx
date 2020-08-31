@@ -16,26 +16,27 @@ const NominateButton = (props) => {
 
         currentNominations.push(newNomination);
         localStorage.setItem("nominations", JSON.stringify(currentNominations));
-        setNominations(currentNominations);
+        setNominations(JSON.parse(localStorage.getItem("nominations")));
         setIsNominated(true);
     }
 
     // Checks if Movie is already in Local Storage
     useEffect(() => {
 
-        const stored = JSON.parse(localStorage.getItem("nominations"));
-        const match = stored.filter(item => item.movieNomination == id);
+        if (nominations) {
 
-        if(stored && match && match.length !== 0) {
+            const match = nominations.filter(item => item.movieNomination == id);
+            if(match && match.length !== 0) {
 
-            let nominated = match[0].movieNomination;
-
-            (match && match.length !== 0 && id == nominated 
-                ? setIsNominated(true)
-                : setIsNominated(false)
-            )
+                let nominated = match[0].movieNomination;
+    
+                (match && match.length !== 0 && id == nominated 
+                    ? setIsNominated(true)
+                    : setIsNominated(false)
+                )
+            }
         }
-    }, [nominations, setNominations]);
+    }, [nominations, setNominations, setIsNominated]);
 
     return (
         <button 
@@ -45,7 +46,7 @@ const NominateButton = (props) => {
             {isNominated
                 ?   <span 
                         className="nominate__label">
-                        Nominated
+                        Added
                     </span>
                 :   <span 
                         className="nominate__label">

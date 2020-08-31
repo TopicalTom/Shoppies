@@ -21,11 +21,14 @@ function SearchBar(props) {
 
     // Offers Helper Text Based on Remaining Nominations
     useEffect(() => {
-        (nominations.length !== 0 
-            ? setPicksProgress(true)
-            : setPicksProgress(false)
-        )
-    }, [nominations.length]);
+
+        if(nominations) {
+            (nominations.length !== 0 
+                ? setPicksProgress(true)
+                : setPicksProgress(false)
+            )
+        }
+    }, [nominations]);
 
     return (
         <article className="search">

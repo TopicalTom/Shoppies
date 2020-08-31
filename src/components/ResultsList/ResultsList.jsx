@@ -13,8 +13,8 @@ const ResultsList = (props) => {
             <ul className="results">
                 {resultsListing
                     .map((listing) => {
-                        const key = listing.imdbID
-                        return <Result {...listing} key={key}/>
+                        //const key = listing.imdbID
+                        return <Result {...listing} key={uuid()}/>
                     }
                 )}
             </ul>

@@ -21,6 +21,16 @@
         display: flex;
         flex-direction: row;
         background: #FF2A53;
+        animation: Notify 1s ease 1s;
+
+        @keyframes Notify {
+            from {
+              transform: height(0px);
+            }
+            to {
+              transform: height(60px);
+            }
+        }
     }
 
     &--inactive {

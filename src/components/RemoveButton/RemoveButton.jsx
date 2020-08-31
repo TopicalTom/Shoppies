@@ -13,7 +13,7 @@ const RemoveButton = (props) => {
         stored = stored.filter(item => item.movieNomination !== id);
 
         localStorage.setItem("nominations", [JSON.stringify(stored)]);
-        setNominations(stored)
+        setNominations(JSON.parse(localStorage.getItem("nominations")))
     }
 
     return (
