@@ -1,68 +1,210 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+<br />
+<br />
 
-In the project directory, you can run:
+<a href="https://ibb.co/FHZ8VPs"><img src="https://i.ibb.co/vXyLYts/The-Shoppies.png" alt="The-Shoppies" border="0"></a>
 
-### `npm start`
+This project can be viewed here [Shoppies Website](https://shoppies.netlify.app/).
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<br />
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### `UX Development Challenge`
 
-### `npm test`
+Shopify has branched out into movie award shows and we need your help. Please build us an app to help manage our movie nominations for the upcoming Shoppies.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+We need a webpage that can search OMDB for movies, and allow the user to save their favourite films they feel should be up for nomination. When they've selected 5 nominees they should be notified they're finished.
 
-### `npm run build`
+> Design Goals
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- Search OMDB and display the results (movies only)
+- Add a movie from the search results to our nomination list
+- View the list of films already nominated
+- Remove a nominee from the nomination list
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+> Technical Requirements
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Search results should come from OMDB's API
+- Each search result should list at least its title, year of release and a button to nominate that film
+- Updates to the search terms should update the result list
+- Movies in search results can be added and removed from the nomination list
+- If a search result has already been nominated, disable its nominate button
+- Display a banner when the user has 5 nominations
 
-### `npm run eject`
+> Bonus Feature
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Save nomination lists if the user leaves the page
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+<br />
+<br />
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
+# Project Structure (Context)
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+<br />
+<br />
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+# Search OMDB and display the results (movies only)
 
-### Analyzing the Bundle Size
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Making a Progressive Web App
+<br />
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+### OMDB API Calls
 
-### Advanced Configuration
+```javascript
+    useLayoutEffect(() => {
+        axios.get(`${API_URL}s=${searchQuery}&type=${queryType}&apikey=${API_KEY}`)
+            .then(response => {
+                setResultsListing(response.data.Search)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [searchQuery, storedNoms]);
+```
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+<br />
+<br />
 
-### Deployment
+# Add a movie from the search results to our nomination list
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-### `npm run build` fails to minify
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+<br />
+
+### Adding Movie to Local Storage
+
+```javascript
+    const addToLocalStorage = () => {
+
+        let currentNominations = JSON.parse(localStorage.getItem('nominations')) || [];
+
+        let newNomination = { "movieNomination": id }
+        currentNominations.push(newNomination);
+
+        localStorage.setItem("nominations", JSON.stringify(currentNominations));
+        setAlreadyNominated(true);
+    }
+```
+
+<br />
+<br />
+
+# View the list of films already nominated
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+<br />
+
+### Displaying Nominated Movies
+
+```javascript
+    useLayoutEffect(() => {
+        if(storedNoms !== null) {
+            {storedNoms
+                .map((item) => {
+                    axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
+                        .then(response => {
+                            const nominee = ({
+                                title: response.data.Title,
+                                year: response.data.Year,
+                                id: response.data.imdbID
+                            })
+                            nominationListing.push(nominee)
+                            setNominationListing(nominationListing)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                    })
+            }
+        }
+    }, [nominationListing]);
+```
+
+<br />
+
+### Checking for already Nominated Movies
+
+```javascript
+    useLayoutEffect(() => {
+
+        const stored = JSON.parse(localStorage.getItem("nominations"));
+        const match = stored.filter(item => item.movieNomination == id);
+
+        if(match && match.length !== 0) {
+
+            let nominated = match[0].movieNomination;
+
+            (id == nominated 
+                ? setAlreadyNominated(true)
+                : setAlreadyNominated(false)
+            )
+        }
+    });
+```
+
+<br />
+<br />
+
+# Remove a nominee from the nomination list
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+<br />
+
+### Selecting Movies To Remove
+
+```javascript
+    let removeFromLocalStorage = function (name, value) {
+
+        let stored = JSON.parse(localStorage.getItem("nominations"));
+        stored = stored.filter(item => item.movieNomination !== id);
+
+        localStorage.setItem("nominations", [JSON.stringify(stored)])
+    }
+```
+
+<br />
+<br />
+
+# Display a banner when the user has 5 nominations
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+<br />
+
+### Creating a Notification Banner
+
+```javascript
+    let removeFromLocalStorage = function (name, value) {
+
+        let stored = JSON.parse(localStorage.getItem("nominations"));
+        stored = stored.filter(item => item.movieNomination !== id);
+
+        localStorage.setItem("nominations", [JSON.stringify(stored)])
+    }
+```
+
+<br />
+<br />
+
+# Reflection
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
