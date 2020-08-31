@@ -8,7 +8,7 @@ import './NominationList.scss';
 import Nominee from "../Nominee/Nominee";
 
 // API Variables
-const API_URL = "http://www.omdbapi.com/?";
+const API_URL = "https://www.omdbapi.com/?";
 const API_KEY = "6f490190";
 
 const NominationList = () => {
