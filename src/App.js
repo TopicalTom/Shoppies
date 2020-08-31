@@ -7,7 +7,7 @@ import Main from "./pages/Main/Main";
 import Banner from "./components/Banner/Banner";
 
 function App() {
-    const local = JSON.parse(localStorage.getItem("nominations"));
+    const local = JSON.parse(localStorage.getItem("nominations")) || [];
     const [nominations, setNominations] = useState(local);
 
     return (

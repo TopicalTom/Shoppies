@@ -24,7 +24,6 @@ const NominationList = () => {
 
                 //let clear = newNominations.splice(0, newNominations.length)
                 //setNewNominations(clear)
-                console.log(newNominations)
 
             nominations.map((item) => {
                 axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
@@ -73,7 +72,7 @@ const NominationList = () => {
         setShouldUpdate(false)
     }, [shouldUpdate]);
 
-    if(nominationListing && nominations.length !== 0) {
+    if(nominationListing && nominations.length != 0) {
 
         return (
             <ul className="nominations">
