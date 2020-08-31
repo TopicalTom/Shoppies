@@ -9,7 +9,7 @@ const NominateButton = (props) => {
     const [isNominated, setIsNominated] = useState(false);
 
     // Adds Movie Nomination to Local Storage
-    const addToLocalStorage = () => {
+    function addToLocalStorage() {
 
         let currentNominations = JSON.parse(localStorage.getItem('nominations')) || [];
         let newNomination = { "movieNomination": id }
@@ -41,7 +41,7 @@ const NominateButton = (props) => {
     return (
         <button 
             className="nominate" 
-            onClick={addToLocalStorage} 
+            onClick={() => addToLocalStorage()} 
             disabled={isNominated}>
             {isNominated
                 ?   <span 

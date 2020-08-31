@@ -7,7 +7,7 @@ const RemoveButton = (props) => {
     const {id} = props
     const {nominations, setNominations} = useContext(NomContext);
 
-    const removeFromLocalStorage = () => {
+    function removeFromLocalStorage() {
 
         let stored = JSON.parse(localStorage.getItem("nominations"));
         stored = stored.filter(item => item.movieNomination !== id);
@@ -17,7 +17,7 @@ const RemoveButton = (props) => {
     }
 
     return (
-        <button className="remove" onClick={removeFromLocalStorage}>
+        <button className="remove" onClick={() => removeFromLocalStorage()}>
             <span className="remove__label">Remove</span>
         </button>
     );

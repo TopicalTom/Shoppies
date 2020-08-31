@@ -16,7 +16,7 @@ const API_KEY = "6f490190";
 const queryType = "Movie";
 
 function Main() {
-    const [resultsListing, setResultsListing] = useState([]);
+    const [resultsListing, setResultsListing] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
 
     // Updates Search Query Parameters

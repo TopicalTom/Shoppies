@@ -1,7 +1,7 @@
 import React, { useContext, useState, useLayoutEffect, useEffect } from 'react';
-import uuid from "react-uuid";
 import { NomContext } from "../../hooks/useContext";
 import axios from "axios";
+import uuid from "react-uuid";
 import './NominationList.scss';
 
 // Components
@@ -14,51 +14,71 @@ const API_KEY = "6f490190";
 const NominationList = () => {
     const {nominations, setNominations} = useContext(NomContext);
     const [nominationListing, setNominationListing] = useState([]);
-    const [updatedListing, setUpdatedListing] = useState([]);
+    const [newNominations, setNewNominations] = useState([]);
     const [shouldUpdate, setShouldUpdate] = useState(false);
 
     // Grabs latest Movie Nomination Listing Data (if exists)
-    useEffect(() => {
+    useLayoutEffect(() => {
 
-        if (nominations) {
+        if (nominations && nominations.length >= 1) {
 
-            {nominations
-                .map((item) => {
-                    axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
-                        .then(response => {
-                            const nominee = ({
-                                title: response.data.Title,
-                                year: response.data.Year,
-                                id: response.data.imdbID
-                            })
-                            updatedListing.push(nominee)
-                            setUpdatedListing(updatedListing)
+                //let clear = newNominations.splice(0, newNominations.length)
+                //setNewNominations(clear)
+                console.log(newNominations)
+
+            nominations.map((item) => {
+                axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
+                    .then(response => {
+                        const nominee = ({
+                            title: response.data.Title,
+                            year: response.data.Year,
+                            id: response.data.imdbID
                         })
-                        .then(() => {
-                            setShouldUpdate(true)
+                        newNominations.unshift(nominee)
+                        newNominations.splice(nominations.length, newNominations.length - nominations.length)
+                    })
+                    .then(() => {
+                        setNominationListing(newNominations)
+                        setShouldUpdate(true)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
+            })
+        } else {
+            nominations.map((item) => {
+                axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
+                    .then(response => {
+                        const nominee = ({
+                            title: response.data.Title,
+                            year: response.data.Year,
+                            id: response.data.imdbID
                         })
-                        .catch(error => {
-                            console.log(error)
-                        })
+                        newNominations.unshift(nominee)
+                    })
+                    .then(() => {
+                        setNominationListing(newNominations)
+                        setShouldUpdate(true)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
                 })
-            }
         }
             
-    }, [setNominations, nominations]); // Runs on Stored Nomination Changes
+    }, [nominations, setNominations]); // Updates on nomination changes
 
     // Displays Movie Nomination Listings
     useLayoutEffect(() => {
-        setNominationListing(updatedListing)
         setShouldUpdate(false)
-    }, [shouldUpdate])
+    }, [shouldUpdate]);
 
-    if(nominationListing && nominationListing.length !== 0) {
+    if(nominationListing && nominations.length !== 0) {
 
         return (
             <ul className="nominations">
                 {nominationListing
                     .map((listing) => {
-                        //const key = `${listing.id}679`
                         return <Nominee {...listing} key={uuid()}/>
                     }
                 )}
