@@ -6,7 +6,7 @@ import Result from "../Result/Result";
 
 const ResultsList = (props) => {
 
-    const {resultsListing, count} = props
+    const {resultsListing} = props
 
     if (resultsListing) {
         return (
@@ -14,7 +14,7 @@ const ResultsList = (props) => {
                 {resultsListing
                     .map((listing) => {
                         const key = listing.imdbID
-                        return <Result {...listing} count={count} key={key}/>
+                        return <Result {...listing} key={key}/>
                     }
                 )}
             </ul>

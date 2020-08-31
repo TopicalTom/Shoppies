@@ -1,4 +1,4 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import axios from "axios";
 import './Main.scss';
 
@@ -17,23 +17,21 @@ const queryType = "Movie";
 
 function Main() {
     const [resultsListing, setResultsListing] = useState([]);
-    const [nominationListing, setNominationListing] = useState([]);
     const [searchQuery, setSearchQuery] = useState("");
-    const storedNoms = JSON.parse(localStorage.getItem("nominations"));
-    const nominationCount = storedNoms.length;
 
     // Updates Search Query Parameters
-    function handleChange(e) {
+    function updateSearch(e) {
         setSearchQuery(e.target.value);
     }
 
     // Resets Search Field
-    function resetValue() {
+    function resetSearch() {
         setSearchQuery("");
     }
 
     // Updates Search Results Listings
-    useLayoutEffect(() => {
+    useEffect(() => {
+        
         axios.get(`${API_URL}s=${searchQuery}&type=${queryType}&apikey=${API_KEY}`)
             .then(response => {
                 setResultsListing(response.data.Search)
@@ -41,30 +39,8 @@ function Main() {
             .catch(error => {
                 console.log(error)
             })
-    }, [searchQuery, storedNoms]);
-
-    // Updates Movie Nomination Listings
-    useLayoutEffect(() => {
-        if(storedNoms !== null) {
-            {storedNoms
-                .map((item) => {
-                    axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
-                        .then(response => {
-                            const nominee = ({
-                                title: response.data.Title,
-                                year: response.data.Year,
-                                id: response.data.imdbID
-                            })
-                            nominationListing.push(nominee)
-                            setNominationListing(nominationListing)
-                        })
-                        .catch(error => {
-                            console.log(error)
-                        })
-                    })
-            }
-        }
-    }, [nominationListing]);
+            
+    }, [searchQuery]); // On SearchQuery Change
 
     return (
         <main className="main">
@@ -88,11 +64,10 @@ function Main() {
                 </header>
                 <article className="main__section">
                     <SearchBar
-                        handleChange={handleChange}
-                        resetValue={resetValue}
+                        updateSearch={updateSearch}
+                        resetSearch={resetSearch}
                         searchParams={searchQuery}
                         length={searchQuery.length}
-                        count={nominationCount}
                     />
                 </article>
                 <article className="main__section">
@@ -106,7 +81,6 @@ function Main() {
                         </h2>
                         <ResultsList 
                             resultsListing={resultsListing}
-                            count={nominationCount}
                         />
                     </div>
                     <div className="main__block main__block--half">
@@ -114,10 +88,7 @@ function Main() {
                             className="main__subtitle">
                             My Nominations
                         </h2>
-                        <NominationList 
-                            nominationListing={nominationListing}
-                            nominationID={storedNoms}
-                        />
+                        <NominationList />
                     </div>
                 </article>
             </section>    
@@ -126,6 +97,34 @@ function Main() {
 }
 
 export default Main;
+
+/*
+    const storedNoms = JSON.parse(localStorage.getItem("nominations"));
+    const nominationCount = storedNoms.length;
+    const [nominationListing, setNominationListing] = useState([])
+    useEffect(() => {
+        //if(storedNoms !== null) {
+            {storedNoms
+                .map((item) => {
+                    axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
+                        .then(response => {
+                            const nominee = ({
+                                title: response.data.Title,
+                                year: response.data.Year,
+                                id: response.data.imdbID
+                            })
+                            nominationListing.push(nominee)
+                            setNominationListing(nominationListing)
+                        })
+                        .catch(error => {
+                            console.log(error)
+                        })
+                    })
+            //}
+        }
+    }, []); // Runs only once 
+
+*/
 
     /*
 

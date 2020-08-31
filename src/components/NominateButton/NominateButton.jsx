@@ -1,46 +1,48 @@
-import React, {useState, useLayoutEffect} from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import { NomContext } from "../../hooks/useContext";
 import "./NominateButton.scss"
 
 const NominateButton = (props) => {
 
     const {id} = props
-    const [alreadyNominated, setAlreadyNominated] = useState(false);
+    const {nominations, setNominations} = useContext(NomContext);
+    const [isNominated, setIsNominated] = useState(false);
 
     // Adds Movie Nomination to Local Storage
     const addToLocalStorage = () => {
 
         let currentNominations = JSON.parse(localStorage.getItem('nominations')) || [];
-
         let newNomination = { "movieNomination": id }
-        currentNominations.push(newNomination);
 
+        currentNominations.push(newNomination);
         localStorage.setItem("nominations", JSON.stringify(currentNominations));
-        setAlreadyNominated(true);
+        setNominations(currentNominations);
+        setIsNominated(true);
     }
 
     // Checks if Movie is already in Local Storage
-    useLayoutEffect(() => {
+    useEffect(() => {
 
         const stored = JSON.parse(localStorage.getItem("nominations"));
         const match = stored.filter(item => item.movieNomination == id);
 
-        if(match && match.length !== 0) {
+        if(stored && match && match.length !== 0) {
 
             let nominated = match[0].movieNomination;
 
-            (id == nominated 
-                ? setAlreadyNominated(true)
-                : setAlreadyNominated(false)
+            (match && match.length !== 0 && id == nominated 
+                ? setIsNominated(true)
+                : setIsNominated(false)
             )
         }
-    });
+    }, [nominations, setNominations]);
 
     return (
         <button 
             className="nominate" 
             onClick={addToLocalStorage} 
-            disabled={alreadyNominated}>
-            {alreadyNominated
+            disabled={isNominated}>
+            {isNominated
                 ?   <span 
                         className="nominate__label">
                         Nominated
