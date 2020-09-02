@@ -13,13 +13,10 @@ const Result = (props) => {
 
     // Removes Nomination Button when Max Nominations reached
     useLayoutEffect(() => {
-
-        if (nominations) {
-            (nominations.length >= 5 
-                ? setMaxNominations(true)
-                : setMaxNominations(false)
-            )
-        }
+        (nominations.length >= 5 
+            ? setMaxNominations(true)
+            : setMaxNominations(false)
+        )
     }, [nominations]);
 
     return (

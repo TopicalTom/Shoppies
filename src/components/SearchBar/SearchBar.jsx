@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from 'react';
 import { NomContext } from "../../hooks/useContext";
 import './SearchBar.scss';
 
+// Components
 import Search from "../../assets/icons/Search.svg";
 import Cancel from "../../assets/icons/Cancel.svg";
 
@@ -17,26 +18,28 @@ function SearchBar(props) {
             ? setHasContent(true)
             : setHasContent(false)
         )
-    }, [searchParams]);
+    }, [length]);
 
     // Offers Helper Text Based on Remaining Nominations
     useEffect(() => {
-
-        if(nominations) {
-            (nominations.length !== 0 
-                ? setPicksProgress(true)
-                : setPicksProgress(false)
-            )
-        }
+        (nominations.length < 5 
+            ? setPicksProgress(true)
+            : setPicksProgress(false)
+        )
     }, [nominations]);
 
     return (
-        <article className="search">
+        <form className="search">
             <img 
                 className="search__icon" 
                 src={Search}
                 alt="Search Icon"
             />
+            <label 
+                className="search__label" 
+                htmlFor="search"> 
+                Movie Title Search
+            </label>
             <input 
                 className="search__input"
                 placeholder="Search Movies"
@@ -50,27 +53,20 @@ function SearchBar(props) {
                 className={`search__count ${hasContent ? "search__count--focused" : "search__count--initial"}`}>
                 {picksProgress
                     ?   `${5 - nominations.length} pick${nominations.length === 4 ? " " : "s"} remaining`
-                    :   "Nominate 5 Movies"
+                    :   "Nominations Complete"
                 }
             </span>
             {hasContent
                 ?   <img 
                         className="search__clear"
                         src={Cancel}
-                        onClick={resetSearch}
+                        alt="Clear Search Icon"
+                        onClick={() => resetSearch()}
                     />
                 :   <></>
             }
-        </article>
+        </form>
     );
 }
 
 export default SearchBar;
-
-/*
-            <span 
-                className="search__count">
-                {picksProgress}
-            </span>
-
-*/

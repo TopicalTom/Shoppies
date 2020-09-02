@@ -1,0 +1,32 @@
+@import "../../styles/baseline.scss";
+
+.placeholder {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    background: #1C1C1E;
+    padding: 5rem 5rem;
+    width: 640px;
+    height: 640px;
+    border-radius: 10px;
+    //position: relative;
+    text-align: center;
+
+    &__cta {
+        font-size: 2rem;
+        margin-bottom: 20px;
+        line-height: 3rem;
+    }
+
+    &__prompt {
+        opacity: 0.7;
+        margin-bottom: 40px;
+    }
+
+    &__image {
+        height: 320px;
+        //position: absolute;
+        bottom: 0;
+    }
+}

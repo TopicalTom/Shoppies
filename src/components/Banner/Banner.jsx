@@ -8,20 +8,19 @@ const Banner = () => {
 
     // Displays Banner when 5 movies nominated
     useEffect(() => {
-
-        if(nominations) {
-            (nominations.length >= 5
-                ?   setShowBanner(true)
-                :   setShowBanner(false)
-            )
-        }
-
+        (nominations.length >= 5
+            ?   setShowBanner(true)
+            :   setShowBanner(false)
+        )
     }, [nominations]);
 
     return (
         <article className={`banner${showBanner ? "--active" : "--inactive"}`}>
             <div className="banner__container">
-                <h3 className="banner__header">Details Here</h3>
+                <h3 
+                    className="banner__header">
+                    Details Here
+                </h3>
             </div>
         </article>
     );

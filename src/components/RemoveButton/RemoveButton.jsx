@@ -1,24 +1,28 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 import { NomContext } from "../../hooks/useContext";
 import "./RemoveButton.scss"
 
 const RemoveButton = (props) => {
-
     const {id} = props
-    const {nominations, setNominations} = useContext(NomContext);
+    const {setNominations} = useContext(NomContext);
 
-    function removeFromLocalStorage() {
-
+    // Removes Movie Nomination from Local Storage and Listings
+    function removeNomination() {
         let stored = JSON.parse(localStorage.getItem("nominations"));
+        
         stored = stored.filter(item => item.movieNomination !== id);
-
         localStorage.setItem("nominations", [JSON.stringify(stored)]);
-        setNominations(JSON.parse(localStorage.getItem("nominations")))
+        setNominations(stored)
     }
 
     return (
-        <button className="remove" onClick={() => removeFromLocalStorage()}>
-            <span className="remove__label">Remove</span>
+        <button 
+            className="remove" 
+            onClick={() => removeNomination()}>
+            <span 
+                className="remove__label">
+                Remove
+            </span>
         </button>
     );
 }

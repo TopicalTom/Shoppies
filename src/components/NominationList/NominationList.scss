@@ -1,6 +1,30 @@
 @import "../../styles/baseline.scss";
 
 .nominations {
+    //width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    padding-inline-start: 0;
+    flex-wrap: wrap;
+
+    & > li {
+        margin-bottom: 20px;
+        margin-right: 20px;
+
+        &:nth-child(3) {
+            margin-right: 0px;
+        }
+    }
+
+    &__empty {
+        opacity: 0.6;
+    }
+}
+
+/*
+
+.nominations {
     width: 100%;
     padding-inline-start: 0;
 
@@ -12,3 +36,5 @@
         opacity: 0.6;
     }
 }
+
+*/

@@ -27,6 +27,13 @@
         }
     }
 
+    &__label {
+        display: hidden;
+        position: absolute;
+        opacity: 0;
+        right:0;
+    }
+
     &__clear {
         position: absolute;
         cursor: pointer;
@@ -78,7 +85,7 @@
         z-index: 90;
         align-self: center;
         text-align: right;
-        opacity: 0.3;
+        opacity: 0.6;
         transition: margin 0.2s ease 0s;
 
         &--focused {
