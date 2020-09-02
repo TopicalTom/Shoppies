@@ -34,6 +34,8 @@ function Main() {
 
     // Updates Search Results Listings
     useLayoutEffect(() => {
+        
+        // Gets Movie Results from OMDB API that match Search Bar Input
         axios.get(`${API_URL}s=${searchQuery}&type=${queryType}&apikey=${API_KEY}`)
             .then(response => {
                 setResultsListing(response.data.Search)
@@ -41,7 +43,7 @@ function Main() {
             .catch(error => {
                 console.log(error)
             })
-    }, [searchQuery]); // On SearchQuery Change
+    }, [searchQuery]); // Updates on SearchBar Input Changes
 
     return (
         <main className="main">

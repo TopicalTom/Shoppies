@@ -19,32 +19,30 @@ const NominationList = () => {
 
     // Grabs OMDB Data based on Local Storage Movie Nomination Values 
     useLayoutEffect(() => {
-        if (nominations) {
-            nominations.map((item) => {
-                axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
-                    .then(response => {
-                        const nominee = ({
-                            title: response.data.Title,
-                            year: response.data.Year,
-                            id: response.data.imdbID,
-                            poster: response.data.Poster
-                        })
+        nominations.map((item) => {
+            axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
+                .then(response => {
+                    const nominee = ({
+                        title: response.data.Title,
+                        year: response.data.Year,
+                        id: response.data.imdbID,
+                        poster: response.data.Poster
+                    })
 
-                        // Moves New to Top
-                        newNominations.unshift(nominee)
+                    // Moves New to Top
+                    newNominations.unshift(nominee)
                         
-                        // Moves Old to Bottom then Splices
-                        newNominations.splice(nominations.length, newNominations.length - nominations.length)
+                    // Moves Old to Bottom then Splices
+                    newNominations.splice(nominations.length, newNominations.length - nominations.length)
 
-                        // Sets Nomination Listing as New Nomination Data
-                        setNominationListing(newNominations)
-                        setShouldUpdate(true)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-            })
-        } 
+                    // Sets Nomination Listing as New Nomination Data
+                    setNominationListing(newNominations)
+                    setShouldUpdate(true)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        })
     }, [nominations, setNominations]);
 
     // Displays Updated Movie Nomination Listings

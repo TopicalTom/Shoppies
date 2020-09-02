@@ -7,28 +7,32 @@ const NominateButton = (props) => {
     const {nominations, setNominations} = useContext(NomContext);
     const [isNominated, setIsNominated] = useState(false);
 
-    // Adds Movie Nomination to Local Storage and Listings
+    // Adds Movie Nomination
     function addNomination() {
         let currentNominations = JSON.parse(localStorage.getItem('nominations')) || [];
         let newNomination = { "movieNomination": id }
 
+        // Pushes New Nomination to Context State and Local Storage
         currentNominations.push(newNomination);
         localStorage.setItem("nominations", JSON.stringify(currentNominations));
         setNominations(JSON.parse(localStorage.getItem("nominations")));
+        
+        // Toggles Button state to disabled to prevent duplicate movie nominations
         setIsNominated(true);
     }
 
     // Checks if Movie is already in Local Storage
     useEffect(() => {
-        const match = nominations.filter(item => item.movieNomination === id);
         
-        if(match && match.length !== 0) {
-            (id === match[0].movieNomination 
-                ?   setIsNominated(true)
-                :   setIsNominated(false)
-            )
-        }
-    }, [nominations, setNominations, setIsNominated, id]);
+        // Returns Object if matching ID exists in Nominations
+        const match = nominations.filter(item => item.movieNomination === id);
+
+        // If Match exists, disables the movies' Nomination Button
+        (match.length !== 0 
+            ?   setIsNominated(true)
+            :   setIsNominated(false)
+        )
+    }, [nominations, id]); // Updates on Nomination Change
 
     return (
         <button 

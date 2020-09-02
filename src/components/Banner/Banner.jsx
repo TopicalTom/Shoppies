@@ -6,13 +6,13 @@ const Banner = () => {
     const {nominations} = useContext(NomContext);
     const [showBanner, setShowBanner] = useState(false);
 
-    // Displays Banner when 5 movies nominated
+    // Displays Banner when Nominations reach 5
     useEffect(() => {
         (nominations.length >= 5
             ?   setShowBanner(true)
             :   setShowBanner(false)
         )
-    }, [nominations]);
+    }, [nominations]); // Updates on Nomination Change
 
     return (
         <article className={`banner${showBanner ? "--active" : "--inactive"}`}>
