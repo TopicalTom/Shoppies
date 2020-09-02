@@ -4,8 +4,6 @@
 
 <a href="https://ibb.co/FHZ8VPs"><img src="https://i.ibb.co/vXyLYts/The-Shoppies.png" alt="The-Shoppies" border="0"></a>
 
-This project can be viewed here [Shoppies Website](https://shoppies.netlify.app/).
-
 <br />
 
 ### `UX Development Challenge`
@@ -55,18 +53,25 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 <br />
 
-### OMDB API Calls
+### Dynamic Search Results
 
 ```javascript
+    // Main.jsx (line 36 - 44)
+    
     useLayoutEffect(() => {
+    
+        // Gets Movie Results from OMDB API that match Search Bar Input
         axios.get(`${API_URL}s=${searchQuery}&type=${queryType}&apikey=${API_KEY}`)
+            
+            // Sets Results Listings as the Response Data
             .then(response => {
                 setResultsListing(response.data.Search)
             })
             .catch(error => {
                 console.log(error)
             })
-    }, [searchQuery, storedNoms]);
+            
+    }, [searchQuery, storedNoms]); // Updates on Search Input Changes
 ```
 
 <br />
@@ -83,15 +88,27 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### Adding Movie to Local Storage
 
 ```javascript
-    const addToLocalStorage = () => {
-
+    // NominateButton.jsx (line 11-19)
+    
+    function addNomination() {
+        
+        // Gets nomination data from local storage if exists, else create empty array
         let currentNominations = JSON.parse(localStorage.getItem('nominations')) || [];
-
+        
+        // Creates nomination object with unique OMDB Movie ID
         let newNomination = { "movieNomination": id }
-        currentNominations.push(newNomination);
 
+        // Pushes new nomination object to nominations array
+        currentNominations.push(newNomination);
+        
+        // Sets updated nominations array as new local storage object
         localStorage.setItem("nominations", JSON.stringify(currentNominations));
-        setAlreadyNominated(true);
+        
+        // Sets Nominations state (Context API) as new nominations array
+        setNominations(JSON.parse(localStorage.getItem("nominations")));
+        
+        // Toggles Button state to disabled to prevent duplicate movie nominations
+        setIsNominated(true);
     }
 ```
 
@@ -109,27 +126,38 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### Displaying Nominated Movies
 
 ```javascript
+    // NominationList.jsx (line 21-46)
+
     useLayoutEffect(() => {
-        if(storedNoms !== null) {
-            {storedNoms
-                .map((item) => {
-                    axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
-                        .then(response => {
-                            const nominee = ({
-                                title: response.data.Title,
-                                year: response.data.Year,
-                                id: response.data.imdbID
-                            })
-                            nominationListing.push(nominee)
-                            setNominationListing(nominationListing)
-                        })
-                        .catch(error => {
-                            console.log(error)
-                        })
+    
+        // Maps Nomination Data to Nominee Object
+        nominations.map((item) => {
+            axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
+                .then(response => {
+                
+                    const nominee = ({
+                        title: response.data.Title,
+                        year: response.data.Year,
+                        id: response.data.imdbID,
+                        poster: response.data.Poster
                     })
-            }
-        }
-    }, [nominationListing]);
+
+                    // Adds Nominee Data to the front of New Nominations Array
+                    newNominations.unshift(nominee)
+                        
+                    // Removes old data from the end of the New Nominations Array
+                    newNominations.splice(nominations.length, newNominations.length - nominations.length)
+
+                    // Sets New Nomination Array to be used for the Nomination Listings
+                    setNominationListing(newNominations)
+                    setShouldUpdate(true)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        })
+        
+    }, [nominations, setNominations]); // Updates on Nomination Changes
 ```
 
 <br />
@@ -137,21 +165,20 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### Checking for already Nominated Movies
 
 ```javascript
-    useLayoutEffect(() => {
+    // Nominate Button.jsx (line 22-29)
+    
+    useEffect(() => {
+        
+        // Returns Object if matching ID exists in Nominations
+        const match = nominations.filter(item => item.movieNomination === id);
 
-        const stored = JSON.parse(localStorage.getItem("nominations"));
-        const match = stored.filter(item => item.movieNomination == id);
-
-        if(match && match.length !== 0) {
-
-            let nominated = match[0].movieNomination;
-
-            (id == nominated 
-                ? setAlreadyNominated(true)
-                : setAlreadyNominated(false)
-            )
-        }
-    });
+        // If Match exists, disables the movies' Nomination Button 
+        (match.length !== 0 
+            ?   setIsNominated(true)
+            :   setIsNominated(false)
+        )
+        
+    }, [nominations, id]); // Updates on Nomination Changes
 ```
 
 <br />
@@ -168,12 +195,19 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### Selecting Movies To Remove
 
 ```javascript
-    let removeFromLocalStorage = function (name, value) {
-
+    // RemoveButton.jsx (line 10-16)
+    
+    function removeNomination() {
+        
+        // Gets array of locally stored movie nominations
         let stored = JSON.parse(localStorage.getItem("nominations"));
+        
+        // Returns Array of Nominations that don't match current Nomination
         stored = stored.filter(item => item.movieNomination !== id);
-
-        localStorage.setItem("nominations", [JSON.stringify(stored)])
+        
+        // Sets Local Storage and Context State as the Filtered Array
+        localStorage.setItem("nominations", [JSON.stringify(stored)]);
+        setNominations(stored)
     }
 ```
 
@@ -188,16 +222,20 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 <br />
 
-### Creating a Notification Banner
+### Conditional Notification Banner
 
 ```javascript
-    let removeFromLocalStorage = function (name, value) {
-
-        let stored = JSON.parse(localStorage.getItem("nominations"));
-        stored = stored.filter(item => item.movieNomination !== id);
-
-        localStorage.setItem("nominations", [JSON.stringify(stored)])
-    }
+    // Banner.jsx (line 10-15)
+    
+    useEffect(() => {
+    
+        // Displays Banner when Nominations (Context API) reaches 5
+        (nominations.length >= 5
+            ?   setShowBanner(true)
+            :   setShowBanner(false)
+        )
+        
+    }, [nominations]); // Updates on Nomination Changes
 ```
 
 <br />
