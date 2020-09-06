@@ -1,66 +1,49 @@
-import React, { useContext, useState, useLayoutEffect} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import { NomContext } from "../../hooks/useContext";
-import axios from "axios";
 import uuid from "react-uuid";
 import './NominationList.scss';
 
 // Components
 import Nominee from "../Nominee/Nominee";
 
-// API Variables
-const API_URL = "https://www.omdbapi.com/?";
-const API_KEY = "6f490190";
-
-const NominationList = () => {
+const NominationList = (props) => {
+    const {nominationListing} = props
     const {nominations, setNominations} = useContext(NomContext);
-    const [shouldUpdate, setShouldUpdate] = useState(false);
-    const [nominationListing, setNominationListing] = useState([]);
-    const newNominations = useState([]);
+    const [currentProgress, setCurrentProgress] = useState(1);
 
-    // Grabs OMDB Data based on Local Storage Movie Nomination Values 
-    useLayoutEffect(() => {
-        nominations.map((item) => {
-            axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
-                .then(response => {
-                    const nominee = ({
-                        title: response.data.Title,
-                        year: response.data.Year,
-                        id: response.data.imdbID,
-                        poster: response.data.Poster
-                    })
-
-                    // Moves New to Top
-                    newNominations.unshift(nominee)
-                        
-                    // Moves Old to Bottom then Splices
-                    newNominations.splice(nominations.length, newNominations.length - nominations.length)
-
-                    // Sets Nomination Listing as New Nomination Data
-                    setNominationListing(newNominations)
-                    setShouldUpdate(true)
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        })
-    }, [nominations, setNominations]);
-
-    // Displays Updated Movie Nomination Listings
-    useLayoutEffect(() => {
-        setShouldUpdate(false)
-    }, [shouldUpdate]);
+    useEffect(() => {
+        setCurrentProgress(nominations.length)
+    }, [nominations, setNominations])
 
     return (
-        <div>
-            <h2 className="main__subtitle">My Nominations</h2>
-            <ul className="nominations">
-                {nominationListing
-                    .map((listing) => {
-                        return <Nominee {...listing} key={uuid()}/>
+        <article className="nominations">
+            <div className="nominations__container">
+                <ul className="nominations__listings">
+                    {nominationListing
+                        .map((listing) => {
+                            return <Nominee {...listing} key={uuid()}/>
+                        }
+                    )}
+                </ul>
+                <ul className="nominations__placeholders">
+                    <li className="nominations__backing" />
+                    <li className="nominations__backing" />
+                    <li className="nominations__backing" />
+                    <li className="nominations__backing" />
+                    <li className="nominations__backing" />
+                </ul>
+            </div>
+            <div className="nominations__details">
+                <span 
+                    className="nominations__progress">
+                    {currentProgress < 5
+                        ?   `${5 - currentProgress} Pick${currentProgress !== 4 ? "s" : ""} Remaining`
+                        :   "Nominations Complete"
                     }
-                )}
-            </ul>
-        </div>
+                </span>
+                <button className="nominations__share">Share</button>
+            </div>
+        </article>
     );
 }
 

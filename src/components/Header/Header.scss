@@ -1,0 +1,42 @@
+@import "../../styles/baseline.scss";
+
+.header {
+    margin: 0px auto;
+    padding: 20px 0px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100vw;
+    position: fixed;
+    background: #131313;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    z-index: 900;
+
+    &__container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 1200px;
+    }
+
+    &__wordmark {
+        vertical-align: center;
+        padding: auto;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__logo {
+        margin-right: 15px;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: row;
+    }
+
+    &__pretext {
+        opacity: 0.6;
+    }
+}

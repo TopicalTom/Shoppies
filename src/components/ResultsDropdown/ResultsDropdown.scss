@@ -1,0 +1,31 @@
+@import "../../styles/baseline.scss";
+
+.dropdown {
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin-top: 5rem;
+    width: 468px;
+    height: auto;
+    background: rgba(28, 28, 30, 0.98);
+    border-radius: 6px;
+    z-index: 600;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 20px 30px;
+    padding: 1rem;
+
+    &__title {
+        margin-bottom: 1rem;
+        padding-bottom: 5px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    &__close {
+        color: #2997ff;
+        width: 100%;
+        text-align: center;
+        border-top: 1px solid grey;
+        background: rgba(28, 28, 30, 0.98);
+        border: none;
+        margin-top: 1rem;
+    }
+}

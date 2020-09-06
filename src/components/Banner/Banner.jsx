@@ -1,27 +1,26 @@
-import React, {useState, useContext, useEffect} from 'react';
-import { NomContext } from "../../hooks/useContext";
+import React from 'react';
 import "./Banner.scss"
 
-const Banner = () => {
-    const {nominations} = useContext(NomContext);
-    const [showBanner, setShowBanner] = useState(false);
+const Banner = (props) => {
 
-    // Displays Banner when Nominations reach 5
-    useEffect(() => {
-        (nominations.length >= 5
-            ?   setShowBanner(true)
-            :   setShowBanner(false)
-        )
-    }, [nominations]); // Updates on Nomination Change
+    const {closeBanner} = props
 
     return (
-        <article className={`banner${showBanner ? "--active" : "--inactive"}`}>
-            <div className="banner__container">
+        <article className="banner">
+            <section className="banner__container">
                 <h3 
                     className="banner__header">
-                    Details Here
+                    Nominations complete
                 </h3>
-            </div>
+                <p
+                    className="banner__details"
+                    >
+                    Your nominations will automatically be submitted once the ceremony begins but feel free to make changes or share until then.
+                </p>
+                <button onClick={() => closeBanner()}>
+                    Got it
+                </button>
+            </section>
         </article>
     );
 }

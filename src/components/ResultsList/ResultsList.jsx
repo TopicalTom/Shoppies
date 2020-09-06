@@ -8,19 +8,15 @@ import Result from "../Result/Result";
 const ResultsList = (props) => {
     const {resultsListing} = props
 
-    if (resultsListing) {
-        return (
-            <ul className="results">
-                {resultsListing
-                    .map((listing) => {
-                        return <Result {...listing} key={uuid()}/>
-                    }
-                )}
-            </ul>
-        );
-    } else {
-        return <span className="results__empty">No Matches</span>
-    }
+    return (
+        <ul className="results">
+            {resultsListing
+                .map((listing) => {
+                    return <Result {...listing} key={uuid()}/>
+                }
+            )}
+        </ul>
+    );
 }
 
 export default ResultsList;

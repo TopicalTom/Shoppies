@@ -1,39 +1,60 @@
 @import "../../styles/baseline.scss";
 
 .banner {
+    position: fixed;
+    z-index: 2000;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    animation: Notify 6s ease;
+    //overflow: hidden;
+    background: #FF2A53;
+    //background: rgba(0, 0, 0, 0.342);
 
-    //box-shadow: rgba(255, 255, 255, 0.445) 20px 20px 30px;
+    @keyframes Notify {
+        from {
+          transform: margin-top(200px);
+        }
+        to {
+          transform: margin-top(0px);
+        }
+    }
 
     &__container {
         display: flex;
         flex-direction: column;
-        margin: 0 auto;
         width: 1000px;
+        padding: 2rem;
+        margin: 0 auto;
     }
 
-    &--active {
-        position: fixed;
-        z-index: 900;
-        bottom: 0;
-        left: 0;
-        width: 100vw;
-        height: 160px;
-        display: flex;
-        flex-direction: row;
-        background: #FF2A53;
-        animation: Notify 1s ease;
-
-        @keyframes Notify {
-            from {
-              transform: height(0px);
-            }
-            to {
-              transform: height(60px);
-            }
-        }
+    &__header {
+        margin-bottom: 10px;
     }
 
-    &--inactive {
-        display: none;
+    &__details {
+        width: 60%;
+    }
+
+    &__close {
+        width: 60%;
     }
 }
+
+/*
+
+    position: absolute;
+    z-index: 2000;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    background: #FF2A53;
+    animation: Notify 6s ease;
+
+*/
