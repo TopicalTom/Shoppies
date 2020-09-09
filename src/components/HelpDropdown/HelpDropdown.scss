@@ -1,0 +1,69 @@
+@import "../../styles/baseline.scss";
+
+.help {
+    position: relative;
+    height: 16px;
+    width: 16px;
+    align-self: center;
+
+    &__icon {
+        height: 16px;
+        width: 16px;
+        opacity: 0.6;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__dropdown {
+        margin-top: 28px;
+        position: absolute;
+        top: 0;
+        left: -182px;
+        z-index: 3000;
+        background: #D4D4D4;
+        width: 380px;
+        padding: 1rem 2rem;
+        text-align: center;
+        box-shadow: rgba(0, 0, 0, 0.4) 0px 20px 30px;
+        border-radius: 6px;
+        justify-self: center;
+        -webkit-animation: fadeIn 0.5s;
+        animation: fadeIn 0.5s;
+
+        @-webkit-keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+          
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity:1 ;
+            }
+        }
+
+        ::after {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: transparent transparent #D4D4D4 transparent;
+            box-shadow: rgba(0, 0, 0, 0.4) 0px 20px 30px;
+        }
+    }
+
+    &__information {
+        color: black;
+    }
+}

@@ -6,7 +6,7 @@
     bottom: 0;
     left: 0;
     width: 100vw;
-    height: 160px;
+    height: 180px;
     display: flex;
     flex-direction: column;
     background: #FF2A53;
@@ -31,18 +31,40 @@
     }
 
     &__details {
-        width: 80%;
+        width: 75%;
     }
 
-    &__close {
-        width: 160px;
-        height: 44px;
+    &__button {
+        width: 200px;
+        height: 50px;
         display: flex;
         align-self: center;
         border: none;
         border-radius: 2px;
-        padding: 0.25rem 2rem;
+        text-align: center;
+        background-color: white;
+
+        &--primary {
+            background-color: white;
+        }
+
+        &--secondary {
+            background: none;
+        }
+    }
+
+    &__action {
         font-size: 1.15rem;
         line-height: 2.2rem;
+        color: black;
+        margin: auto;
+
+        &--primary {
+            color: black;
+        }
+
+        &--secondary {
+            color: white;
+        }
     }
 }

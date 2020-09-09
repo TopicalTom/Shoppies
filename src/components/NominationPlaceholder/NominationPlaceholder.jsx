@@ -15,7 +15,7 @@ const NominationPlaceholder = () => {
             />
             <h3 
                 className="placeholder__cta">
-                There's nothing here...
+                No Nominations Yet
             </h3>
             <p 
                 className="placeholder__prompt">

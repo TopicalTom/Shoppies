@@ -71,26 +71,6 @@
         color: white;
         opacity: 0.2;
     }
-
-    &__count {
-        position: absolute;
-        pointer-events: none;
-        right: 0;
-        top: 16;
-        z-index: 90;
-        align-self: center;
-        text-align: right;
-        opacity: 0.6;
-        transition: margin 0.2s ease 0s;
-
-        &--focused {
-            margin: 21px 60px;
-        }
-
-        &--initial {
-            margin: 21px 24px;
-        }
-    }
 }
 
 .focus {

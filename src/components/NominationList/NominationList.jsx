@@ -42,8 +42,8 @@ const NominationList = (props) => {
                     }
                 </span>
                 <button 
-                    className="nominations__share">
-                    Share
+                    className="nominations__submit">
+                    Submit Nominations
                 </button>
             </div>
         </article>

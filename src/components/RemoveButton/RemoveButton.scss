@@ -3,9 +3,12 @@
 .remove {
     border: none;
     background-color: white;
-    border-radius: 2px;
     padding: 0.5rem 1rem;
-    height: 36px;
+    height: 44px;
+
+    &:hover {
+        cursor: pointer;
+    }
 
     &__label {
         color: black;

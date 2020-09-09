@@ -20,6 +20,12 @@
         margin-bottom: 40px;
     }
 
+    &__context {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: row;
+    }
+
     &__heading {
         display: flex;
         flex-direction: row;
@@ -27,7 +33,19 @@
     }
 
     &__instructions {
-        margin-top: 15px;
         opacity: 0.6;
+        margin-right: 6px;
+    }
+
+    &__help {
+        width: 16px;
+        height: 16px;
+        opacity: 0.4;
+        align-self: center;
+
+        &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+        }
     }
 }

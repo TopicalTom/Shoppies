@@ -22,8 +22,8 @@ function SearchBar() {
         setSearchQuery(e.target.value);
     }
 
-    // Resets Search Field
-    function resetSearch() {
+    // Clears Search Field
+    function clearSearch() {
         setSearchQuery("");
     }
 
@@ -82,7 +82,7 @@ function SearchBar() {
                             className="search__clear"
                             src={Cancel}
                             alt="Clear Search Icon"
-                            onClick={() => resetSearch()}
+                            onClick={() => clearSearch()}
                         />
                         <ResultsDropdown 
                             searchQuery={searchQuery}
@@ -96,7 +96,7 @@ function SearchBar() {
         {hasContent
             ?   <div // Overlay for focused Search
                     className="focus" 
-                    onClick={() => resetSearch()}
+                    onClick={() => clearSearch()}
                 />
             :   <></>
         }

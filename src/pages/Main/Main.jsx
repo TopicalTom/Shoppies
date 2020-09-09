@@ -6,6 +6,7 @@ import './Main.scss';
 // Components
 import Nominations from "../../components/NominationList/NominationList";
 import Placeholder from "../../components/NominationPlaceholder/NominationPlaceholder";
+import Help from "../../components/HelpDropdown/HelpDropdown";
 
 // API Variables
 const API_URL = "https://www.omdbapi.com/?";
@@ -55,7 +56,12 @@ function Main() {
             <div className="main__container">
                 <section className="main__section">
                     <h2 className="main__heading">My Nominations</h2>
-                    <p className="main__instructions">Nominate your top 5 favourite movies for award consideration</p>
+                    <div className="main__context">
+                        <p className="main__instructions">Nominate your top 5 favourite movies for award consideration</p>
+                        <Help 
+                            details="You have until December 10th, 2020 to curate your movie nominations. Nominations will be saved if you leave this page."
+                        />
+                    </div>
                 </section>
                 {nominations.length !== 0
                     ?   <Nominations nominationListing={nominationListing}/>

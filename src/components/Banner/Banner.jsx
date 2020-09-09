@@ -15,13 +15,24 @@ const Banner = (props) => {
                     </h3>
                     <p
                         className="banner__details">
-                        Your nominations will automatically be submitted once the ceremony begins.
+                        Make sure to submit your nominations before the Shoppies red carpet rolls out on December 10th, 2020 at 7PM EST.
                     </p>
                 </div>
                 <button 
-                    className="banner__close"
+                    className="banner__button banner__button--secondary"
                     onClick={() => closeBanner()}>
-                    Continue
+                    <span
+                        className="banner__action banner__action--secondary">
+                        Maybe Later
+                    </span>
+                </button>
+                <button 
+                    className="banner__button banner__button--primary"
+                    onClick={() => closeBanner()}>
+                    <span
+                        className="banner__action banner__action--primary">
+                        Submit Now
+                    </span>
                 </button>
             </div>
         </article>
