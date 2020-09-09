@@ -42,6 +42,8 @@ After nailing the initial structure of the project based on the graphic that was
 
 In order to accomplish this, I relied heavily on [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
 
+<br />
+
 - [Visibility of system status](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
 - [Match between system and real world](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%232%3A%20Match%20between%20system%20and%20the%20real%20world)
 - [Recognition rather than recall](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%236%3A%20Recognition%20rather%20than%20recall)
@@ -49,17 +51,35 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
 - [Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
 - [Help and documentation](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%2310%3A%20Help%20and%20documentation)
 
-With these guidelines in mind, I was able to take my Shoppies design from this:
+<br />
+
+With these guidelines in mind, I was able to take my Shoppies design from what you see below, compared to what you can see on the currrent live version [here](https://shoppies.netlify.app/).
 
 <a href="https://ibb.co/Rpcx6Ds"><img src="https://i.ibb.co/MD7Y1Ct/Shoppies-Initial.png" alt="Shoppies-Initial" border="0"></a>
 
-To this:
+<br />
 
-<a href="https://ibb.co/6rFnVYv"><img src="https://i.ibb.co/7jKY8vg/Shoppies-Final.png" alt="Shoppies-Final" border="0"></a>
+### Phase 1: Gaining Context
+
+<a href="https://ibb.co/hgYrzP5"><img src="https://i.ibb.co/8mYGZW3/Shoppies-Phase-1.png" alt="Shoppies-Phase-1" border="0"></a>
 
 <br />
 
-### Establishing User Flow
+### Phase 2: Making Selections
+
+<a href="https://ibb.co/23ZNR06"><img src="https://i.ibb.co/fdDvZVS/Shoppies-Phase-2.png" alt="Shoppies-Phase-2" border="0"></a>
+
+<br />
+
+### Phase 3: Managing Selections
+
+<a href="https://ibb.co/6WS7vHN"><img src="https://i.ibb.co/71Ddgnb/Shoppies-Phase-3.png" alt="Shoppies-Phase-3" border="0"></a>
+
+<br />
+
+### Phase 4: Determining Next Steps
+
+<a href="https://ibb.co/R6k51sR"><img src="https://i.ibb.co/vd6tbT0/Shoppies-Phase-4.png" alt="Shoppies-Phase-4" border="0"></a>
 
 <br />
 <br />
