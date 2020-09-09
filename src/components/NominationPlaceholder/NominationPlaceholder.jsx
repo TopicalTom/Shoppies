@@ -19,13 +19,13 @@ const NominationPlaceholder = () => {
             </h3>
             <p 
                 className="placeholder__prompt">
-                Movie nominations can be made through the search bar
-                <a
-                    className="placeholder__redirect" 
-                    href="#search">
-                    here
-                </a>
+                Movie nominations can be made through the search bar above.
             </p>
+            <a
+                className="placeholder__redirect" 
+                href="#search">
+                Start Nominating
+            </a>
         </div>
     );
 }

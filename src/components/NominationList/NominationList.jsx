@@ -41,53 +41,13 @@ const NominationList = (props) => {
                         :   "Nominations Complete"
                     }
                 </span>
-                <button className="nominations__share">Share</button>
+                <button 
+                    className="nominations__share">
+                    Share
+                </button>
             </div>
         </article>
     );
 }
 
 export default NominationList;
-
-/*
-
-    if(nominationListing && nominations.length != 0) {
-
-        return (
-            <ul className="nominations">
-                {nominationListing
-                    .map((listing) => {
-                        return <Nominee {...listing} key={uuid()}/>
-                    }
-                )}
-            </ul>
-        );
-    } else {
-        return <span className="nominations__empty">Nominated movies will show up here</span>
-
-*/
-
-/*
-else {
-            nominations.map((item) => {
-                axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
-                    .then(response => {
-                        const nominee = ({
-                            title: response.data.Title,
-                            year: response.data.Year,
-                            id: response.data.imdbID,
-                            poster: response.data.Poster
-                        })
-                        newNominations(nominee)
-                    })
-                    .then(() => {
-                        setNominationListing(newNominations)
-                        setShouldUpdate(true)
-                    })
-                    .catch(error => {
-                        console.log(error)
-                    })
-                })
-        }
-
-*/

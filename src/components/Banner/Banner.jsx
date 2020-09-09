@@ -7,20 +7,23 @@ const Banner = (props) => {
 
     return (
         <article className="banner">
-            <section className="banner__container">
-                <h3 
-                    className="banner__header">
-                    Nominations complete
-                </h3>
-                <p
-                    className="banner__details"
-                    >
-                    Your nominations will automatically be submitted once the ceremony begins but feel free to make changes or share until then.
-                </p>
-                <button onClick={() => closeBanner()}>
-                    Got it
+            <div className="banner__container">
+                <div className="banner__message">
+                    <h3 
+                        className="banner__header">
+                        Nominations complete
+                    </h3>
+                    <p
+                        className="banner__details">
+                        Your nominations will automatically be submitted once the ceremony begins.
+                    </p>
+                </div>
+                <button 
+                    className="banner__close"
+                    onClick={() => closeBanner()}>
+                    Continue
                 </button>
-            </section>
+            </div>
         </article>
     );
 }

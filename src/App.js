@@ -29,10 +29,7 @@ function App() {
     return (
         <NomContext.Provider value={{ nominations, setNominations }}>
             {showBanner
-                ?   <>
-                        <Banner closeBanner={closeBanner}/>
-                        <div className="overlay" closeBanner={closeBanner}/>
-                    </>
+                ?   <Banner closeBanner={closeBanner}/>
                 :   <></>
             }
             <Header />
