@@ -36,11 +36,28 @@ We need a webpage that can search OMDB for movies, and allow the user to save th
 <br />
 <br />
 
-# Project Structure (Context)
+# Project Design
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Before going into how I added the functional requirements for this challenge, I want to quickly go over my thought process behind my version of Shoppies, and why I designed it the way I did.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+After nailing the initial structure of the project based on the graphic that was provided my design goal was to create a clearer narrative for what users were hoping to accomplish on this page, and provide additional context for what it was they were doing on a moment to moment basis.
+
+In order to accomplish this, I relied heavily on Usability Heuristics as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
+
+- Visibility of system status
+- Match between system and real world
+- Recognition rather than recall
+- Flexibility and efficiency of use
+- Aesthetic and minimalist design
+- Help and documentation
+
+With these guidelines in mind, I was able to take my Shoppies design from this:
+
+<a href="https://ibb.co/Rpcx6Ds"><img src="https://i.ibb.co/MD7Y1Ct/Shoppies-Initial.png" alt="Shoppies-Initial" border="0"></a>
+
+To this:
+
+<a href="https://ibb.co/6rFnVYv"><img src="https://i.ibb.co/7jKY8vg/Shoppies-Final.png" alt="Shoppies-Final" border="0"></a>
 
 <br />
 <br />
