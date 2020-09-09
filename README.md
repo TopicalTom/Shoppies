@@ -12,6 +12,8 @@ Shopify has branched out into movie award shows and we need your help. Please bu
 
 We need a webpage that can search OMDB for movies, and allow the user to save their favourite films they feel should be up for nomination. When they've selected 5 nominees they should be notified they're finished.
 
+<br />
+
 > Technical Requirements
 
 - Search OMDB and display the results (movies only)
@@ -19,29 +21,33 @@ We need a webpage that can search OMDB for movies, and allow the user to save th
   - Each search result should list at least its title, year of release and a button to nominate that film
   - Updates to the search terms should update the result list
 - Add a movie from the search results to our nomination list
-  - Save nomination lists if the user leaves the page (Bonus)
+  - View the list of films already nominated
   - If a search result has already been nominated, disable its nominate button
+  - Save nomination lists if the user leaves the page (Bonus)
 - Remove a nominee from the nomination list
-- View the list of films already nominated
-  - Display a banner when the user has 5 nominations
+- Display a banner when the user has 5 nominations
 
 <br />
 <br />
 
-# Project Design
+# Design Overview
 
 Before going into how I added the functional requirements for this challenge, I want to quickly go over my thought process behind my version of Shoppies, and why I designed it the way I did.
 
 After nailing the initial structure of the project based on the graphic that was provided my design goal was to create a clearer narrative for what users were hoping to accomplish on this page, and provide additional context for what it was they were doing on a moment to moment basis.
 
-In order to accomplish this, I relied heavily on Usability Heuristics as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
+<br />
 
-- Visibility of system status
-- Match between system and real world
-- Recognition rather than recall
-- Flexibility and efficiency of use
-- Aesthetic and minimalist design
-- Help and documentation
+### Utilizing Usability Heuristics
+
+In order to accomplish this, I relied heavily on [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
+
+- [Visibility of system status](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
+- [Match between system and real world](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%232%3A%20Match%20between%20system%20and%20the%20real%20world)
+- [Recognition rather than recall](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%236%3A%20Recognition%20rather%20than%20recall)
+- [Flexibility and efficiency of use](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
+- [Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
+- [Help and documentation](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%2310%3A%20Help%20and%20documentation)
 
 With these guidelines in mind, I was able to take my Shoppies design from this:
 
@@ -50,6 +56,15 @@ With these guidelines in mind, I was able to take my Shoppies design from this:
 To this:
 
 <a href="https://ibb.co/6rFnVYv"><img src="https://i.ibb.co/7jKY8vg/Shoppies-Final.png" alt="Shoppies-Final" border="0"></a>
+
+<br />
+
+### Establishing User Flow
+
+<br />
+<br />
+
+# Development Overview
 
 <br />
 <br />
@@ -120,15 +135,6 @@ To learn React, check out the [React documentation](https://reactjs.org/).
         setIsNominated(true);
     }
 ```
-
-<br />
-<br />
-
-# View the list of films already nominated
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 
 <br />
 
@@ -250,8 +256,10 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 <br />
 <br />
 
-# Reflection
+# Next Steps
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+At this current moment, Shoppies represents only a cross-section of an experience as it is only focused on how a user might submit their nominations for an award ceremony. If I were to build out this experience I would focus on features that bookend what I have built so far in order to create a more complete experience and narrative.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+For instance, this current experience is under the assumption that users are already familiar or at least aware of what Shoppies is in order to be submitting their movies for consideration. Therefore, one area I would look into is creating an about page that would allow users who aren't familiar with the Shoppies to learn more about the awards ceremony and have an understanding of why they might want to make a submission.
+
+On the flip side, the current experience ends with a user being able to submit their movie nominations but there is nothing to tie a specific user to their nominations. To alleviate this issue, I would look into User Authentication so that users could either sign-in, or at the very least use an email, to connect a user to their submission. Building on this, Shoppies appears to be a new award ceremony so being able to reach new audiences would be beneficial for their growth. Providing users with the ability to share their nominations with their friends through social media might help with reach and building up an audience before the Shoppies officially begins.
