@@ -14,7 +14,7 @@ We need a webpage that can search OMDB for movies, and allow the user to save th
 
 <br />
 
-> Technical Requirements
+### `Technical Requirements`
 
 - Search OMDB and display the results (movies only)
   - Search results should come from OMDB's API
@@ -99,19 +99,59 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 # Add a movie from the search results to our nomination list
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
 <br />
 
 ### Front-End: Making Selections
 
-<a href="https://ibb.co/23ZNR06"><img src="https://i.ibb.co/fdDvZVS/Shoppies-Phase-2.png" alt="Shoppies-Phase-2" border="0"></a>
+When a user make
+
+I am also looking to display posters of movies in the search listings in a future version to help ensure users are selecting the movie they intend to in order to protect against users from having to go back and forth adding, checking the movie poster as a nomination and then removing to try again which is too many steps and can be solved with this small change.
 
 <br />
 
-### Back-End: Adding Movie to Local Storage
+<a href="https://ibb.co/23ZNR06"><img src="https://i.ibb.co/fdDvZVS/Shoppies-Phase-2.png" alt="Shoppies-Phase-2" border="0"></a>
+
+> Note: Since I am using an unordered list with uuid key values, when nominees are added to the list they are done so in a random order. This is less than ideal for the User Experience as the movies shift around in a random way. This can make it hard to determine the movie that was just added as it might be added underneath the search results dropdown. I am fullly aware of this issue and intend to make adjustments to ensure the newest movie is listed from left to right.
+
+<br />
+
+### Back-End: Add Persisting Movie Nominations 
+
+When I initially took on the challenge of adding persisting movie nominations, I thought it would be fairly straightforward since I've used [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage#wikiArticle:~:text=The%20read%2Donly%20localStorage%20property%20allows%20you,is%2C%20when%20the%20page%20is%20closed.) before when adding a light/dark mode toggle on my portfolio site. My thought process was that I could use the values in local storage as a global state that could be pulled wherever and whenever they were needed, and any changes would trigger updates to the Shoppies UI. While this worked well for when the local storage was one value, I ran into issues when it was an array of values as it was difficult to determine when changes occured in the local storage array and the page would require a refresh to trigger a display change.
+
+Luckily, I did some research and stumbled upon the [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) Hook which allowed me to create the global state I needed, but would enable me to track when changes were made by wrapping everything in a NomContext provider: 
+
+
+<br />
+
+```javascript
+    // App.js (line 12-39)
+    
+    function App() {
+        const savedData = JSON.parse(localStorage.getItem("nominations")) || [];
+        const [nominations, setNominations] = useState(savedData);
+        const [showBanner, setShowBanner] = useState(false);
+        
+        // (line 17-28)
+
+        return (
+            <NomContext.Provider value={{ nominations, setNominations }}>
+                {showBanner
+                    ?   <Banner closeBanner={closeBanner}/>
+                    :   <></>
+                }
+                <Header />
+                <Main />
+            </NomContext.Provider>
+        );
+    }
+```
+
+<br />
+
+From here, whenever a user clicked on a movie result to add it to their movie nominations list, it is added first to local storage and then as the useContext value to trigger UI changes wherever it was needed without having to reload the page. Essentially, I am using useContext as a trackable value that can update the DOM for the current session but using local storage as a back-up just in case a user intentionally or unintentionally leaves.
+
+<br />
 
 ```javascript
     // NominateButton.jsx (line 11-19)
@@ -323,17 +363,35 @@ Using the useContext hook that is providing access to a global state for nominat
 <br />
 
 ```javascript
-    // Banner.jsx (line 10-15)
+    // App.js (line 12-39)
     
-    useEffect(() => {
+    function App() {
     
-        // Displays Banner when Nominations (Context API) reaches 5
-        (nominations.length >= 5
-            ?   setShowBanner(true)
-            :   setShowBanner(false)
-        )
-        
-    }, [nominations]); // Updates on Nomination Changes
+        // (line 13-16)
+
+        function closeBanner() {
+            setShowBanner(false)
+        }
+
+        // Displays Banner when Nominations reach 5
+        useEffect(() => {
+            (nominations.length >= 5
+                ?   setShowBanner(true)
+                :   setShowBanner(false)
+            )
+        }, [nominations]); // Updates on Nomination Change
+
+        return (
+            <NomContext.Provider value={{ nominations, setNominations }}>
+                {showBanner
+                    ?   <Banner closeBanner={closeBanner}/>
+                    :   <></>
+                }
+                <Header />
+                <Main />
+            </NomContext.Provider>
+        );
+    }
 ```
 
 <br />
