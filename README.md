@@ -76,23 +76,22 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Back-End: Dynamic Search Results
 
+<br />
+
 ```javascript
-    // Main.jsx (line 36 - 44)
+    // SearchBar.jsx (line 37 - 47)
     
-    useLayoutEffect(() => {
-    
+    useEffect(() => {
+        
         // Gets Movie Results from OMDB API that match Search Bar Input
         axios.get(`${API_URL}s=${searchQuery}&type=${queryType}&apikey=${API_KEY}`)
-            
-            // Sets Results Listings as the Response Data
             .then(response => {
                 setResultsListing(response.data.Search)
             })
             .catch(error => {
                 console.log(error)
             })
-            
-    }, [searchQuery, storedNoms]); // Updates on Search Input Changes
+    }, [searchQuery]);
 ```
 
 <br />
@@ -144,7 +143,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### Back-End: Displaying Nominated Movies
 
 ```javascript
-    // NominationList.jsx (line 21-46)
+    // Main.jsx (line 22-47)
 
     useLayoutEffect(() => {
     
@@ -183,7 +182,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 ### Back-End: Checking for already Nominated Movies
 
 ```javascript
-    // Nominate Button.jsx (line 22-29)
+    // NominateButton.jsx (line 22-29)
     
     useEffect(() => {
         
@@ -204,19 +203,77 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 # Remove a nominee from the nomination list
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
 <br />
 
 ### Front-End: Managing Selections
+
+Compared to diagram of Shoppies that was provided in the challenge write-up where both search results, nominations and their respective actions were all visible at the same time, users must instead hover over the movie they want to interact with to make changes in this version. While hiding the remove button, movie name, and year behind a hover interaction works well for the [Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design) Usabilty Heuristic, it would appear to go against [User control and freedom](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design) as there isn't a clearly marked undo option or instructions for how to manage these actions.
+
+With that being said, this change in design relies on a user's [mental mode](https://www.nngroup.com/articles/mental-models/#body-content:~:text=Summary%3A%20What%20users%20believe%20they%20know,with%20designs%20that%20try%20something%20new.) of hovering over similar movie listings of Netflix to complete actions in a similiar manner as the two cover a similar niche.
+
+<br />
 
 <a href="https://ibb.co/6WS7vHN"><img src="https://i.ibb.co/71Ddgnb/Shoppies-Phase-3.png" alt="Shoppies-Phase-3" border="0"></a>
 
 <br />
 
 ### Back-End: Selecting Movies To Remove
+
+When the get request to the OMDB API for nominations that are added to local storage is run, one of the values that is added to the Nominee object is movie id from IMDB:
+
+<br />
+
+```javascript
+    // Main.jsx (line 26-31)
+    
+    const nominee = ({
+        title: response.data.Title,
+        year: response.data.Year,
+        id: response.data.imdbID,
+        poster: response.data.Poster
+    })
+```
+
+<br />
+
+This id value is then passed through the Nominee component to be used as a reference value within the RemoveButton component: 
+
+<br />
+
+```javascript
+    // Nominee.jsx (line 10-50)
+    
+    const Nominee = (props) => {
+        const {title, year, id, poster} = props
+
+        return (
+            <li className="nominee">
+                <div className="nominee__details">
+                    <span 
+                        className="nominee__title nominee__title--main">
+                        {title}
+                    </span>
+                    <span 
+                        className="nominee__year nominee__year--main">
+                        ({year})
+                    </span>
+                    <RemoveButton id={id} />
+                </div>
+                
+                // (line 26-47)
+                
+            </li>
+        );
+    }
+```
+
+<br />
+
+By passing this id prop all the way down to the child RemoveButton component, I am able to determine the current movie that is selected, and therefore which movie needs to be removed as a listing. Using the [filter array method](https://www.w3schools.com/jsref/jsref_filter.asp) (used previously to check for already nominated movies) I compared the IMDBid values stored in a user's local storage to the nominee IMDBid value to return an array of movie nominations that weren't the current selection.
+
+This adjusted array was then first set in local storage as the new stored array before being set as the new global nominations array using the useContext hook to update other areas in the app.
+
+<br />
 
 ```javascript
     // RemoveButton.jsx (line 10-16)
