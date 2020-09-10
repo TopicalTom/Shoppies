@@ -30,7 +30,7 @@ We need a webpage that can search OMDB for movies, and allow the user to save th
 <br />
 <br />
 
-# Design Overview
+# Project Overview
 
 Before going into how I added the functional requirements for this challenge, I want to quickly go over my thought process behind my version of Shoppies, and why I designed it the way I did.
 
@@ -58,35 +58,6 @@ With these guidelines in mind, I was able to take my Shoppies design from what y
 <a href="https://ibb.co/Rpcx6Ds"><img src="https://i.ibb.co/MD7Y1Ct/Shoppies-Initial.png" alt="Shoppies-Initial" border="0"></a>
 
 <br />
-
-### Phase 1: Gaining Context
-
-<a href="https://ibb.co/hgYrzP5"><img src="https://i.ibb.co/8mYGZW3/Shoppies-Phase-1.png" alt="Shoppies-Phase-1" border="0"></a>
-
-<br />
-
-### Phase 2: Making Selections
-
-<a href="https://ibb.co/23ZNR06"><img src="https://i.ibb.co/fdDvZVS/Shoppies-Phase-2.png" alt="Shoppies-Phase-2" border="0"></a>
-
-<br />
-
-### Phase 3: Managing Selections
-
-<a href="https://ibb.co/6WS7vHN"><img src="https://i.ibb.co/71Ddgnb/Shoppies-Phase-3.png" alt="Shoppies-Phase-3" border="0"></a>
-
-<br />
-
-### Phase 4: Determining Next Steps
-
-<a href="https://ibb.co/R6k51sR"><img src="https://i.ibb.co/vd6tbT0/Shoppies-Phase-4.png" alt="Shoppies-Phase-4" border="0"></a>
-
-<br />
-<br />
-
-# Development Overview
-
-<br />
 <br />
 
 # Search OMDB and display the results (movies only)
@@ -97,7 +68,13 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 <br />
 
-### Dynamic Search Results
+### Front-End: Focused Search
+
+<a href="https://ibb.co/hgYrzP5"><img src="https://i.ibb.co/8mYGZW3/Shoppies-Phase-1.png" alt="Shoppies-Phase-1" border="0"></a>
+
+<br />
+
+### Back-End: Dynamic Search Results
 
 ```javascript
     // Main.jsx (line 36 - 44)
@@ -129,7 +106,13 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 <br />
 
-### Adding Movie to Local Storage
+### Front-End: Making Selections
+
+<a href="https://ibb.co/23ZNR06"><img src="https://i.ibb.co/fdDvZVS/Shoppies-Phase-2.png" alt="Shoppies-Phase-2" border="0"></a>
+
+<br />
+
+### Back-End: Adding Movie to Local Storage
 
 ```javascript
     // NominateButton.jsx (line 11-19)
@@ -158,7 +141,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 <br />
 
-### Displaying Nominated Movies
+### Back-End: Displaying Nominated Movies
 
 ```javascript
     // NominationList.jsx (line 21-46)
@@ -197,7 +180,7 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 <br />
 
-### Checking for already Nominated Movies
+### Back-End: Checking for already Nominated Movies
 
 ```javascript
     // Nominate Button.jsx (line 22-29)
@@ -227,7 +210,13 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 <br />
 
-### Selecting Movies To Remove
+### Front-End: Managing Selections
+
+<a href="https://ibb.co/6WS7vHN"><img src="https://i.ibb.co/71Ddgnb/Shoppies-Phase-3.png" alt="Shoppies-Phase-3" border="0"></a>
+
+<br />
+
+### Back-End: Selecting Movies To Remove
 
 ```javascript
     // RemoveButton.jsx (line 10-16)
@@ -257,7 +246,13 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 <br />
 
-### Conditional Notification Banner
+### Front-End: Determining Next Steps
+
+<a href="https://ibb.co/R6k51sR"><img src="https://i.ibb.co/vd6tbT0/Shoppies-Phase-4.png" alt="Shoppies-Phase-4" border="0"></a>
+
+<br />
+
+### Back-End: Conditional Notification Banner
 
 ```javascript
     // Banner.jsx (line 10-15)
