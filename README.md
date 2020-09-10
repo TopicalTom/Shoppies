@@ -240,19 +240,30 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 # Display a banner when the user has 5 nominations
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
 <br />
 
 ### Front-End: Determining Next Steps
+
+Once a user adds their fifth and final movie to their nomination list they are presented with a bottom banner (resembling the red carpet of the Oscars) that communicates how long they have to submit their nominations. In addition to this prompt, a user is given the option to either dismiss the banner or submit their nominations then and there if they are happy with their current selections. 
+
+If a user decides to hold-off on submitting their nominations (maybe they are watching a new movie tonight) and dismisses the banner, they are still able to find the same information and actions as the banner. This ties into the following Usability heuristics:
+
+- [Visibility of system status](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
+- [Recognition rather than recall](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%236%3A%20Recognition%20rather%20than%20recall)
+- [Flexibility and efficiency of use](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
+- [Help and documentation](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%2310%3A%20Help%20and%20documentation)   
+
+<br />
 
 <a href="https://ibb.co/R6k51sR"><img src="https://i.ibb.co/vd6tbT0/Shoppies-Phase-4.png" alt="Shoppies-Phase-4" border="0"></a>
 
 <br />
 
 ### Back-End: Conditional Notification Banner
+
+Using the useContext hook that is providing access to a global state for nominations, the Banner Component is able to be displayed when the number of nominations reaches 5.
+
+<br />
 
 ```javascript
     // Banner.jsx (line 10-15)
