@@ -38,7 +38,7 @@ After nailing the initial structure of the project based on the graphic that was
 
 <br />
 
-### Utilizing Usability Heuristics
+### Design: Utilizing Usability Heuristics
 
 In order to accomplish this, I relied heavily on [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
 
@@ -58,6 +58,18 @@ With these guidelines in mind, I was able to take my Shoppies design from what y
 <a href="https://ibb.co/Rpcx6Ds"><img src="https://i.ibb.co/MD7Y1Ct/Shoppies-Initial.png" alt="Shoppies-Initial" border="0"></a>
 
 <br />
+
+### Development: Incorporating New Techniques
+
+In order to accomplish this, I relied heavily on [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
+
+- [React Hooks](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
+- [useEffect & useLayoutEffect](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%232%3A%20Match%20between%20system%20and%20the%20real%20world)
+- [useContext](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%236%3A%20Recognition%20rather%20than%20recall)
+- [Local Storage](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
+- [OMDB API](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
+
+<br />
 <br />
 
 # Search OMDB and display the results (movies only)
@@ -75,6 +87,16 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 <br />
 
 ### Back-End: Dynamic Search Results
+
+<br />
+
+```javascript
+    // SearchBar.jsx (line 11 - 13)
+    
+    const API_URL = "https://www.omdbapi.com/?";
+    const API_KEY = (hidden); // 8-character string
+    const queryType = "Movie";
+```
 
 <br />
 
@@ -182,6 +204,10 @@ From here, whenever a user clicked on a movie result to add it to their movie no
 
 ### Back-End: Displaying Nominated Movies
 
+For displaying nominated movies I used a similar axios get request as the search results but instead for IMDB id's rather than Movie Titles. These IMDB id's were pulled from the useContext nomination array.
+
+<br />
+
 ```javascript
     // Main.jsx (line 22-47)
 
@@ -215,6 +241,21 @@ From here, whenever a user clicked on a movie result to add it to their movie no
         })
         
     }, [nominations, setNominations]); // Updates on Nomination Changes
+```
+
+<br />
+
+```javascript
+    // Main.jsx (line 33-40)
+
+    // Original
+    newNominations.push(nominee)
+    setNominationListing(newNominations)
+    
+    // Updated
+    newNominations.unshift(nominee)                 
+    newNominations.splice(nominations.length, newNominations.length - nominations.length)
+    setNominationListing(newNominations)
 ```
 
 <br />
