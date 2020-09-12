@@ -32,9 +32,9 @@ We need a webpage that can search OMDB for movies, and allow the user to save th
 
 # Project Overview
 
-Before going into how I added the functional requirements for this challenge, I want to quickly go over my thought process behind my version of Shoppies, and why I designed it the way I did.
+There was a brief moment of time where I considered not taking on this UX Development challenge as I only recently got into development and wasn't sure if I was ready as I took a slight break to refresh my knowledge of design. However, as somone who is currently one movie away from completing the top 100 movies, and 70 away from completing all 250 top rated movies on IMDB, I couldn't give up the chance to combine my continued love for movies while reinvigorating my new found exploration into development.
 
-After nailing the initial structure of the project based on the graphic that was provided my design goal was to create a clearer narrative for what users were hoping to accomplish on this page, and provide additional context for what it was they were doing on a moment to moment basis.
+This project, also provided a great chance to to really understand how Design and Development contribute to shaping an experience while challenging me to apply concepts in a practical way. Before going into, how I added the functional requirements for this challenge, I want to quickly go over my thought process and areas I focused on when approaching my version of Shoppies:
 
 <br />
 
@@ -67,6 +67,7 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
 - [useEffect & useLayoutEffect](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%232%3A%20Match%20between%20system%20and%20the%20real%20world)
 - [useContext](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%236%3A%20Recognition%20rather%20than%20recall)
 - [Local Storage](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
+- [Array Methods](https://www.w3schools.com/jsref/jsref_obj_array.asp)
 - [OMDB API](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
 
 <br />
@@ -74,13 +75,13 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
 
 # Search OMDB and display the results (movies only)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
 <br />
 
 ### Front-End: Focused Search
+
+After nailing the initial structure of the project based on the graphic that was provided my design goal was to create a clearer narrative for what users were hoping to accomplish on this page, and provide additional context for what it was they were doing on a moment to moment basis.
+
+<br />
 
 <a href="https://ibb.co/hgYrzP5"><img src="https://i.ibb.co/8mYGZW3/Shoppies-Phase-1.png" alt="Shoppies-Phase-1" border="0"></a>
 
@@ -171,7 +172,7 @@ Luckily, I did some research and stumbled upon the [useContext](https://reactjs.
 
 <br />
 
-From here, whenever a user clicked on a movie result to add it to their movie nominations list, it is added first to local storage and then as the useContext value to trigger UI changes wherever it was needed without having to reload the page. Essentially, I am using useContext as a trackable value that can update the DOM for the current session but using local storage as a back-up just in case a user intentionally or unintentionally leaves.
+From here, whenever a user clicked on a movie result to add it to their movie nominations list, it is added first to local storage and then as the useContext value to trigger UI changes wherever it was needed, without having to reload the page. Essentially, I am using useContext as a trackable value that can update the DOM for the current session but using local storage as a back-up just in case a user intentionally or unintentionally leaves.
 
 <br />
 
@@ -204,7 +205,64 @@ From here, whenever a user clicked on a movie result to add it to their movie no
 
 ### Back-End: Displaying Nominated Movies
 
-For displaying nominated movies I used a similar axios get request as the search results but instead for IMDB id's rather than Movie Titles. These IMDB id's were pulled from the useContext nomination array.
+For displaying nominated movies I used a similar axios get request as the search results but instead of Movie Titles I used IMDB id's. These IMDB id's were pulled from the useContext nomination array, mapped to a nominee object and then added to an intermediary state of newNominations before setting the actual nominations listing as the new array of values.
+
+<br />
+
+```javascript
+    // Main.jsx (line 22-47)
+
+    useLayoutEffect(() => {
+    
+        // Maps Nomination Data to Nominee Object
+        nominations.map((item) => {
+            axios.get(`${API_URL}i=${item.movieNomination}&apikey=${API_KEY}`)
+                .then(response => {
+                
+                    const nominee = ({
+                        title: response.data.Title,
+                        year: response.data.Year,
+                        id: response.data.imdbID,
+                        poster: response.data.Poster
+                    })
+
+                    // Adds Nominee Data to New Nominations Array
+                    newNominations.push(nominee)
+                    setNominationListing(newNominations)
+                    setShouldUpdate(true)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        })
+        
+    }, [nominations, setNominations]); // Updates on Nomination Changes
+```
+
+<br />
+
+However, this original iteration was flawed as everytime a user added or removed a movie nomination, it would keep the current movie listings but add the new adjusted array as well, resulting in duplicate data. In order to fix this I looked into [array methods](https://www.w3schools.com/jsref/jsref_obj_array.asp) to see if I could either clear the pre-existing listings before adding new listings or filter out the data that needed to be added or removed.
+
+What I landed on was using [unshift array method](https://www.w3schools.com/jsref/jsref_unshift.asp) method to add the newest data to the front of the nominations array, and then using the [splice array method](https://www.w3schools.com/jsref/jsref_splice.asp) to remove the excess (i.e. old data) from the end of the array. This was made reusable by splicing out the excess data based on the length of data that was being added or removed which can be seen below:
+
+<br />
+
+```javascript
+    // Main.jsx (line 33-40)
+
+    // Original
+    newNominations.push(nominee)
+    setNominationListing(newNominations)
+    
+    // Updated
+    newNominations.unshift(nominee)                 
+    newNominations.splice(nominations.length, newNominations.length - nominations.length)
+    setNominationListing(newNominations)
+```
+
+<br />
+
+Putting that all together, I was able to create a fairly streamlined system that could handle both adding and removing movie listings from the nomination listing arrays.
 
 <br />
 
@@ -241,21 +299,6 @@ For displaying nominated movies I used a similar axios get request as the search
         })
         
     }, [nominations, setNominations]); // Updates on Nomination Changes
-```
-
-<br />
-
-```javascript
-    // Main.jsx (line 33-40)
-
-    // Original
-    newNominations.push(nominee)
-    setNominationListing(newNominations)
-    
-    // Updated
-    newNominations.unshift(nominee)                 
-    newNominations.splice(nominations.length, newNominations.length - nominations.length)
-    setNominationListing(newNominations)
 ```
 
 <br />
