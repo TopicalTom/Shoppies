@@ -63,12 +63,20 @@ With these guidelines in mind, I was able to take my Shoppies design from what y
 
 In order to accomplish this, I relied heavily on [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
 
-- [React Hooks](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
-- [useEffect & useLayoutEffect](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%232%3A%20Match%20between%20system%20and%20the%20real%20world)
-- [useContext](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%236%3A%20Recognition%20rather%20than%20recall)
-- [Local Storage](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
+- [React Hooks](https://reactjs.org/docs/hooks-reference.html#useeffect)
+  - [useState](https://reactjs.org/docs/hooks-reference.html#usestate)
+  - [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect)
+  - [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext)
+  - [useLayoutEffect](https://reactjs.org/docs/hooks-reference.html#uselayouteffect)
+- [Local Storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 - [Array Methods](https://www.w3schools.com/jsref/jsref_obj_array.asp)
-- [OMDB API](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
+  - [Push](https://www.w3schools.com/jsref/jsref_obj_push.asp)
+  - [Unshift](https://www.w3schools.com/jsref/jsref_obj_unshift.asp)
+  - [Splice](https://www.w3schools.com/jsref/jsref_obj_splice.asp)
+  - [Find](https://www.w3schools.com/jsref/jsref_obj_find.asp)
+  - [Filter](https://www.w3schools.com/jsref/jsref_filter.asp)
+- [OMDB API](http://www.omdbapi.com/)
+- [Netlify](https://www.netlify.com/)
 
 <br />
 <br />
@@ -85,9 +93,13 @@ After nailing the initial structure of the project based on the graphic that was
 
 <a href="https://ibb.co/hgYrzP5"><img src="https://i.ibb.co/8mYGZW3/Shoppies-Phase-1.png" alt="Shoppies-Phase-1" border="0"></a>
 
+> Note: The award ceremony illustration for the empty nomination state was not designed by myself but is instead sourced from [Undraw](https://undraw.co/), a great open-source library for illustrations.
+
 <br />
 
 ### Development: Dynamic Search Results
+
+
 
 <br />
 
@@ -248,8 +260,6 @@ What I landed on was using [unshift array method](https://www.w3schools.com/jsre
 <br />
 
 ```javascript
-    // Main.jsx (line 33-40)
-
     // Original
     newNominations.push(nominee)
     setNominationListing(newNominations)
@@ -306,6 +316,8 @@ Putting that all together, I was able to create a fairly streamlined system that
 ### Development: Checking for already Nominated Movies
 
 In the same spirit as trying to prevent duplicate data from being added above, I also needed to prevent users from being able to add the same movie multiple times, even if the movie was truly that good. To acomplish this, I used the [find array method](https://www.w3schools.com/jsref/jsref_find.asp) to determine if the IMDB id's of any of the search results match any IMDB id's of movies stored in local storage or in the useContext nominations array.
+
+<br />
 
 ```javascript
     // NominateButton.jsx (line 22-29)
@@ -423,8 +435,7 @@ This id value is then passed through the Nominee component to be used as a refer
 
 By passing this id prop all the way down to the child RemoveButton component, I am able to determine the current movie that is selected, and therefore which movie needs to be removed as a listing. Using the [filter array method](https://www.w3schools.com/jsref/jsref_filter.asp) I compared the IMDBid values stored in a user's local storage to the nominee IMDBid value to return an array of movie nominations that weren't the current selection. 
 
-
-This adjusted array was then first set in local storage as the new stored array before being set as the new global nominations array using the useContext hook to update other areas in the app.
+Now the question is why did I use filter here, when I used find before when trying to do a similar action while checking for already existing movie nominations? The reason for this is because "find" stops after the first value is found while "filter" returns an array of values. This key difference enabled me to quickly filter out the value I wanted to remove and in the next step set the adjusted array as the new local storage array to be used in updating other areas of the app.
 
 <br />
 
