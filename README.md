@@ -32,9 +32,9 @@ We need a webpage that can search OMDB for movies, and allow the user to save th
 
 # Project Overview
 
-There was a brief moment of time where I considered not taking on this UX Development challenge as I only recently got into development and wasn't sure if I was ready as I took a slight break to refresh my knowledge of design. However, as somone who is currently one movie away from completing the top 100 movies, and 70 away from completing all 250 top rated movies on IMDB, I couldn't give up the chance to combine my continued love for movies while reinvigorating my new found exploration into development.
+There was a brief moment of time where I considered not taking on this UX Development challenge as I only recently got into development and wasn't sure if I was ready to jump into a job that revolved around it. However, as somone who is currently one movie away from completing the top 100 movies, and 70 away from completing all 250 top rated movies on IMDB, I couldn't give up the chance to combine my continued love for movies while reinvigorating my new found exploration into development.
 
-This project, also provided a great chance to to really understand how Design and Development contribute to shaping an experience while challenging me to apply concepts in a practical way. Before going into, how I added the functional requirements for this challenge, I want to quickly go over my thought process and areas I focused on when approaching my version of Shoppies:
+This project, also provided a great chance to to really understand how Design and Development contribute to shaping an experience while challenging me to apply concepts in a practical way. Before going into how I added the functional requirements for this challenge, I want to quickly go over my thought process and areas I focused on when approaching my version of Shoppies:
 
 <br />
 
@@ -77,7 +77,7 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
 
 <br />
 
-### Front-End: Focused Search
+### Design: Focused Search
 
 After nailing the initial structure of the project based on the graphic that was provided my design goal was to create a clearer narrative for what users were hoping to accomplish on this page, and provide additional context for what it was they were doing on a moment to moment basis.
 
@@ -87,7 +87,7 @@ After nailing the initial structure of the project based on the graphic that was
 
 <br />
 
-### Back-End: Dynamic Search Results
+### Development: Dynamic Search Results
 
 <br />
 
@@ -124,7 +124,7 @@ After nailing the initial structure of the project based on the graphic that was
 
 <br />
 
-### Front-End: Making Selections
+### Design: Making Selections
 
 When a user make
 
@@ -138,7 +138,7 @@ I am also looking to display posters of movies in the search listings in a futur
 
 <br />
 
-### Back-End: Add Persisting Movie Nominations 
+### Development: Add Persisting Movie Nominations 
 
 When I initially took on the challenge of adding persisting movie nominations, I thought it would be fairly straightforward since I've used [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage#wikiArticle:~:text=The%20read%2Donly%20localStorage%20property%20allows%20you,is%2C%20when%20the%20page%20is%20closed.) before when adding a light/dark mode toggle on my portfolio site. My thought process was that I could use the values in local storage as a global state that could be pulled wherever and whenever they were needed, and any changes would trigger updates to the Shoppies UI. While this worked well for when the local storage was one value, I ran into issues when it was an array of values as it was difficult to determine when changes occured in the local storage array and the page would require a refresh to trigger a display change.
 
@@ -203,14 +203,14 @@ From here, whenever a user clicked on a movie result to add it to their movie no
 
 <br />
 
-### Back-End: Displaying Nominated Movies
+### Development: Displaying Nominated Movies
 
 For displaying nominated movies I used a similar axios get request as the search results but instead of Movie Titles I used IMDB id's. These IMDB id's were pulled from the useContext nomination array, mapped to a nominee object and then added to an intermediary state of newNominations before setting the actual nominations listing as the new array of values.
 
 <br />
 
 ```javascript
-    // Main.jsx (line 22-47)
+    // Main.jsx (Old Version)
 
     useLayoutEffect(() => {
     
@@ -303,7 +303,9 @@ Putting that all together, I was able to create a fairly streamlined system that
 
 <br />
 
-### Back-End: Checking for already Nominated Movies
+### Development: Checking for already Nominated Movies
+
+In the same spirit as trying to prevent duplicate data from being added above, I also needed to prevent users from being able to add the same movie multiple times, even if the movie was truly that good. To acomplish this, I used the [find array method](https://www.w3schools.com/jsref/jsref_find.asp) to determine if the IMDB id's of any of the search results match any IMDB id's of movies stored in local storage or in the useContext nominations array.
 
 ```javascript
     // NominateButton.jsx (line 22-29)
@@ -311,15 +313,41 @@ Putting that all together, I was able to create a fairly streamlined system that
     useEffect(() => {
         
         // Returns Object if matching ID exists in Nominations
-        const match = nominations.filter(item => item.movieNomination === id);
+        const match = nominations.find(item => item.movieNomination === id);
 
-        // If Match exists, disables the movies' Nomination Button 
-        (match.length !== 0 
+        // If Match exists, disables the movies' Nomination Button
+        (match !== undefined 
             ?   setIsNominated(true)
             :   setIsNominated(false)
         )
-        
-    }, [nominations, id]); // Updates on Nomination Changes
+    }, [nominations, id]); // Updates on Nomination Change
+```
+
+<br />
+
+If a matching IMDB id is found, the truthiness of the isNominated state is used to toggle the nominate button into a disabled state, and vice-versa.
+
+<br />
+
+```javascript
+    // NominateButton.jsx (line 5-48)
+    
+    const NominateButton = (props) => {
+    
+        // (line 12-36)
+
+        return (
+            <button 
+                className="nominate" 
+                onClick={() => addNomination()} 
+                disabled={isNominated}>
+                <span 
+                    className="nominate__label">
+                    {isNominated ? "Added" : "Nominate"}
+                </span>
+            </button>
+        );
+    }
 ```
 
 <br />
@@ -329,11 +357,11 @@ Putting that all together, I was able to create a fairly streamlined system that
 
 <br />
 
-### Front-End: Managing Selections
+### Design: Managing Selections
 
 Compared to diagram of Shoppies that was provided in the challenge write-up where both search results, nominations and their respective actions were all visible at the same time, users must instead hover over the movie they want to interact with to make changes in this version. While hiding the remove button, movie name, and year behind a hover interaction works well for the [Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design) Usabilty Heuristic, it would appear to go against [User control and freedom](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design) as there isn't a clearly marked undo option or instructions for how to manage these actions.
 
-With that being said, this change in design relies on a user's [mental mode](https://www.nngroup.com/articles/mental-models/#body-content:~:text=Summary%3A%20What%20users%20believe%20they%20know,with%20designs%20that%20try%20something%20new.) of hovering over similar movie listings of Netflix to complete actions in a similiar manner as the two cover a similar niche.
+With that being said, this change in design relies on a user's [mental model](https://www.nngroup.com/articles/mental-models/#body-content:~:text=Summary%3A%20What%20users%20believe%20they%20know,with%20designs%20that%20try%20something%20new.) of hovering over similar movie listings of Netflix to complete actions in a similiar manner as the two cover a similar niche.
 
 <br />
 
@@ -341,7 +369,7 @@ With that being said, this change in design relies on a user's [mental mode](htt
 
 <br />
 
-### Back-End: Selecting Movies To Remove
+### Development: Selecting Movies To Remove
 
 When the get request to the OMDB API for nominations that are added to local storage is run, one of the values that is added to the Nominee object is movie id from IMDB:
 
@@ -393,7 +421,8 @@ This id value is then passed through the Nominee component to be used as a refer
 
 <br />
 
-By passing this id prop all the way down to the child RemoveButton component, I am able to determine the current movie that is selected, and therefore which movie needs to be removed as a listing. Using the [filter array method](https://www.w3schools.com/jsref/jsref_filter.asp) (used previously to check for already nominated movies) I compared the IMDBid values stored in a user's local storage to the nominee IMDBid value to return an array of movie nominations that weren't the current selection.
+By passing this id prop all the way down to the child RemoveButton component, I am able to determine the current movie that is selected, and therefore which movie needs to be removed as a listing. Using the [filter array method](https://www.w3schools.com/jsref/jsref_filter.asp) I compared the IMDBid values stored in a user's local storage to the nominee IMDBid value to return an array of movie nominations that weren't the current selection. 
+
 
 This adjusted array was then first set in local storage as the new stored array before being set as the new global nominations array using the useContext hook to update other areas in the app.
 
@@ -423,7 +452,7 @@ This adjusted array was then first set in local storage as the new stored array 
 
 <br />
 
-### Front-End: Determining Next Steps
+### Design: Determining Next Steps
 
 Once a user adds their fifth and final movie to their nomination list they are presented with a bottom banner (resembling the red carpet of the Oscars) that communicates how long they have to submit their nominations. In addition to this prompt, a user is given the option to either dismiss the banner or submit their nominations then and there if they are happy with their current selections. 
 
@@ -440,7 +469,7 @@ If a user decides to hold-off on submitting their nominations (maybe they are wa
 
 <br />
 
-### Back-End: Conditional Notification Banner
+### Development: Conditional Notification Banner
 
 Using the useContext hook that is providing access to a global state for nominations, the Banner Component is able to be displayed when the number of nominations reaches 5.
 
