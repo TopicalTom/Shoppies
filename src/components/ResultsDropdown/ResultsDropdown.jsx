@@ -9,7 +9,6 @@ const ResultsDropdown = (props) => {
 
     return (
         <div className="dropdown">
-            <p className="dropdown__title">Movie titles with "{searchQuery}"</p>
             {resultsListing
                 ?   <>
                         <ResultsList resultsListing={resultsListing}/>
@@ -17,10 +16,28 @@ const ResultsDropdown = (props) => {
                             className="dropdown__close" 
                             href="#search"
                             onClick={() => closeResults()}>
-                            Clear search
+                            {resultsListing.length > 1
+                                ?   `Clear ${resultsListing.length} movie results`
+                                :   "Clear movie result"
+                            }
                         </a>
                     </>
-                :   <p className="dropdown__empty">No matches</p>
+                :   <div className="dropdown__empty">  
+                        <p 
+                            className="dropdown__issue">
+                            {searchQuery.length <= 2
+                                ?   `Too many results for "${searchQuery}"`
+                                :   `No matches for "${searchQuery}"`
+                            }
+                        </p>
+                        <p 
+                            className="dropdown__troubleshoot">
+                            {searchQuery.length <= 2
+                                ?   "Try adding more of the movie title."
+                                :   "Check your spelling or try narrowing your search."
+                            }
+                        </p>
+                    </div>
             }
         </div>
     );

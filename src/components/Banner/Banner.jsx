@@ -31,7 +31,7 @@ const Banner = (props) => {
                     onClick={() => closeBanner()}>
                     <span
                         className="banner__action banner__action--primary">
-                        Submit Now
+                        Submit Nominations
                     </span>
                 </button>
             </div>

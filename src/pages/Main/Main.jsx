@@ -51,6 +51,8 @@ function Main() {
         setShouldUpdate(false)
     }, [shouldUpdate]);
 
+    console.log(nominationListing)
+
     return (
         <main className="main">
             <div className="main__container">

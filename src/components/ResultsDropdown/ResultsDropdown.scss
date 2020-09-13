@@ -11,6 +11,7 @@
     border-radius: 6px;
     z-index: 600;
     box-shadow: rgba(0, 0, 0, 0.6) 0px 20px 30px;
+    overflow: hidden;
 
     &__title {
         margin: 0rem 1.5rem;
@@ -23,15 +24,31 @@
     &__close {
         color: #2997ff;
         width: 100%;
-        text-align: center;
         border: none;
         display: flex;
-        padding: 0.75rem;
+        padding: 0.75rem 0rem;
         justify-content: center;
         font-size: 1rem;
+        border-top: 1px solid #ffffff10;
+        box-shadow: rgba(0, 0, 0, 0.8) 20px 20px 30px;
+        position: absolute;
+        bottom: 0;
+        background: rgba(28, 28, 30, 0.98);
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
     }
 
     &__empty {
-        padding: 0.5rem 1.5rem 1rem 1.5rem;
+        padding: 1rem 1.5rem;
+    }
+
+    &__issue {
+        margin-bottom: 5px;
+    }
+
+    &__troubleshoot {
+        opacity: 0.3;
     }
 }

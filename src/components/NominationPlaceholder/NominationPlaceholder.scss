@@ -35,6 +35,9 @@
         height: 44px;
         width: 200px;
         color: #2997ff;
-        text-emphasis: center;
+
+        &:hover {
+            opacity: 0.6;
+        }
     }
 }

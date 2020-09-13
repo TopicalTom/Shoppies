@@ -8,6 +8,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0);
+    transition: all 0.2s ease-in-out;
+
+    &:first-of-type() {
+        padding: 1rem 1.5rem 0.75rem 1.5rem;
+    }
 
     &:hover {
         background: rgba(255, 255, 255, 0.05);
@@ -50,41 +56,3 @@
         border-radius: 2px;
     }
 }
-
-
-/*
-
-@import "../../styles/baseline.scss";
-
-.result {
-    margin: 0;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    justify-content: space-between;
-
-    &__details {
-        display: flex;
-        flex-direction: column;
-        width: 70%;
-    }
-
-    &__title {
-        margin-right: 4px;
-        width: 100%;
-        font-weight: bold;
-    }
-
-    &__year {
-        margin-right: 4px;
-        width: 100%;
-        opacity: 0.6;
-    }
-
-    &__preview {
-        height: 80px;
-        width: 55px;
-    }
-}
-
-*/

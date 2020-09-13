@@ -42,8 +42,12 @@ const NominationList = (props) => {
                     }
                 </span>
                 <button 
-                    className="nominations__submit">
-                    Submit Nominations
+                    className="nominations__submit"
+                    disabled={currentProgress < 5}>
+                    <span
+                        className="nominations__label">
+                        Submit Nominations
+                    </span>
                 </button>
             </div>
         </article>
