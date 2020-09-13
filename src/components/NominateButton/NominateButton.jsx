@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext, useState, useLayoutEffect } from 'react';
 import { NomContext } from "../../hooks/useContext";
 import "./NominateButton.scss"
 
@@ -22,13 +22,13 @@ const NominateButton = (props) => {
     }
 
     // Checks if Movie is already in Local Storage
-    useEffect(() => {
+    useLayoutEffect(() => {
         
         // Returns Object if matching ID exists in Nominations
-        const match = nominations.filter(item => item.movieNomination === id);
+        const match = nominations.find(item => item.movieNomination === id);
 
         // If Match exists, disables the movies' Nomination Button
-        (match.length !== 0 
+        (match !== undefined 
             ?   setIsNominated(true)
             :   setIsNominated(false)
         )

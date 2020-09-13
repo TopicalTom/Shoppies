@@ -9,12 +9,12 @@
     width: 110px;
 
     &:disabled {
-        background-color: rgb(155, 155, 155);
+        background-color: rgba(255, 255, 255, 0.3);
+    }
 
-        &__label {
-            color: grey;
-            text-align: center;
-        }
+    &:hover {
+        opacity: 0.8;
+        cursor: pointer;
     }
 
     &__label {

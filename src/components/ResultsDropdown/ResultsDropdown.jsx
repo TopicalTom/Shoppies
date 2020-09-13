@@ -9,17 +9,18 @@ const ResultsDropdown = (props) => {
 
     return (
         <div className="dropdown">
-            <p className="dropdown__title">Movie results for "{searchQuery}"</p>
+            <p className="dropdown__title">Movie titles with "{searchQuery}"</p>
             {resultsListing
                 ?   <>
                         <ResultsList resultsListing={resultsListing}/>
-                        <button 
+                        <a
                             className="dropdown__close" 
+                            href="#search"
                             onClick={() => closeResults()}>
-                            Close results
-                        </button>
+                            Clear search
+                        </a>
                     </>
-                :   <span>No matches</span>
+                :   <p className="dropdown__empty">No matches</p>
             }
         </div>
     );

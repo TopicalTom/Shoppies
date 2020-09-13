@@ -59,7 +59,7 @@ function Main() {
                     <div className="main__context">
                         <p className="main__instructions">Nominate your top 5 favourite movies for award consideration</p>
                         <Help 
-                            details="You have until December 10th, 2020 to curate your movie nominations. Nominations will be saved if you leave this page."
+                            details="You have until December 10th, 2020 to submit your nominations. Nominations will be saved if you leave this page."
                         />
                     </div>
                 </section>

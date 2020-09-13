@@ -20,6 +20,7 @@ function HelpDropdown(props) {
         <div className="help">
             <img 
                 className="help__icon" 
+                alt="Additional Information Icon"
                 src={Info}
                 onMouseEnter={() => openDropdown()}
                 onMouseLeave={() => closeDropdown()}

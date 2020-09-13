@@ -6,6 +6,62 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    &__listing {
+        display: flex;
+        flex-direction: row;
+        width: 65%;
+    }
+
+    &__details{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        margin: auto 0;
+    }
+
+    &__title {
+        font-weight: bold;
+    }
+
+    &__year {
+        opacity: 0.6;
+    }
+
+    &__preview {
+        height: 60px;
+        width: 40px;
+        margin-right: 1rem;
+    }
+
+    &__placeholder {
+        height: 60px;
+        width: 40px;
+        padding: 0.25rem;
+        margin-right: 1rem;
+        border: 0.25px solid white;
+        opacity: 0.2;
+        border-radius: 2px;
+    }
+}
+
+
+/*
+
+@import "../../styles/baseline.scss";
+
+.result {
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
 
     &__details {
         display: flex;
@@ -24,4 +80,11 @@
         width: 100%;
         opacity: 0.6;
     }
+
+    &__preview {
+        height: 80px;
+        width: 55px;
+    }
 }
+
+*/

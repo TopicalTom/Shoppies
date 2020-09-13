@@ -78,12 +78,16 @@ function SearchBar() {
             />
             {hasContent
                 ?   <>
-                        <img // Clear Search Button
-                            className="search__clear"
-                            src={Cancel}
-                            alt="Clear Search Icon"
+                        <a
+                            href="#search"
                             onClick={() => clearSearch()}
-                        />
+                            >
+                            <img // Clear Search Button
+                                className="search__clear"
+                                src={Cancel}
+                                alt="Clear Search Icon"
+                            />
+                        </a>
                         <ResultsDropdown 
                             searchQuery={searchQuery}
                             resultsListing={resultsListing}
