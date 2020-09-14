@@ -85,13 +85,13 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
 
 <br />
 
-### Design: Focused Search
+### Design: Guided Search
 
 After nailing the initial structure of the project based on the graphic that was provided my design goal was to create a clearer narrative for what users were hoping to accomplish on this page, and provide additional context for what it was they were doing on a moment to moment basis.
 
 <br />
 
-<a href="https://ibb.co/hgYrzP5"><img src="https://i.ibb.co/8mYGZW3/Shoppies-Phase-1.png" alt="Shoppies-Phase-1" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/K7yP3fq/ezgif-com-video-to-gif-2.gif" alt="ezgif-com-video-to-gif-2" border="0"></a>
 
 > Note: The award ceremony illustration for the empty nomination state was not designed by myself but is instead sourced from [Undraw](https://undraw.co/), a great open-source library for illustrations.
 
@@ -140,11 +140,9 @@ After nailing the initial structure of the project based on the graphic that was
 
 When a user make
 
-I am also looking to display posters of movies in the search listings in a future version to help ensure users are selecting the movie they intend to in order to protect against users from having to go back and forth adding, checking the movie poster as a nomination and then removing to try again which is too many steps and can be solved with this small change.
-
 <br />
 
-<a href="https://ibb.co/23ZNR06"><img src="https://i.ibb.co/fdDvZVS/Shoppies-Phase-2.png" alt="Shoppies-Phase-2" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/dGMtH75/ezgif-com-video-to-gif-3.gif" alt="ezgif-com-video-to-gif-3" border="0"></a>
 
 > Note: Since I am using an unordered list with uuid key values, when nominees are added to the list they are done so in a random order. This is less than ideal for the User Experience as the movies shift around in a random way. This can make it hard to determine the movie that was just added as it might be added underneath the search results dropdown. I am fullly aware of this issue and intend to make adjustments to ensure the newest movie is listed from left to right.
 
@@ -377,7 +375,7 @@ With that being said, this change in design relies on a user's [mental model](ht
 
 <br />
 
-<a href="https://ibb.co/6WS7vHN"><img src="https://i.ibb.co/71Ddgnb/Shoppies-Phase-3.png" alt="Shoppies-Phase-3" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/DtBbxX7/ezgif-com-video-to-gif-4.gif" alt="ezgif-com-video-to-gif-4" border="0"></a>
 
 <br />
 
@@ -476,7 +474,7 @@ If a user decides to hold-off on submitting their nominations (maybe they are wa
 
 <br />
 
-<a href="https://ibb.co/R6k51sR"><img src="https://i.ibb.co/vd6tbT0/Shoppies-Phase-4.png" alt="Shoppies-Phase-4" border="0"></a>
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/W2FhDrv/ezgif-com-video-to-gif-5.gif" alt="ezgif-com-video-to-gif-5" border="0"></a>
 
 <br />
 
