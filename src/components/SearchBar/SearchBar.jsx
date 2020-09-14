@@ -17,6 +17,7 @@ function SearchBar() {
     const [searchQuery, setSearchQuery] = useState("");
     const [resultsListing, setResultsListing] = useState(null);
     const [hasContent, setHasContent] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
     const {nominations} = useContext(NomContext);
 
     // Updates Search Query Parameters
@@ -29,10 +30,15 @@ function SearchBar() {
         setSearchQuery("");
     }
 
-    // Collapses Search Field & Results
-    function closeResults() {
+    // Adds Overlay to Focus User Attention
+    function focusSearch() {
+        setIsFocused(true);
+    }
+
+    // Removes Overlay to Reduce User Attention
+    function removeFocus() {
+        setIsFocused(false);
         setSearchQuery("");
-        setHasContent(false);
     }
 
     // Updates Search Results Listings
@@ -59,7 +65,7 @@ function SearchBar() {
     // Closes ResultsDropdown when Max Nominations Reached
     useLayoutEffect(() => {
         if (nominations.length === 5) {
-            closeResults()
+            removeFocus()
         }
     }, [nominations]);
 
@@ -84,32 +90,33 @@ function SearchBar() {
                     type="text"
                     value={searchQuery}
                     onChange={updateSearch}
+                    onFocus={() => focusSearch()}
                 />
                 {hasContent
-                    ?   <>
-                            <a  // Clear Search Button
-                                href="#search"
-                                onClick={() => clearSearch()}
-                                >
-                                <img
-                                    className="search__clear"
-                                    src={Cancel}
-                                    alt="Clear Search Icon"
-                                />
-                            </a>
-                            <ResultsDropdown 
-                                searchQuery={searchQuery}
-                                resultsListing={resultsListing}
-                                closeResults={closeResults} 
+                    ?   <a  // Clear Search Button
+                            href="#search"
+                            onClick={() => clearSearch()}>
+                            <img
+                                className="search__clear"
+                                src={Cancel}
+                                alt="Clear Search Icon"
                             />
-                        </>
+                        </a>
+                    :   <></>
+                }
+                {isFocused
+                    ?   <ResultsDropdown 
+                            searchQuery={searchQuery}
+                            resultsListing={resultsListing}
+                            clearSearch={clearSearch} 
+                        /> 
                     :   <></>
                 }
             </div>
-            {hasContent
+            {isFocused
                 ?   <div // Overlay for focused Search
                         className="focus" 
-                        onClick={() => clearSearch()}
+                        onClick={() => removeFocus()}
                     />
                 :   <></>
             }

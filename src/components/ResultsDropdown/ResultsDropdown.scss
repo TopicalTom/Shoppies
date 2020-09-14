@@ -52,15 +52,20 @@
         }
     }
 
-    &__empty {
+    &__instructions {
         padding: 1rem 1.5rem;
     }
 
+    &__task,
     &__issue {
         margin-bottom: 5px;
     }
 
+    &__assistance,
     &__troubleshoot {
         opacity: 0.3;
+        font-size: 1rem;
+        line-height: 1.5rem;
+        margin-bottom: 5px;
     }
 }
