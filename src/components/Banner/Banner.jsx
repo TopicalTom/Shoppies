@@ -15,7 +15,16 @@ const Banner = (props) => {
                     </h3>
                     <p
                         className="banner__details">
-                        Make sure to submit your nominations before the Shoppies red carpet rolls out on December 10th, 2020 at 7PM EST.
+                        Make sure to submit your nominations before the Shoppies red carpet rolls out on 
+                        <span 
+                            className="banner__emphasize">
+                            December 10th, 2020
+                        </span>
+                        at 
+                        <span
+                            className="banner__emphasize">
+                            7PM EST.
+                        </span>
                     </p>
                 </div>
                 <button 
@@ -23,7 +32,7 @@ const Banner = (props) => {
                     onClick={() => closeBanner()}>
                     <span
                         className="banner__action banner__action--secondary">
-                        Maybe Later
+                        Submit Later
                     </span>
                 </button>
                 <button 

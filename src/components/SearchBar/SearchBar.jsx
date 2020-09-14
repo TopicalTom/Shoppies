@@ -1,4 +1,5 @@
-import React, {useState, useEffect} from 'react';
+import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
+import { NomContext } from "../../hooks/useContext";
 import axios from "axios";
 import './SearchBar.scss';
 
@@ -16,6 +17,7 @@ function SearchBar() {
     const [searchQuery, setSearchQuery] = useState("");
     const [resultsListing, setResultsListing] = useState(null);
     const [hasContent, setHasContent] = useState(false);
+    const {nominations} = useContext(NomContext);
 
     // Updates Search Query Parameters
     function updateSearch(e) {
@@ -49,61 +51,68 @@ function SearchBar() {
     // Updates UI Based on Search Field Input
     useEffect(() => {
         (searchQuery.length > 0 
-            ? setHasContent(true)
-            : setHasContent(false)
+            ?   setHasContent(true)
+            :   setHasContent(false)
         )
     }, [searchQuery]);
 
+    // Closes ResultsDropdown when Max Nominations Reached
+    useLayoutEffect(() => {
+        if (nominations.length === 5) {
+            closeResults()
+        }
+    }, [nominations]);
+
     return (
         <>
-        <form className="search">
-            <img 
-                className="search__icon" 
-                src={Search}
-                alt="Search Icon"
-            />
-            <label 
-                className="search__label" 
-                htmlFor="search"> 
-                Movie Title Search
-            </label>
-            <input 
-                className="search__input"
-                placeholder="Find Movies"
-                name="search"
-                id="search"
-                type="text"
-                value={searchQuery}
-                onChange={updateSearch}
-            />
-            {hasContent
-                ?   <>
-                        <a
-                            href="#search"
-                            onClick={() => clearSearch()}
-                            >
-                            <img // Clear Search Button
-                                className="search__clear"
-                                src={Cancel}
-                                alt="Clear Search Icon"
+            <div className="search">
+                <img 
+                    className="search__icon" 
+                    src={Search}
+                    alt="Search Icon"
+                />
+                <label 
+                    className="search__label" 
+                    htmlFor="search"> 
+                    Movie Title Search
+                </label>
+                <input 
+                    className="search__input"
+                    placeholder="Find Movies"
+                    name="search"
+                    id="search"
+                    type="text"
+                    value={searchQuery}
+                    onChange={updateSearch}
+                />
+                {hasContent
+                    ?   <>
+                            <a  // Clear Search Button
+                                href="#search"
+                                onClick={() => clearSearch()}
+                                >
+                                <img
+                                    className="search__clear"
+                                    src={Cancel}
+                                    alt="Clear Search Icon"
+                                />
+                            </a>
+                            <ResultsDropdown 
+                                searchQuery={searchQuery}
+                                resultsListing={resultsListing}
+                                closeResults={closeResults} 
                             />
-                        </a>
-                        <ResultsDropdown 
-                            searchQuery={searchQuery}
-                            resultsListing={resultsListing}
-                            closeResults={closeResults} 
-                        />
-                    </>
+                        </>
+                    :   <></>
+                }
+            </div>
+            {hasContent
+                ?   <div // Overlay for focused Search
+                        className="focus" 
+                        onClick={() => clearSearch()}
+                    />
                 :   <></>
             }
-        </form>
-        {hasContent
-            ?   <div // Overlay for focused Search
-                    className="focus" 
-                    onClick={() => clearSearch()}
-                />
-            :   <></>
-        }
         </>
     );
 }

@@ -12,6 +12,18 @@
     z-index: 600;
     box-shadow: rgba(0, 0, 0, 0.6) 0px 20px 30px;
     overflow: hidden;
+    animation: Dropdown 0.2s ease-in 0s;
+
+    @keyframes Dropdown {
+        from {
+            margin-top: 5.5rem;
+            opacity: 0;
+        }
+        to {
+            margin-top: 5rem;
+            opacity: 1;
+        }
+    }
 
     &__title {
         margin: 0rem 1.5rem;

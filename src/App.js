@@ -7,6 +7,7 @@ import Main from "./pages/Main/Main";
 
 // Components
 import Banner from "./components/Banner/Banner";
+import Overlay from "./components/Overlay/Overlay";
 import Header from "./components/Header/Header";
 
 function App() {
@@ -29,7 +30,10 @@ function App() {
     return (
         <NomContext.Provider value={{ nominations, setNominations }}>
             {showBanner
-                ?   <Banner closeBanner={closeBanner}/>
+                ?   <>
+                        <Banner closeBanner={closeBanner}/>
+                        <Overlay closeBanner={closeBanner}/>
+                    </>
                 :   <></>
             }
             <Header />

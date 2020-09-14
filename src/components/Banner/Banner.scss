@@ -9,7 +9,17 @@
     height: 180px;
     display: flex;
     flex-direction: column;
-    background: #FF2A53;
+    background: linear-gradient(#FF2A53, #c41c3d);
+    animation: Banner 0.8s ease-in-out 0s;
+
+    @keyframes Banner {
+        from {
+            bottom: -200px;
+        }
+        to {
+            bottom: 0;
+        }
+    }
 
     &__container {
         display: flex;
@@ -33,6 +43,12 @@
     &__details {
         width: 75%;
         opacity: 0.8;
+        font-size: 1rem;
+    }
+
+    &__emphasize {
+        font-weight: bold;
+        padding: 0rem 0.35rem;
     }
 
     &__button {
@@ -53,22 +69,23 @@
             width: 300px;
 
             &:hover {
-                box-shadow: 0 0px 20px rgba(255, 255, 255, 0.4);
+                box-shadow: 0 0px 20px rgba(255, 255, 255, 0.5);
             }
         }
 
         &--secondary {
             background: none;
-            width: 224px;
+            width: 200px;
+            margin-right: 8px;
+            background-color: rgba(0, 0, 0, 0.1);
 
             &:hover {
-                opacity: 0.6;
+                background-color: rgba(0, 0, 0, 0.15);
             }
         }
     }
 
     &__action {
-        //font-size: 1rem;
         color: black;
         margin: auto;
 

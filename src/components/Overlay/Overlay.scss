@@ -1,0 +1,21 @@
+@import "../../styles/baseline.scss";
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1999;
+    animation: Overlay 0.2s ease 0s;
+
+    @keyframes Overlay {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+}
