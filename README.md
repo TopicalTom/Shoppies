@@ -28,7 +28,7 @@ Shopify has branched out into movie award shows and we need your help. Please bu
 
 There was a brief moment of time where I considered not taking on this UX Development challenge as I only recently got into development and wasn't sure if I was ready to jump into a job that revolved around it. However, as somone who is currently one movie away from completing the top 100 movies, and 70 away from completing all 250 top rated movies on IMDB, I couldn't give up the chance to combine my continued love for movies while reinvigorating my new found exploration into development.
 
-This project, also provided a great chance to to really understand how Design and Development contribute to shaping an experience while challenging me to apply concepts in a practical way. Before going into how I added the functional requirements for this challenge, I want to quickly go over my thought process and areas I focused on when approaching my version of Shoppies:
+This project, also provided a great chance to to really understand how Design and Development contribute to shaping an experience while challenging me to apply concepts in a practical way. Before going into how I added the functional requirements for this challenge, I want to quickly go over areas I focused on for each discipline when approaching my version of Shoppies:
 
 <br />
 
@@ -47,7 +47,7 @@ Whenever I approach a new project, one of the core principles I use to ensure my
 
 <br />
 
-Using these heuristics as a guide, I was able to venture out from the initial structure provided and facilitate an experience that more effectively communicates the why, what and how of the Shoppies user journey. I will cover this in detail in the following sections but for reference, I have provided an earlier iteration of my version of Shoppies before I applied any UX improvements to showcase how the design was changed in relation to the final live version [here](https://shoppies.netlify.app/). 
+I'll be going more into detail into the specifics of how these heuristics were applied, but at a high-level they were used to venture out from the initial layout provided to more effectively communicate the why, what and how of the Shoppies user journey. For reference, I have provided an earlier iteration of my version of Shoppies before I applied any UX improvements (below) to showcase how the design was changed in relation to the final live version [here](https://shoppies.netlify.app/). 
 
 <br />
 
@@ -55,9 +55,13 @@ Using these heuristics as a guide, I was able to venture out from the initial st
 
 <br />
 
-### Development: Incorporating New Techniques
+### Development: Incorporating New & Old Concepts
 
-In order to accomplish this, I relied heavily on [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
+Since I just started my exploration into Development this year, one of my goals was to venture out from the development skills I was comfortable with in order to challenge myself and broaden my development knowledge. An example of this is React Hooks, a concept not covered in the course I took, which required me to re-learn how to do component lifecycle methods as I had only used their class and functional component counterparts before.
+
+While applying hooks and their lifecycle methods were a sizeable part of this project, I also utilized the following new and old concepts to bring my version of Shoppies to life. I'll be going more into detail into the why and how these were applied, but for now this is the high-level overview of what I will cover:
+
+<br />
 
 - [React Hooks](https://reactjs.org/docs/hooks-reference.html#useeffect)
   - [useState](https://reactjs.org/docs/hooks-reference.html#usestate)
