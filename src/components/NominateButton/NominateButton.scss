@@ -19,6 +19,13 @@
         cursor: pointer;
     }
 
+    &:focus {
+        outline-style: solid;
+        outline: none;
+        border: 3px solid #2998ffcb;
+        box-shadow: 0 0px 20px rgba(41, 152, 255, 0.3);
+    }
+
     &__label {
         color: black;
     }

@@ -31,13 +31,13 @@ const ResultsDropdown = (props) => {
                                         className="dropdown__task">
                                         {nominations.length < 5
                                             ?   "Type in the movie you want to nominate."
-                                            :   "Your nominations are complete"
+                                            :   "Your nominations are complete."
                                         }
                                     </p>
                                     <p  // Additional Information for how to proceed
                                         className="dropdown__assistance">
                                         {nominations.length < 5
-                                            ?   "Will only accept movie titles, not years or actors."
+                                            ?   "Only accepts movie titles, not years or actors."
                                             :   "Hover over your current nominations (below) to make changes if you want to add new movies."
                                         }
                                     </p>

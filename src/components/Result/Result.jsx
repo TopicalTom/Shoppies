@@ -9,7 +9,6 @@ import NominateButton from '../NominateButton/NominateButton';
 import Award from "../../assets/icons/Shoppie.svg";
 
 const Result = (props) => {
-
     const {nominations} = useContext(NomContext);
     const {Title, Year, imdbID, Poster} = props
     const [maxNominations, setMaxNominations] = useState(false)
@@ -26,8 +25,16 @@ const Result = (props) => {
         <li className="result">
             <div className="result__listing">
                 {Poster !== "N/A"
-                    ?   <img className="result__preview" src={Poster}/>
-                    :   <img className="result__placeholder" src={Award}/>
+                    ?   <img 
+                            className="result__preview" 
+                            src={Poster}
+                            alt={`${Title} (${Year}) Poster`}
+                        />
+                    :   <img 
+                            className="result__placeholder" 
+                            src={Award}
+                            alt="Movie Poster Placeholder"
+                        />
                 }
                 <div className="result__details">
                     <span className="result__title">{Title}</span>
