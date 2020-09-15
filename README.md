@@ -76,6 +76,7 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
   - [Find](https://www.w3schools.com/jsref/jsref_obj_find.asp)
   - [Filter](https://www.w3schools.com/jsref/jsref_filter.asp)
 - [OMDB API](http://www.omdbapi.com/)
+- [Axios](https://www.npmjs.com/package/axios)
 - [Netlify](https://www.netlify.com/)
 
 <br />
@@ -99,7 +100,7 @@ After nailing the initial structure of the project based on the graphic that was
 
 ### Development: Dynamic Search Results
 
-
+After registering an API Key for the OMDB API, I used Postman to run a quick test and figure out what end-points I would need to grab the correct search results. These end-points and specified search type of "movie" used to limit the search results were turned into variables to be used in all OMBD API calls.
 
 <br />
 
@@ -110,6 +111,14 @@ After nailing the initial structure of the project based on the graphic that was
     const API_KEY = (hidden); // 8-character string
     const queryType = "Movie";
 ```
+
+<br />
+
+From there, I used an axios get request to return search data from the OMBD API that fit the criteria for what the user was inputting into the Search Bar component. Rather than a user having to submit their search query manually after they typed in a movie title, the results are automatically updated and displayed as a user adds or removes characters from their search input. This is made possible through the useEffect hook which only runs whenever the searchQuery value changes, similar to the way that the componentDidUpdate lifecycle method works with preveProps/prevState. The benefit of this setup is that it:
+
+- Provides users with immediate feedback on what they are looking for
+- Limits the amount of characters needed to find a result
+- Reduces component re-renders to when values have actually changed
 
 <br />
 
@@ -130,6 +139,51 @@ After nailing the initial structure of the project based on the graphic that was
 ```
 
 <br />
+
+The response data is then passed down as props through the ResultsDropdown and ResultsListing Components to be used by each Result Component. However, while all movies have a title, year and IMDB Id, not all have a poster. As a fallback to this issue, whenever a Poster returns the string "N/A" (denoting no poster) the movie poster is replaced with an award icon in its place.
+
+<br />
+
+```javascript
+    // Result.jsx (line 11 - 50)
+    
+    const Result = (props) => {
+        const {nominations} = useContext(NomContext);
+        const {Title, Year, imdbID, Poster} = props
+        const [maxNominations, setMaxNominations] = useState(false)
+
+        // (line 16-22)
+
+        return (
+            <li className="result">
+                <div className="result__listing">
+                    {Poster !== "N/A"
+                        ?   <img 
+                                className="result__preview" 
+                                src={Poster}
+                                alt={`${Title} (${Year}) Poster`}
+                            />
+                        :   <img 
+                                className="result__placeholder" 
+                                src={Award}
+                                alt="Movie Poster Placeholder"
+                            />
+                    }
+                    <div className="result__details">
+                        <span className="result__title">{Title}</span>
+                        <span className="result__year">({Year})</span>
+                    </div>
+                </div>
+                {maxNominations
+                    ?   <></>
+                    :   <NominateButton id={imdbID} />
+                }
+            </li>
+        );
+    }
+```
+
+<br/>
 <br />
 
 # Add a movie from the search results to our nomination list
@@ -153,7 +207,6 @@ When a user make
 When I initially took on the challenge of adding persisting movie nominations, I thought it would be fairly straightforward since I've used [local storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage#wikiArticle:~:text=The%20read%2Donly%20localStorage%20property%20allows%20you,is%2C%20when%20the%20page%20is%20closed.) before when adding a light/dark mode toggle on my portfolio site. My thought process was that I could use the values in local storage as a global state that could be pulled wherever and whenever they were needed, and any changes would trigger updates to the Shoppies UI. While this worked well for when the local storage was one value, I ran into issues when it was an array of values as it was difficult to determine when changes occured in the local storage array and the page would require a refresh to trigger a display change.
 
 Luckily, I did some research and stumbled upon the [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) Hook which allowed me to create the global state I needed, but would enable me to track when changes were made by wrapping everything in a NomContext provider: 
-
 
 <br />
 
