@@ -8,13 +8,7 @@
 
 ### `UX Development Challenge`
 
-Shopify has branched out into movie award shows and we need your help. Please build us an app to help manage our movie nominations for the upcoming Shoppies.
-
-We need a webpage that can search OMDB for movies, and allow the user to save their favourite films they feel should be up for nomination. When they've selected 5 nominees they should be notified they're finished.
-
-<br />
-
-### `Technical Requirements`
+Shopify has branched out into movie award shows and we need your help. Please build us an app to help manage our movie nominations for the upcoming Shoppies. We need a webpage that can allow the user to save their favourite films they feel should be up for nomination. The technical requirements for this challenge are as follows:
 
 - Search OMDB and display the results (movies only)
   - Search results should come from OMDB's API
@@ -40,7 +34,7 @@ This project, also provided a great chance to to really understand how Design an
 
 ### Design: Utilizing Usability Heuristics
 
-In order to accomplish this, I relied heavily on [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
+Whenever I approach a new project, one of the core principles I use to ensure my design is intuitive are [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
 
 <br />
 
@@ -53,7 +47,9 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
 
 <br />
 
-With these guidelines in mind, I was able to take my Shoppies design from what you see below, compared to what you can see on the currrent live version [here](https://shoppies.netlify.app/).
+Using these heuristics as a guide, I was able to venture out from the initial structure provided and facilitate an experience that more effectively communicates the why, what and how of the Shoppies user journey. I will cover this in detail in the following sections but for reference, I have provided an earlier iteration of my version of Shoppies before I applied any UX improvements to showcase how the design was changed in relation to the final live version [here](https://shoppies.netlify.app/). 
+
+<br />
 
 <a href="https://ibb.co/Rpcx6Ds"><img src="https://i.ibb.co/MD7Y1Ct/Shoppies-Initial.png" alt="Shoppies-Initial" border="0"></a>
 
@@ -114,7 +110,7 @@ After registering an API Key for the OMDB API, I used Postman to run a quick tes
 
 <br />
 
-From there, I used an axios get request to return search data from the OMBD API that fit the criteria for what the user was inputting into the Search Bar component. Rather than a user having to submit their search query manually after they typed in a movie title, the results are automatically updated and displayed as a user adds or removes characters from their search input. This is made possible through the useEffect hook which only runs whenever the searchQuery value changes, similar to the way that the componentDidUpdate lifecycle method works with preveProps/prevState. The benefit of this setup is that it:
+From there, I used an axios get request to return search data from the OMBD API that fit the criteria for what the user was inputting into the Search Bar component. Rather than a user having to submit their search query manually after they typed in a movie title, the results are automatically updated and displayed as a user adds or removes characters from their search input. This is made possible through the useEffect hook which only runs whenever the searchQuery value changes, similar to the way that the componentDidUpdate lifecycle method works with prevProps/prevState. The benefit of this setup is that it:
 
 - Provides users with immediate feedback on what they are looking for
 - Limits the amount of characters needed to find a result
