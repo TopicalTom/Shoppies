@@ -32,11 +32,17 @@ This project, also provided a great chance to to really understand how Design an
 
 <br />
 
-### Design: Utilizing Usability Heuristics
+### Design: Establishing Clear Flow
 
-Whenever I approach a new project, one of the core principles I use to ensure my design is intuitive are [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
+One of the issues with the initial design provided for this challenge (below) is that the user has to piece together the narrative of the experience and what they are seeking to accomplish. With some effort and contextual clues, a user might figure out that The Shoppies is some sort of movie award ceremony they are able to nominate movies to but the process to do wouldn’t lend to a very positive experience:
 
 <br />
+
+<a href="https://ibb.co/bdDSQx1"><img src="https://i.ibb.co/zfDyQ1s/Shoppies-Provided.png" alt="Shoppies-Provided" border="0"></a>
+
+<br />
+
+Due to this, my design goal was to create a clearer narrative for the user journey of nominating movies for The Shoppies by applying a variety of [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
 
 - [Visibility of system status](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
 - [Match between system and real world](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%232%3A%20Match%20between%20system%20and%20the%20real%20world)
@@ -45,9 +51,7 @@ Whenever I approach a new project, one of the core principles I use to ensure my
 - [Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
 - [Help and documentation](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%2310%3A%20Help%20and%20documentation)
 
-<br />
-
-I'll be going more into detail into the specifics of how these heuristics were applied, but at a high-level they were used to venture out from the initial layout provided to more effectively communicate the why, what and how of the Shoppies user journey. For reference, I have provided an earlier iteration of my version of Shoppies before I applied any UX improvements (below) to showcase how the design was changed in relation to the final live version [here](https://shoppies.netlify.app/). 
+Using these principles as guidance for my design changes, which I will explain in detail in the following sections, I was able to take my initial design (below) to the final live version which can be viewed [here](https://shoppies.netlify.app/).
 
 <br />
 
@@ -60,8 +64,6 @@ I'll be going more into detail into the specifics of how these heuristics were a
 Since I just started my exploration into Development this year, one of my goals was to venture out from the development skills I was comfortable with in order to challenge myself and broaden my development knowledge. An example of this is React Hooks, a concept not covered in the course I took, which required me to re-learn how to do component lifecycle methods as I had only used their class and functional component counterparts before.
 
 While applying hooks and their lifecycle methods were a sizeable part of this project, I also utilized the following new and old concepts to bring my version of Shoppies to life. I'll be going more into detail into the why and how these were applied, but for now this is the high-level overview of what I will cover:
-
-<br />
 
 - [React Hooks](https://reactjs.org/docs/hooks-reference.html#useeffect)
   - [useState](https://reactjs.org/docs/hooks-reference.html#usestate)
@@ -88,7 +90,15 @@ While applying hooks and their lifecycle methods were a sizeable part of this pr
 
 ### Design: Guided Search
 
-After nailing the initial structure of the project based on the graphic that was provided my design goal was to create a clearer narrative for what users were hoping to accomplish on this page, and provide additional context for what it was they were doing on a moment to moment basis.
+Before a user is able to search for movies they want to nominate, they might require a bit more context for what they are doing before they make any actions. With the original provided design, there was no clear starter state so my goal was to provide more context into the Shoppies experience with the following features:
+
+- Task Header with desired outcome and option for additional information
+- Empty state with instructions for how to begin the experience
+- Initial search dropdown for communicating query type and error handling 
+
+These features gradually guide users towards making their initial movie nomination through the search bar with the knowledge of what they are doing, rather than them trying to figure it out themselves which leans into the [Help and documentation](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%2310%3A%20Help%20and%20documentation) usability heuristic. However, for users that might already be familiar with Shoppies, they can easily navigate to the search bar located prominently at the top without having to focus on everything else below which leans into [Flexibility and efficiency of use](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use).
+
+Regardless of product familiarity, once a user is at the search bar it functions in the way they would expect with movie listings being displayed below as they type in each character:
 
 <br />
 
@@ -193,6 +203,11 @@ The response data is then passed down as props through the ResultsDropdown and R
 ### Design: Making Selections
 
 When a user make
+
+- [Visibility of system status](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
+- [Recognition rather than recall](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%236%3A%20Recognition%20rather%20than%20recall)
+- [Flexibility and efficiency of use](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
+- [Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
 
 <br />
 
