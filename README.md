@@ -200,14 +200,23 @@ The response data is then passed down as props through the ResultsDropdown and R
 
 <br />
 
-### Design: Making Selections
+### Design: Focused Selections
 
-When a user make
+Compared to the provided design where the header, search bar, search results and movie nominations were all visible and usable at the same time, I took a more focused approach. When a user selects the search bar and searches for a movie title, the rest of the app is darkened to focus the user in on the current task of nominating movies to reduce their [cognitive load](https://www.nngroup.com/articles/minimize-cognitive-load/). However, even with the search bar being the current focus, users are still able to see the task header and nomination list as it is updated with new nominations. This was important from a user experience standpoint as it keeps important information visible at all times while providing feedback for what their nominate action does, which ties into the following Usability Heuristics:
 
-- [Visibility of system status](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
 - [Recognition rather than recall](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%236%3A%20Recognition%20rather%20than%20recall)
+- [Visibility of system status](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
+
+Since a user doesn't have to scroll, visit another page or complete another action to confirm their action was successfull, they can continue nominating their next movie through the following methods:
+
+- Manually removing their search query to type in a new one
+- Clicking the "clear" button within the search bar to reset their search
+- Clicking the "clear movie results" button at the bottom of the search dropdown to reset their search
+
+Having all of these ways to manage their search aims to speed up how they interact with Shoppies. For instance, if the movie they were looking for was at the top of the list, clicking the search bar clear would be the fastest option. Whereas, if the movie they wanted to nominate was at the bottom of the dropdown it would be quicker to click the bottom clear button without breaking the flow of how they are viewing the listings as it is at the bottom. While there are many other situations and use cases for which option they might select, but the point is this setup lends to the following Usability Heuristics:
+
+- [User control and freedom](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
 - [Flexibility and efficiency of use](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
-- [Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
 
 <br />
 
@@ -583,6 +592,15 @@ Using the useContext hook that is providing access to a global state for nominat
         );
     }
 ```
+
+<br />
+<br />
+
+# Reflection
+
+<br />
+
+<a href="https://ibb.co/qJQn2c8"><img src="https://i.ibb.co/XYR4GKP/Screen-Shot-2020-09-16-at-3-34-29-PM.png" alt="Screen-Shot-2020-09-16-at-3-34-29-PM" border="0"></a>
 
 <br />
 <br />
