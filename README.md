@@ -34,7 +34,7 @@ This project, also provided a great chance to to really understand how Design an
 
 ### Design: Establishing Clear Flow
 
-One of the issues with the initial design provided for this challenge (below) is that the user has to piece together the narrative of the experience and what they are seeking to accomplish. With some effort and contextual clues, a user might figure out that The Shoppies is some sort of movie award ceremony they are able to nominate movies to but the process to do wouldn’t lend to a very positive experience:
+One of the issues with the initial design provided for this challenge (below) is that the user has to piece together the narrative of the experience and what they are seeking to accomplish. With some effort and contextual clues a user might figure out that The Shoppies is some sort of movie award ceremony they are able to nominate movies to, but having little to no guidance would likely lead to a less than ideal experience.
 
 <br />
 
@@ -51,11 +51,7 @@ Due to this, my design goal was to create a clearer narrative for the user journ
 - [Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
 - [Help and documentation](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%2310%3A%20Help%20and%20documentation)
 
-Using these principles as guidance for my design changes, which I will explain in detail in the following sections, I was able to take my initial design (below) to the final live version which can be viewed [here](https://shoppies.netlify.app/).
-
-<br />
-
-<a href="https://ibb.co/Rpcx6Ds"><img src="https://i.ibb.co/MD7Y1Ct/Shoppies-Initial.png" alt="Shoppies-Initial" border="0"></a>
+Using these principles as guidance for my design changes, which I will explain in detail in the following sections, I was able to take this initial design to the final live version which can be viewed [here](https://shoppies.netlify.app/).
 
 <br />
 
@@ -80,6 +76,53 @@ While applying hooks and their lifecycle methods were a sizeable part of this pr
 - [OMDB API](http://www.omdbapi.com/)
 - [Axios](https://www.npmjs.com/package/axios)
 - [Netlify](https://www.netlify.com/)
+
+<br />
+
+### General: Folder Structure
+
+Lastly, my folder structure (seen below) is organized by grouping similar files together which aims for scale as I add more features, pages and implement responsiveness. 
+
+<br />
+
+```
+Shoppies
+├── README.md
+├── package.json
+├── node_modules
+├── build
+├── .netlify
+├── public
+└── src
+    ├── assets
+    │   ├── icons
+    │   ├── images
+    │   └── logos
+    ├── components
+    │   ├── Banner
+    │   ├── Header
+    │   ├── HelpDropdown
+    │   ├── NominateButton
+    │   ├── NominationList
+    │   ├── NominationPlaceholder
+    │   ├── Nominee
+    │   ├── Overlay
+    │   ├── RemoveButton
+    │   ├── Result
+    │   ├── ResultsDropdown
+    │   ├── ResultsList
+    │   └── SearchBar
+    ├── hooks
+    │   └── useContext.jsx
+    ├── pages / Main
+    │   ├── Main.jsx
+    │   └── Main.scss
+    ├── styles
+    │   ├── partials
+    │   └── baseline.scss
+    ├── App.js
+    └── index.js
+```
 
 <br />
 <br />
