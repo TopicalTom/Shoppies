@@ -429,6 +429,8 @@ Putting that all together, I was able to create a fairly streamlined system that
     }, [nominations, setNominations]); // Updates on Nomination Changes
 ```
 
+> Note: This solution still isn't where it needs to be as I am tracking a bug where the first movie nomination added briefly flashes a previously nominated listing first. This only occurs with the first nomination added when a user returns to an empty nomination state after removing all nominations, but is none-the-less something I plan on fixing.
+
 <br />
 
 ### Development: Checking for already Nominated Movies
@@ -639,19 +641,10 @@ Using the useContext hook that is providing access to a global state for nominat
 <br />
 <br />
 
-# Reflection
-
-<br />
-
-<a href="https://ibb.co/qJQn2c8"><img src="https://i.ibb.co/XYR4GKP/Screen-Shot-2020-09-16-at-3-34-29-PM.png" alt="Screen-Shot-2020-09-16-at-3-34-29-PM" border="0"></a>
-
-<br />
-<br />
-
 # Next Steps
 
 At this current moment, Shoppies represents only a cross-section of an experience as it is only focused on how a user might submit their nominations for an award ceremony. If I were to build out this experience I would focus on features that bookend what I have built so far in order to create a more complete experience and narrative.
 
 For instance, this current experience is under the assumption that users are already familiar or at least aware of what Shoppies is in order to be submitting their movies for consideration. Therefore, one area I would look into is creating an about page that would allow users who aren't familiar with the Shoppies to learn more about the awards ceremony and have an understanding of why they might want to make a submission.
 
-On the flip side, the current experience ends with a user being able to submit their movie nominations but there is nothing to tie a specific user to their nominations. To alleviate this issue, I would look into User Authentication so that users could either sign-in, or at the very least use an email, to connect a user to their submission. Building on this, Shoppies appears to be a new award ceremony so being able to reach new audiences would be beneficial for their growth. Providing users with the ability to share their nominations with their friends through social media might help with reach and building up an audience before the Shoppies officially begins.
+On the flip side, the current experience ends with a user being able to submit their movie nominations but there is nothing to tie a specific user to their nominations. To alleviate this issue, I would look into User Authentication so that users could either sign-in, or at the very least use an email, to connect a user to their submission. Providing users with the ability to share their nominations with their friends through social media would be beneficial for growth, reach and building up an audience before the Shoppies officially begins. 
