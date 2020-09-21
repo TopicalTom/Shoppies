@@ -3,7 +3,7 @@ import { NomContext } from "../../hooks/useContext";
 import "./NominateButton.scss"
 
 const NominateButton = (props) => {
-    const {id} = props
+    const {id, activeCopy, inactiveCopy} = props
     const {nominations, setNominations} = useContext(NomContext);
     const [isNominated, setIsNominated] = useState(false);
 
@@ -41,7 +41,7 @@ const NominateButton = (props) => {
             disabled={isNominated}>
             <span 
                 className="nominate__label">
-                {isNominated ? "Added" : "Nominate"}
+                {isNominated ? inactiveCopy : activeCopy}
             </span>
         </button>
     );

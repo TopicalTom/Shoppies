@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect, useLayoutEffect } from 'react';
+import { useHistory } from "react-router-dom";
 import { NomContext } from "../../hooks/useContext";
 import axios from "axios";
 import './SearchBar.scss';
@@ -19,15 +20,18 @@ function SearchBar() {
     const [hasContent, setHasContent] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
     const {nominations} = useContext(NomContext);
+    const history = useHistory();
 
     // Updates Search Query Parameters
     function updateSearch(e) {
         setSearchQuery(e.target.value);
+        history.push("/");
     }
 
     // Clears Search Field
     function clearSearch() {
         setSearchQuery("");
+        history.push("/");
     }
 
     // Adds Overlay to Focus User Attention
@@ -39,6 +43,7 @@ function SearchBar() {
     function removeFocus() {
         setIsFocused(false);
         setSearchQuery("");
+        history.push("/");
     }
 
     // Updates Search Results Listings

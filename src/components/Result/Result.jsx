@@ -1,4 +1,5 @@
 import React, { useContext, useState, useLayoutEffect } from 'react';
+import { Link } from "react-router-dom";
 import { NomContext } from "../../hooks/useContext";
 import './Result.scss';
 
@@ -23,7 +24,12 @@ const Result = (props) => {
 
     return (
         <li className="result">
-            <div className="result__listing">
+            <Link
+                to={{
+                    pathname: `/movie/${imdbID}`,
+                    selectedMovie: {movieID: imdbID}
+                }} 
+                className="result__listing">
                 {Poster !== "N/A"
                     ?   <img 
                             className="result__preview" 
@@ -40,10 +46,14 @@ const Result = (props) => {
                     <span className="result__title">{Title}</span>
                     <span className="result__year">({Year})</span>
                 </div>
-            </div>
+            </Link>
             {maxNominations
                 ?   <></>
-                :   <NominateButton id={imdbID} />
+                :   <NominateButton 
+                        id={imdbID} 
+                        activeCopy="Nominate"
+                        inactiveCopy="Added"
+                    />
             }
         </li>
     );

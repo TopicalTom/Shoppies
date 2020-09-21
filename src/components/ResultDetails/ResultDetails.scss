@@ -1,0 +1,194 @@
+@import "../../styles/baseline.scss";
+
+.details {
+    display: flex;
+    flex-direction: column;
+    height: 535px;
+    margin-bottom: 3.7rem;
+
+    &__return {
+        display: flexbox;
+        align-self: center;
+        position: absolute;
+        margin-left: 1rem;
+        height: 30px;
+        width: 30px;
+
+        &:hover {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+    }
+
+    &__back {
+        height: 30px;
+        width: 30px;
+    }
+
+    &__context {
+        display: inline-block;
+        flex-direction: row;
+        max-width: 25ch;
+        margin: 0 auto;
+        text-overflow: ellipsis;
+        align-self: center;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    &__header {
+        width: 100%;
+        display: flex;
+        font-size: 1rem;
+        position: absolute;
+        top: 0;
+        height: 3.7rem;
+
+        &--scrolled {
+            background: rgb(28, 28, 30);
+            box-shadow: rgba(0, 0, 0, 0.1) 20px 20px 30px;
+            z-index: 900;
+        }
+    }
+
+    &__poster {
+        height: 200px;
+        margin-top: 3.7rem;
+        position: fixed;
+        margin-left: 1.5rem;
+        border-radius: 2px;
+        z-index: 900;
+        max-width: 130px;
+    }
+
+    &__placeholder {
+        height: 200px;
+        margin-top: 3.7rem;
+        position: fixed;
+        margin-left: 1.5rem;
+        border-radius: 2px;
+        padding: 1rem 1.5rem;
+        border: 0.25px solid white;
+        opacity: 0.2;
+        border-radius: 2px;
+        max-width: 130px;
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        width: 280px;
+        margin-left: auto;
+        padding: 3.7rem 1.5rem 3.7rem 0;
+    }
+
+    &__year {
+        opacity: 0.5;
+        margin-bottom: 1rem;
+    }
+
+    &__label {
+        font-size: 0.9rem;
+        opacity: 0.4;
+        margin-top: 1rem;
+        text-transform: capitalize;
+    }
+
+    &__plot {
+        font-size: 0.9rem;
+        line-height: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    &__item {
+        font-size: 0.9rem;
+        line-height: 1.8rem;
+    }
+
+    &__rating {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 1.5rem;
+
+        & > div {
+            margin-right: 6px;
+        }
+    }
+
+    &__star {
+        height: 25px;
+        width: 25px;
+        clip-path: polygon(
+            50% 0%,
+            63% 38%,
+            100% 38%,
+            69% 59%,
+            82% 100%,
+            50% 75%,
+            18% 100%,
+            31% 59%,
+            0% 38%,
+            37% 38%
+        );
+        background-color: #F9A825;
+    }
+
+    &__close {
+        color: #2997ff;
+        width: 100%;
+        display: flex;
+        padding: 0.75rem 0rem;
+        justify-content: center;
+        font-size: 1rem;
+    }
+
+    &__genre {
+        font-size: 0.7rem;
+        line-height: 1.2rem;
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background-color: #00000027;
+        margin-bottom: 1rem;
+        width: auto;
+        border-radius: 4px;
+    }
+
+    &__genres {
+        display: flex;
+        flex-direction: row;
+        justify-content: start;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid #ffffff10;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+        max-width: 280px;
+
+        & > p {
+            margin-right: 6px;
+            margin-bottom: 6px;
+        }
+
+        & > p:last-child() {
+            margin-right: 0px;
+            margin-bottom: 6px;
+        }
+    }
+
+    &__action {
+        width: 100%;
+        display: flex;
+        flex-direction: row-reverse;
+        font-size: 1rem;
+        border-top: 1px solid #ffffff10;
+        box-shadow: rgba(0, 0, 0, 0.8) 20px 20px 30px;
+        position: absolute;
+        margin: auto;
+        bottom: 0;
+        background: rgba(28, 28, 30, 0.98);
+        height: 3.7rem;
+        align-items: center;
+        padding-right: 1.5rem;
+    }
+}
