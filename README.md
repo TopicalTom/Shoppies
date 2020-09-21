@@ -8,13 +8,7 @@
 
 ### `UX Development Challenge`
 
-Shopify has branched out into movie award shows and we need your help. Please build us an app to help manage our movie nominations for the upcoming Shoppies.
-
-We need a webpage that can search OMDB for movies, and allow the user to save their favourite films they feel should be up for nomination. When they've selected 5 nominees they should be notified they're finished.
-
-<br />
-
-### `Technical Requirements`
+Shopify has branched out into movie award shows and we need your help. Please build us an app to help manage our movie nominations for the upcoming Shoppies. We need a webpage that can allow the user to save their favourite films they feel should be up for nomination. The technical requirements for this challenge are as follows:
 
 - Search OMDB and display the results (movies only)
   - Search results should come from OMDB's API
@@ -34,15 +28,21 @@ We need a webpage that can search OMDB for movies, and allow the user to save th
 
 There was a brief moment of time where I considered not taking on this UX Development challenge as I only recently got into development and wasn't sure if I was ready to jump into a job that revolved around it. However, as somone who is currently one movie away from completing the top 100 movies, and 70 away from completing all 250 top rated movies on IMDB, I couldn't give up the chance to combine my continued love for movies while reinvigorating my new found exploration into development.
 
-This project, also provided a great chance to to really understand how Design and Development contribute to shaping an experience while challenging me to apply concepts in a practical way. Before going into how I added the functional requirements for this challenge, I want to quickly go over my thought process and areas I focused on when approaching my version of Shoppies:
+This project, also provided a great chance to to really understand how Design and Development contribute to shaping an experience while challenging me to apply concepts in a practical way. Before going into how I added the functional requirements for this challenge, I want to quickly go over areas I focused on for each discipline when approaching my version of Shoppies:
 
 <br />
 
-### Design: Utilizing Usability Heuristics
+### Design: Establishing Clear Flow
 
-In order to accomplish this, I relied heavily on [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
+One of the issues with the initial design provided for this challenge (below) is that the user has to piece together the narrative of the experience and what they are seeking to accomplish. With some effort and contextual clues a user might figure out that The Shoppies is some sort of movie award ceremony they are able to nominate movies to, but having little to no guidance would likely lead to a less than ideal experience.
 
 <br />
+
+<a href="https://ibb.co/bdDSQx1"><img src="https://i.ibb.co/zfDyQ1s/Shoppies-Provided.png" alt="Shoppies-Provided" border="0"></a>
+
+<br />
+
+Due to this, my design goal was to create a clearer narrative for the user journey of nominating movies for The Shoppies by applying a variety of [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/). Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
 
 - [Visibility of system status](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
 - [Match between system and real world](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%232%3A%20Match%20between%20system%20and%20the%20real%20world)
@@ -51,17 +51,15 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
 - [Aesthetic and minimalist design](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%238%3A%20Aesthetic%20and%20minimalist%20design)
 - [Help and documentation](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%2310%3A%20Help%20and%20documentation)
 
-<br />
-
-With these guidelines in mind, I was able to take my Shoppies design from what you see below, compared to what you can see on the currrent live version [here](https://shoppies.netlify.app/).
-
-<a href="https://ibb.co/Rpcx6Ds"><img src="https://i.ibb.co/MD7Y1Ct/Shoppies-Initial.png" alt="Shoppies-Initial" border="0"></a>
+Using these principles as guidance for my design changes, which I will explain in detail in the following sections, I was able to take this initial design to the final live version which can be viewed [here](https://shoppies.netlify.app/).
 
 <br />
 
-### Development: Incorporating New Techniques
+### Development: Incorporating New & Old Concepts
 
-In order to accomplish this, I relied heavily on [Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) as a guide to ensure my changes would be intuitive. Of the ten most common usability heuristics, the primary ones I incorporated into this design are the following:
+Since I just started my exploration into Development this year, one of my goals was to venture out from the development skills I was comfortable with in order to challenge myself and broaden my development knowledge. An example of this is React Hooks, a concept not covered in the course I took, which required me to re-learn how to do component lifecycle methods as I had only used their class and functional component counterparts before.
+
+While applying hooks and their lifecycle methods were a sizeable part of this project, I also utilized the following new and old concepts to bring my version of Shoppies to life. I'll be going more into detail into the why and how these were applied, but for now this is the high-level overview of what I will cover:
 
 - [React Hooks](https://reactjs.org/docs/hooks-reference.html#useeffect)
   - [useState](https://reactjs.org/docs/hooks-reference.html#usestate)
@@ -80,6 +78,53 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
 - [Netlify](https://www.netlify.com/)
 
 <br />
+
+### General: Folder Structure
+
+Lastly, my folder structure (seen below) is organized by grouping similar files together which aims for scale as I add more features, pages and implement responsiveness. 
+
+<br />
+
+```
+Shoppies
+├── README.md
+├── package.json
+├── node_modules
+├── build
+├── .netlify
+├── public
+└── src
+    ├── assets
+    │   ├── icons
+    │   ├── images
+    │   └── logos
+    ├── components
+    │   ├── Banner
+    │   ├── Header
+    │   ├── HelpDropdown
+    │   ├── NominateButton
+    │   ├── NominationList
+    │   ├── NominationPlaceholder
+    │   ├── Nominee
+    │   ├── Overlay
+    │   ├── RemoveButton
+    │   ├── Result
+    │   ├── ResultsDropdown
+    │   ├── ResultsList
+    │   └── SearchBar
+    ├── hooks
+    │   └── useContext.jsx
+    ├── pages / Main
+    │   ├── Main.jsx
+    │   └── Main.scss
+    ├── styles
+    │   ├── partials
+    │   └── baseline.scss
+    ├── App.js
+    └── index.js
+```
+
+<br />
 <br />
 
 # Search OMDB and display the results (movies only)
@@ -88,7 +133,15 @@ In order to accomplish this, I relied heavily on [Usability Heuristics](https://
 
 ### Design: Guided Search
 
-After nailing the initial structure of the project based on the graphic that was provided my design goal was to create a clearer narrative for what users were hoping to accomplish on this page, and provide additional context for what it was they were doing on a moment to moment basis.
+Before a user is able to search for movies they want to nominate, they might require a bit more context for what they are doing before they make any actions. With the original provided design, there was no clear starter state so my goal was to provide more context into the Shoppies experience with the following features:
+
+- Task Header with desired outcome and option for additional information
+- Empty state with instructions for how to begin the experience
+- Initial search dropdown for communicating query type and error handling 
+
+These features gradually guide users towards making their initial movie nomination through the search bar with the knowledge of what they are doing, rather than them trying to figure it out themselves which leans into the [Help and documentation](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%2310%3A%20Help%20and%20documentation) usability heuristic. However, for users that might already be familiar with Shoppies, they can easily navigate to the search bar located prominently at the top without having to focus on everything else below which leans into [Flexibility and efficiency of use](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use).
+
+Regardless of product familiarity, once a user is at the search bar it functions in the way they would expect with movie listings being displayed below as they type in each character:
 
 <br />
 
@@ -114,7 +167,7 @@ After registering an API Key for the OMDB API, I used Postman to run a quick tes
 
 <br />
 
-From there, I used an axios get request to return search data from the OMBD API that fit the criteria for what the user was inputting into the Search Bar component. Rather than a user having to submit their search query manually after they typed in a movie title, the results are automatically updated and displayed as a user adds or removes characters from their search input. This is made possible through the useEffect hook which only runs whenever the searchQuery value changes, similar to the way that the componentDidUpdate lifecycle method works with preveProps/prevState. The benefit of this setup is that it:
+From there, I used an axios get request to return search data from the OMBD API that fit the criteria for what the user was inputting into the Search Bar component. Rather than a user having to submit their search query manually after they typed in a movie title, the results are automatically updated and displayed as a user adds or removes characters from their search input. This is made possible through the useEffect hook which only runs whenever the searchQuery value changes, similar to the way that the componentDidUpdate lifecycle method works with prevProps/prevState. The benefit of this setup is that it:
 
 - Provides users with immediate feedback on what they are looking for
 - Limits the amount of characters needed to find a result
@@ -190,9 +243,23 @@ The response data is then passed down as props through the ResultsDropdown and R
 
 <br />
 
-### Design: Making Selections
+### Design: Focused Selections
 
-When a user make
+Compared to the provided design where the header, search bar, search results and movie nominations were all visible and usable at the same time, I took a more focused approach. When a user selects the search bar and searches for a movie title, the rest of the app is darkened to focus the user in on the current task of nominating movies to reduce their [cognitive load](https://www.nngroup.com/articles/minimize-cognitive-load/). However, even with the search bar being the current focus, users are still able to see the task header and nomination list as it is updated with new nominations. This was important from a user experience standpoint as it keeps important information visible at all times while providing feedback for what their nominate action does, which ties into the following Usability Heuristics:
+
+- [Recognition rather than recall](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%236%3A%20Recognition%20rather%20than%20recall)
+- [Visibility of system status](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%231%3A%20Visibility%20of%20system%20status)
+
+Since a user doesn't have to scroll, visit another page or complete another action to confirm their action was successfull, they can continue nominating their next movie through the following methods:
+
+- Manually removing their search query to type in a new one
+- Clicking the "clear" button within the search bar to reset their search
+- Clicking the "clear movie results" button at the bottom of the search dropdown to reset their search
+
+Having all of these ways to manage their search aims to speed up how they interact with Shoppies. For instance, if the movie they were looking for was at the top of the list, clicking the search bar clear would be the fastest option. Whereas, if the movie they wanted to nominate was at the bottom of the dropdown it would be quicker to click the bottom clear button without breaking the flow of how they are viewing the listings as it is at the bottom. While there are many other situations and use cases for which option they might select, but the point is this setup lends to the following Usability Heuristics:
+
+- [User control and freedom](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
+- [Flexibility and efficiency of use](https://www.nngroup.com/articles/ten-usability-heuristics/#articleBody:~:text=%237%3A%20Flexibility%20and%20efficiency%20of%20use)
 
 <br />
 
@@ -361,6 +428,8 @@ Putting that all together, I was able to create a fairly streamlined system that
         
     }, [nominations, setNominations]); // Updates on Nomination Changes
 ```
+
+> Note: This solution still isn't where it needs to be as I am tracking a bug where the first movie nomination added briefly flashes a previously nominated listing first. This only occurs with the first nomination added when a user returns to an empty nomination state after removing all nominations, but is none-the-less something I plan on fixing.
 
 <br />
 
@@ -578,4 +647,4 @@ At this current moment, Shoppies represents only a cross-section of an experienc
 
 For instance, this current experience is under the assumption that users are already familiar or at least aware of what Shoppies is in order to be submitting their movies for consideration. Therefore, one area I would look into is creating an about page that would allow users who aren't familiar with the Shoppies to learn more about the awards ceremony and have an understanding of why they might want to make a submission.
 
-On the flip side, the current experience ends with a user being able to submit their movie nominations but there is nothing to tie a specific user to their nominations. To alleviate this issue, I would look into User Authentication so that users could either sign-in, or at the very least use an email, to connect a user to their submission. Building on this, Shoppies appears to be a new award ceremony so being able to reach new audiences would be beneficial for their growth. Providing users with the ability to share their nominations with their friends through social media might help with reach and building up an audience before the Shoppies officially begins.
+On the flip side, the current experience ends with a user being able to submit their movie nominations but there is nothing to tie a specific user to their nominations. To alleviate this issue, I would look into User Authentication so that users could either sign-in, or at the very least use an email, to connect a user to their submission. Providing users with the ability to share their nominations with their friends through social media would be beneficial for growth, reach and building up an audience before the Shoppies officially begins. 
