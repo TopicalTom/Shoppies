@@ -160,8 +160,6 @@ const MovieDetails = (props) => {
                 </div>
             </div>
         );
-    } else {
-        return <Loader />
     }
 }
 
