@@ -1,15 +1,15 @@
 import React, { useContext, useState, useLayoutEffect } from 'react';
 import { Link } from "react-router-dom";
 import { NomContext } from "../../hooks/useContext";
-import './Result.scss';
+import './Movie.scss';
 
 // Components
 import NominateButton from '../NominateButton/NominateButton';
 
 // Assets 
-import Award from "../../assets/icons/Shoppie.svg";
+import Placeholder from "../../assets/icons/Shoppie.svg";
 
-const Result = (props) => {
+const Movie = (props) => {
     const {nominations} = useContext(NomContext);
     const {Title, Year, imdbID, Poster} = props
     const [maxNominations, setMaxNominations] = useState(false)
@@ -23,28 +23,28 @@ const Result = (props) => {
     }, [nominations]);
 
     return (
-        <li className="result">
+        <li className="movie">
             <Link
                 to={{
                     pathname: `/movie/${imdbID}`,
                     selectedMovie: {movieID: imdbID}
                 }} 
-                className="result__listing">
+                className="movie__listing">
                 {Poster !== "N/A"
                     ?   <img 
-                            className="result__preview" 
+                            className="movie__preview" 
                             src={Poster}
                             alt={`${Title} (${Year}) Poster`}
                         />
                     :   <img 
-                            className="result__placeholder" 
-                            src={Award}
+                            className="movie__placeholder" 
+                            src={Placeholder}
                             alt="Movie Poster Placeholder"
                         />
                 }
-                <div className="result__details">
-                    <span className="result__title">{Title}</span>
-                    <span className="result__year">({Year})</span>
+                <div className="movie__details">
+                    <span className="movie__title">{Title}</span>
+                    <span className="movie__year">({Year})</span>
                 </div>
             </Link>
             {maxNominations
@@ -59,4 +59,4 @@ const Result = (props) => {
     );
 }
 
-export default Result;
+export default Movie;

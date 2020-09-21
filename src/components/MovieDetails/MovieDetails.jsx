@@ -2,10 +2,11 @@ import React, { useEffect, useLayoutEffect, useState, useContext, useRef } from 
 import { NomContext } from "../../hooks/useContext";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import './ResultDetails.scss';
+import './MovieDetails.scss';
 
 // Components
 import NominateButton from '../NominateButton/NominateButton';
+import Loader from "../Loader/Loader";
 
 // Assets
 import Back from "../../assets/icons/Back.svg";
@@ -15,7 +16,7 @@ import Placeholder from "../../assets/icons/Shoppie.svg";
 const API_URL = "https://www.omdbapi.com/?";
 const API_KEY = "6f490190";
 
-const ResultDetails = (props) => {
+const MovieDetails = (props) => {
     const {clearSearch} = props
     const contentWindow = useRef();
     const [scrollTop, setScrollTop] = useState(0);
@@ -160,8 +161,8 @@ const ResultDetails = (props) => {
             </div>
         );
     } else {
-        return <></>
+        return <Loader />
     }
 }
 
-export default ResultDetails;
+export default MovieDetails;

@@ -7,7 +7,7 @@ import './SearchBar.scss';
 // Components
 import Search from "../../assets/icons/Search.svg";
 import Cancel from "../../assets/icons/Cancel.svg";
-import ResultsDropdown from '../ResultsDropdown/ResultsDropdown';
+import Dropdown from '../SearchDropdown/SearchDropdown';
 
 // API Variables
 const API_URL = "https://www.omdbapi.com/?";
@@ -110,7 +110,7 @@ function SearchBar() {
                     :   <></>
                 }
                 {isFocused
-                    ?   <ResultsDropdown 
+                    ?   <Dropdown 
                             searchQuery={searchQuery}
                             resultsListing={resultsListing}
                             clearSearch={clearSearch} 
