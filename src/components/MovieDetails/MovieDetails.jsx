@@ -6,7 +6,6 @@ import './MovieDetails.scss';
 
 // Components
 import NominateButton from '../NominateButton/NominateButton';
-import Loader from "../Loader/Loader";
 
 // Assets
 import Back from "../../assets/icons/Back.svg";
@@ -37,7 +36,7 @@ const MovieDetails = (props) => {
                     id: response.data.imdbID,
                     title: response.data.Title,
                     year: response.data.Year,
-                    rating: response.data.Rated,
+                    rating: response.data.imdbRating,
                     plot: response.data.Plot,
                     genre: response.data.Genre,
                     poster: response.data.Poster,
@@ -46,6 +45,7 @@ const MovieDetails = (props) => {
                         writer: response.data.Writer,
                         cast: response.data.Actors,
                         runtime: response.data.Runtime,
+                        rated: response.data.Rated,
                         language: response.data.Language
                     }
                 })
@@ -68,7 +68,7 @@ const MovieDetails = (props) => {
     }, [nominations]);
 
     if (currentMovie !== undefined) {
-        const {title, poster, year, plot, genre, details, id} = currentMovie
+        const {title, poster, year, plot, genre, details, rating, id} = currentMovie
 
         return (
             <div className="details">
@@ -132,7 +132,7 @@ const MovieDetails = (props) => {
                             <>
                                 <span 
                                     className="details__label">
-                                    {key}
+                                {   key}
                                 </span>
                                 <p 
                                     className="details__item">
@@ -160,6 +160,8 @@ const MovieDetails = (props) => {
                 </div>
             </div>
         );
+    } else {
+        return <></>
     }
 }
 

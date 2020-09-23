@@ -1,0 +1,48 @@
+@import "../../styles/baseline.scss";
+
+.rating {
+    display: inline-block;
+    unicode-bidi: bidi-override;
+    font-size: 25px;
+    height: 25px;
+    width: auto;
+    margin: 0;
+    position: relative;
+    padding: 0;
+
+    &__upper {
+        padding: 0;
+        position: absolute;
+        z-index: 1;
+        display: flex;
+        height: 25px;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+    }
+
+    &__lower {
+        padding: 0;
+        display: flex;
+        z-index: 0;
+        height: 25px;
+    }
+    
+    &__star {
+        height: 25px;
+        width: 25px;
+        clip-path: polygon(
+            50% 0%,
+            63% 38%,
+            100% 38%,
+            69% 59%,
+            82% 100%,
+            50% 75%,
+            18% 100%,
+            31% 59%,
+            0% 38%,
+            37% 38%
+        );
+        background-color: red;
+    }
+}

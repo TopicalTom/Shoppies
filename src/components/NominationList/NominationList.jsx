@@ -18,13 +18,13 @@ const NominationList = (props) => {
     return (
         <article className="nominations">
             <div className="nominations__container">
-                <ul className="nominations__listings">
+                <ol className="nominations__listings">
                     {nominationListing
                         .map((listing) => {
                             return <Nominee {...listing} key={uuid()}/>
                         }
                     )}
-                </ul>
+                </ol>
                 <ul className="nominations__placeholders">
                     <li className="nominations__backing" />
                     <li className="nominations__backing" />
