@@ -275,8 +275,6 @@ Having all of these ways to manage their search aims to speed up how they intera
 
 <a href="https://imgbb.com/"><img src="https://i.ibb.co/dGMtH75/ezgif-com-video-to-gif-3.gif" alt="ezgif-com-video-to-gif-3" border="0"></a>
 
-> Note: Since I am using an unordered list with uuid key values, when nominees are added to the list they are done so in a random order. This is less than ideal for the User Experience as the movies shift around in a random way. This can make it hard to determine the movie that was just added as it might be added underneath the search results dropdown. I am fullly aware of this issue and intend to make adjustments to ensure the newest movie is listed from left to right.
-
 <br />
 
 ### Development: Add Persisting Movie Nominations 
