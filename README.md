@@ -66,10 +66,14 @@ While applying hooks and their lifecycle methods were a sizeable part of this pr
   - [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect)
   - [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext)
   - [useLayoutEffect](https://reactjs.org/docs/hooks-reference.html#uselayouteffect)
+  - [useRef](https://reactjs.org/docs/hooks-reference.html#useref)
+  - [useHistory](https://reactrouter.com/web/api/Hooks/usehistory#usehistory:~:text=useRouteMatch-,useHistory,The%20useHistory%20hook%20gives%20you%20access%20to%20the%20history%20instance%20that%20you%20may%20use%20to%20navigate.,-import)
+- [React Router](https://reactrouter.com/web/guides/quick-start)
 - [Local Storage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage)
 - [Array Methods](https://www.w3schools.com/jsref/jsref_obj_array.asp)
   - [Push](https://www.w3schools.com/jsref/jsref_obj_push.asp)
   - [Unshift](https://www.w3schools.com/jsref/jsref_obj_unshift.asp)
+  - [Split](https://www.w3schools.com/jsref/jsref_obj_split.asp)
   - [Splice](https://www.w3schools.com/jsref/jsref_obj_splice.asp)
   - [Find](https://www.w3schools.com/jsref/jsref_obj_find.asp)
   - [Filter](https://www.w3schools.com/jsref/jsref_filter.asp)
@@ -102,16 +106,17 @@ Shoppies
     │   ├── Banner
     │   ├── Header
     │   ├── HelpDropdown
+    │   ├── Movie
+    │   ├── MovieDetails
     │   ├── NominateButton
     │   ├── NominationList
     │   ├── NominationPlaceholder
     │   ├── Nominee
     │   ├── Overlay
     │   ├── RemoveButton
-    │   ├── Result
-    │   ├── ResultsDropdown
-    │   ├── ResultsList
-    │   └── SearchBar
+    │   ├── SearchBar
+    │   ├── SearchDropdown
+    │   └── SearchResults
     ├── hooks
     │   └── useContext.jsx
     ├── pages / Main
@@ -158,7 +163,7 @@ After registering an API Key for the OMDB API, I used Postman to run a quick tes
 <br />
 
 ```javascript
-    // SearchBar.jsx (line 11 - 13)
+    // SearchBar.jsx (line 13 - 15)
     
     const API_URL = "https://www.omdbapi.com/?";
     const API_KEY = (hidden); // 8-character string
@@ -176,7 +181,7 @@ From there, I used an axios get request to return search data from the OMBD API 
 <br />
 
 ```javascript
-    // SearchBar.jsx (line 37 - 47)
+    // SearchBar.jsx (line 50 - 60)
     
     useEffect(() => {
         
@@ -193,40 +198,45 @@ From there, I used an axios get request to return search data from the OMBD API 
 
 <br />
 
-The response data is then passed down as props through the ResultsDropdown and ResultsListing Components to be used by each Result Component. However, while all movies have a title, year and IMDB Id, not all have a poster. As a fallback to this issue, whenever a Poster returns the string "N/A" (denoting no poster) the movie poster is replaced with an award icon in its place.
+The response data is then passed down as props through the SearchDropdown and SearchResults Components to be used by each Movie Component listing. However, while all movies have a title, year and IMDB Id, not all have a poster. As a fallback to this issue, whenever a Poster returns the string "N/A" (denoting no poster) the movie poster is replaced with an award icon in its place.
 
 <br />
 
 ```javascript
-    // Result.jsx (line 11 - 50)
+    // Movie.jsx (line 12 - 57)
     
-    const Result = (props) => {
+    const Movie = (props) => {
         const {nominations} = useContext(NomContext);
         const {Title, Year, imdbID, Poster} = props
         const [maxNominations, setMaxNominations] = useState(false)
 
-        // (line 16-22)
+        // (line 17-24)
 
         return (
-            <li className="result">
-                <div className="result__listing">
+            <li className="movie">
+                <Link
+                    to={{
+                        pathname: `/movie/${imdbID}`,
+                        selectedMovie: {movieID: imdbID}
+                    }} 
+                    className="movie__listing">
                     {Poster !== "N/A"
                         ?   <img 
-                                className="result__preview" 
+                                className="movie__preview" 
                                 src={Poster}
                                 alt={`${Title} (${Year}) Poster`}
                             />
                         :   <img 
-                                className="result__placeholder" 
-                                src={Award}
+                                className="movie__placeholder" 
+                                src={Placeholder}
                                 alt="Movie Poster Placeholder"
                             />
                     }
-                    <div className="result__details">
-                        <span className="result__title">{Title}</span>
-                        <span className="result__year">({Year})</span>
+                    <div className="movie__details">
+                        <span className="movie__title">{Title}</span>
+                        <span className="movie__year">({Year})</span>
                     </div>
-                </div>
+                </Link>
                 {maxNominations
                     ?   <></>
                     :   <NominateButton id={imdbID} />
